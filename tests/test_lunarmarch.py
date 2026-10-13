@@ -284,6 +284,126 @@ print(json.dumps({'type': 'turn.completed', 'usage': {'input_tokens': 120, 'inpu
         self.assertFalse(gate["clear"])
         self.assertTrue(any("protected invariant regressed from baseline" in error for error in gate["errors"]))
 
+    def test_task_budget_counts_failures_and_role_switches_before_reservation(self) -> None:
+        self.add_contract(acceptance_commands=[])
+        for role in ("builder", "reviewer", "fixer", "auditor"):
+            attempt = reserve_attempt(self.run, "demo-task", role)
+            finish_attempt(self.run, attempt, 1, [])
+        with patch("lm_core.run_checks") as checks:
+            with self.assertRaisesRegex(LunarMarchError, "task attempt budget exhausted"):
+                reserve_attempt(self.run, "demo-task", "recovery")
+            checks.assert_not_called()
+        self.assertEqual(len(list((self.run / "attempts" / "demo-task").iterdir())), 4)
+
+    def test_run_budget_cannot_be_reset_with_new_task(self) -> None:
+        limited = Path(self.temporary.name) / "limited-run"
+        init_run(self.project, limited, "Bound all work", "task", max_attempts=1)
+        spec = Path(self.temporary.name) / "limited.json"
+        for task_id in ("first", "second"):
+            spec.write_text(json.dumps(self.contract(task_id=task_id, acceptance_commands=[])))
+            add_task(limited, spec)
+        attempt = reserve_attempt(limited, "first", "scout")
+        finish_attempt(limited, attempt, 1, [])
+        with self.assertRaisesRegex(LunarMarchError, "run attempt budget exhausted"):
+            reserve_attempt(limited, "second", "builder")
+        self.assertFalse((limited / "attempts" / "second").exists())
+
+    def test_failed_setup_counts_against_run_budget_and_reports_missing_usage(self) -> None:
+        limited = Path(self.temporary.name) / "setup-limited"
+        init_run(self.project, limited, "Count setup failures", "task", max_attempts=1)
+        spec = Path(self.temporary.name) / "setup.json"
+        for task_id in ("first", "second"):
+            spec.write_text(json.dumps(self.contract(task_id=task_id, acceptance_commands=[])))
+            add_task(limited, spec)
+        with patch("lm_core.capture_snapshot", side_effect=OSError("snapshot failed")):
+            with self.assertRaisesRegex(OSError, "snapshot failed"):
+                reserve_attempt(limited, "first", "builder")
+        summary = status_summary(limited)
+        self.assertEqual(summary["attempt_budget"], {"limit": 1, "used": 1, "remaining": 0})
+        self.assertEqual(summary["usage"]["total_tokens"], {"reported_sum": None, "reported_attempts": 0, "missing_attempts": 1})
+        self.assertEqual(summary["tasks"][0]["attempts"][0]["lifecycle"], "incomplete_reservation")
+        self.assertEqual(summary["running_or_unknown_attempts"], 1)
+        self.assertFalse(summary["reservation_locked"])
+        with self.assertRaisesRegex(LunarMarchError, "run attempt budget exhausted"):
+            reserve_attempt(limited, "second", "builder")
+
+    def test_concurrent_reservations_cannot_overwrite_attempt_bindings(self) -> None:
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+        self.add_contract(acceptance_commands=[])
+        self.add_contract(task_id="second", acceptance_commands=[])
+        entered, release = Event(), Event()
+        def slow_checks(*args, **kwargs):
+            entered.set()
+            if not release.wait(5):
+                raise RuntimeError("test release timed out")
+            return []
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            with patch("lm_core.run_checks", side_effect=slow_checks):
+                first = pool.submit(reserve_attempt, self.run, "demo-task", "builder")
+                try:
+                    self.assertTrue(entered.wait(5))
+                    with self.assertRaisesRegex(LunarMarchError, "reservation lock exists"):
+                        reserve_attempt(self.run, "second", "builder")
+                finally:
+                    release.set()
+                first.result(timeout=5)
+        self.assertFalse((self.run / ".reservation-lock").exists())
+        reserve_attempt(self.run, "second", "builder")
+        summary = status_summary(self.run)
+        self.assertEqual(summary["attempt_budget"]["used"], 2)
+        self.assertEqual(summary["running_or_unknown_attempts"], 2)
+
+    def test_default_auditor_budget_stops_repeated_full_audits(self) -> None:
+        self.add_contract(acceptance_commands=[])
+        for _ in range(2):
+            attempt = reserve_attempt(self.run, "demo-task", "auditor")
+            self.finish_with_report(attempt, [])
+        with self.assertRaisesRegex(LunarMarchError, "auditor attempt budget exhausted"):
+            reserve_attempt(self.run, "demo-task", "auditor")
+
+    def test_new_work_reactivates_completed_run_and_reports_partial_usage(self) -> None:
+        self.add_contract(role_hint="scout", acceptance_commands=[])
+        first = reserve_attempt(self.run, "demo-task", "scout")
+        (first / "report.md").write_text("Complete.")
+        finish_attempt(self.run, first, 0, [], usage={"total_tokens": 123, "output_tokens": 23})
+        accept_task(self.run, "demo-task", first)
+        self.assertEqual(status_summary(self.run)["status"], "complete")
+        self.add_contract(task_id="next-task", acceptance_commands=[])
+        self.assertEqual(json.loads((self.run / "state.json").read_text())["status"], "active")
+        second = reserve_attempt(self.run, "next-task", "builder")
+        finish_attempt(self.run, second, 1, [])
+        reserve_attempt(self.run, "next-task", "fixer")
+        summary = status_summary(self.run)
+        self.assertEqual(summary["status"], "active")
+        self.assertEqual(summary["progress"]["tasks"], {"accepted": 1, "total": 2})
+        self.assertEqual(summary["attempt_budget"], {"limit": 24, "used": 3, "remaining": 21})
+        self.assertEqual(summary["usage"]["total_tokens"], {"reported_sum": 123, "reported_attempts": 1, "missing_attempts": 2})
+        self.assertEqual(summary["usage"]["uncached_input_plus_output"]["reported_sum"], None)
+        self.assertEqual(summary["running_or_unknown_attempts"], 1)
+        self.assertEqual(summary["attempts_by_role"], {"scout": 1, "builder": 1, "fixer": 1})
+
+    def test_snapshot_preserves_dotfiles_and_detects_their_changes(self) -> None:
+        hidden = self.project / ".gitignore"
+        hidden.write_text("cache/\n")
+        self.assertIn(".gitignore", capture_snapshot(self.project)["files"])
+        self.add_contract(acceptance_commands=[], allowed_paths=[".gitignore"])
+        attempt = reserve_attempt(self.run, "demo-task", "builder")
+        hidden.write_text("cache/\nlocal/\n")
+        self.finish_with_report(attempt, [])
+        gate = gate_attempt(self.run, attempt)
+        self.assertTrue(gate["clear"], gate)
+        self.assertEqual(gate["changed_paths"], [".gitignore"])
+
+    def test_preexisting_invariant_failure_is_warning_not_new_regression(self) -> None:
+        command = "python3 -c 'raise SystemExit(1)'"
+        self.add_contract(acceptance_commands=[], invariant_commands=[command])
+        attempt = reserve_attempt(self.run, "demo-task", "builder")
+        self.finish_with_report(attempt, [{"kind": "invariant", "command": command, "returncode": 1}])
+        gate = gate_attempt(self.run, attempt)
+        self.assertTrue(gate["clear"], gate)
+        self.assertTrue(any("already failing at baseline" in warning for warning in gate["warnings"]))
+
     def test_read_only_launcher_uses_explicit_sandbox_without_auto_approval(self) -> None:
         self.add_contract(role_hint="reviewer", acceptance_commands=[])
         fake = Path(self.temporary.name) / "fake-codex-read-only"

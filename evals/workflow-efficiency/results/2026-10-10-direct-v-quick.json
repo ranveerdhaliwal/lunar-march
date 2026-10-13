@@ -1,0 +1,385 @@
+{
+  "format": "lunarmarch-workflow-pilot-result-v1",
+  "manifest": {
+    "format": "lunarmarch-workflow-pilot-v1",
+    "date": "2026-10-10",
+    "parent_model": "gpt-6.1-sol",
+    "worker_model": "gpt-5.6-luna",
+    "effort": "high",
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "source_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "dirty_suite_override": true,
+    "publication_scope": "exploratory pilot, not a general performance claim",
+    "fixture_hashes": {
+      "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+      "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+      "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+      "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+      "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+    },
+    "task_sha256": "52d8dbfd2b340c1b114d8c37adc469d12f822fb693bdb64d48199b26012bc7d3",
+    "grader_sha256": "39ef185fddd327bd51a015e59703cb9a75a4a75a0b54095a579ef4da4fda5192",
+    "runner_sha256": "b224ad97f12de912680323ae14e269cf85194ba9c17225280d6743d796d3e9ad",
+    "skill_sha256": "404822c3b9201634882f21a873f0a7a3a3b1613801f41bd2a95bb3dded66ea08",
+    "python": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+    "root_timeout": 360,
+    "worker_timeout": 180,
+    "max_model_calls": 6,
+    "order": [
+      "direct",
+      "quick",
+      "quick",
+      "direct"
+    ],
+    "success_rule": "all public/hidden checks and scope pass; complete telemetry; Quick mean time, total tokens and uncached input plus output each <=90% of Direct",
+    "stop_rule": "stop after first pair on quality/infrastructure failure or if Quick fails any efficiency threshold; no replacement trials",
+    "cost_limits": "no pricing/account-meter inference; root and worker usage included, setup and external approval-review usage excluded"
+  },
+  "recorded_mechanical_summary": {
+    "trials": 2,
+    "planned_trials": 4,
+    "metrics": {
+      "direct": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 91.615,
+        "total_tokens": 129529.0,
+        "uncached_input_plus_output": 22265.0
+      },
+      "quick": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 102.273,
+        "total_tokens": 445088.0,
+        "uncached_input_plus_output": 46496.0
+      }
+    },
+    "complete": false,
+    "thresholds_met": false,
+    "successful": false,
+    "early_stop": true
+  },
+  "trials": [
+    {
+      "sequence": 1,
+      "arm": "direct",
+      "root": {
+        "model_requested": "gpt-6.1-sol",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-01-5feceb66/project",
+          "-m",
+          "gpt-6.1-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-01-5feceb66/root/report.md",
+          "-"
+        ],
+        "seconds": 91.615,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 123411,
+          "cached_input_tokens": 107264,
+          "uncached_input_tokens": 16147,
+          "output_tokens": 6118,
+          "reasoning_tokens": 1384,
+          "total_tokens": 129529,
+          "uncached_input_plus_output": 22265
+        },
+        "prompt_sha256": "ac0b448734c954fa238111db6d2ae622b89cd81ce20886d3178097ee0699c35f"
+      },
+      "worker": null,
+      "seconds": 91.615,
+      "combined_usage": {
+        "input_tokens": 123411,
+        "cached_input_tokens": 107264,
+        "uncached_input_tokens": 16147,
+        "output_tokens": 6118,
+        "reasoning_tokens": 1384,
+        "total_tokens": 129529,
+        "uncached_input_plus_output": 22265
+      },
+      "changed_paths": [
+        "activity/cli.py",
+        "activity/parse.py",
+        "activity/report.py",
+        "tests/test_windows.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\ntest_invalid_or_naive_timestamps (test_windows.TimestampTests.test_invalid_or_naive_timestamps) ... ok\ntest_iso_offsets_normalize_to_utc (test_windows.TimestampTests.test_iso_offsets_normalize_to_utc) ... ok\ntest_csv_data_errors_produce_no_json (test_windows.WindowCliTests.test_csv_data_errors_produce_no_json) ... ok\ntest_csv_timestamps_stay_raw_and_legacy_csv_requires_no_window (test_windows.WindowCliTests.test_csv_timestamps_stay_raw_and_legacy_csv_requires_no_window) ... ok\ntest_flags_emit_single_existing_json_shape (test_windows.WindowCliTests.test_flags_emit_single_existing_json_shape) ... ok\ntest_invalid_flags_and_order_produce_no_json (test_windows.WindowCliTests.test_invalid_flags_and_order_produce_no_json) ... ok\ntest_invalid_row_timestamp_errors_only_with_window (test_windows.WindowCliTests.test_invalid_row_timestamp_errors_only_with_window) ... ok\ntest_module_invocation_success_and_failure (test_windows.WindowCliTests.test_module_invocation_success_and_failure) ... ok\ntest_all_rows_require_valid_timestamps_with_any_window (test_windows.WindowTests.test_all_rows_require_valid_timestamps_with_any_window) ... ok\ntest_bounds_with_offsets (test_windows.WindowTests.test_bounds_with_offsets) ... ok\ntest_empty_input_and_empty_window (test_windows.WindowTests.test_empty_input_and_empty_window) ... ok\ntest_equal_or_reversed_bounds_are_rejected (test_windows.WindowTests.test_equal_or_reversed_bounds_are_rejected) ... ok\ntest_half_open_window_and_sorted_exact_totals (test_windows.WindowTests.test_half_open_window_and_sorted_exact_totals) ... ok\ntest_naive_bounds_are_rejected_even_without_events (test_windows.WindowTests.test_naive_bounds_are_rejected_even_without_events) ... ok\ntest_no_window_ignores_timestamp_validity (test_windows.WindowTests.test_no_window_ignores_timestamp_validity) ... ok\ntest_one_sided_windows (test_windows.WindowTests.test_one_sided_windows) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 0.067s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_all_event_timestamps_checked_with_window (test_hidden_windows.WindowTests.test_all_event_timestamps_checked_with_window) ... ok\ntest_bad_bounds_even_on_empty_data (test_hidden_windows.WindowTests.test_bad_bounds_even_on_empty_data) ... ok\ntest_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json) ... ok\ntest_cli_filtering (test_hidden_windows.WindowTests.test_cli_filtering) ... ok\ntest_cli_missing_timestamp_in_window (test_hidden_windows.WindowTests.test_cli_missing_timestamp_in_window) ... ok\ntest_half_open_window_exact_totals (test_hidden_windows.WindowTests.test_half_open_window_exact_totals) ... ok\ntest_no_window_preserves_legacy (test_hidden_windows.WindowTests.test_no_window_preserves_legacy) ... ok\ntest_one_sided_windows (test_hidden_windows.WindowTests.test_one_sided_windows) ... ok\ntest_parser_normalizes_offsets (test_hidden_windows.WindowTests.test_parser_normalizes_offsets) ... ok\ntest_parser_rejects_invalid (test_hidden_windows.WindowTests.test_parser_rejects_invalid) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.005s\n\nOK\n"
+        }
+      ],
+      "quality_pass": true,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "6333043f7c9304a1428703991f709f6e15135e7dc0fd746e6ffe285b06bfb938",
+        "activity/parse.py": "169dcb1f700d6b15fb31b6b3b171195c7ec14e2059c2e50c3dd5e9e2d8f368ee",
+        "activity/report.py": "6bbe4da9ecabd4ba2e08a13f6c9c175071b43326b4ed4c36e2d06f2cda17b3ae",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+        "tests/test_windows.py": "9c41fd8ec93f454f4f749707369bf825bea428e5abb94633c8380a06fd6c0db9"
+      }
+    },
+    {
+      "sequence": 2,
+      "arm": "quick",
+      "root": {
+        "model_requested": "gpt-6.1-sol",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6.1-sol",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-02-6b86b273/root/report.md",
+          "-"
+        ],
+        "seconds": 102.273,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 197831,
+          "cached_input_tokens": 184320,
+          "uncached_input_tokens": 13511,
+          "output_tokens": 2317,
+          "reasoning_tokens": 494,
+          "total_tokens": 200148,
+          "uncached_input_plus_output": 15828
+        },
+        "prompt_sha256": "9e39f5d0261cfd270b6085bf7d03326c6b88437e8bb6be37285213432771b9f6"
+      },
+      "worker": {
+        "model_requested": "gpt-5.6-luna",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-02-6b86b273/project",
+          "-m",
+          "gpt-5.6-luna",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-02-6b86b273/worker/report.md",
+          "-"
+        ],
+        "seconds": 54.604,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 237680,
+          "cached_input_tokens": 214272,
+          "uncached_input_tokens": 23408,
+          "output_tokens": 7260,
+          "reasoning_tokens": 3721,
+          "total_tokens": 244940,
+          "uncached_input_plus_output": 30668
+        },
+        "prompt_sha256": "9c45094dd31305ed8373301ff0e4b1d71e33678d20227bc8788993d35b5f2bfb"
+      },
+      "seconds": 102.273,
+      "combined_usage": {
+        "input_tokens": 435511,
+        "cached_input_tokens": 398592,
+        "uncached_input_tokens": 36919,
+        "output_tokens": 9577,
+        "reasoning_tokens": 4215,
+        "total_tokens": 445088,
+        "uncached_input_plus_output": 46496
+      },
+      "changed_paths": [
+        "activity/cli.py",
+        "activity/parse.py",
+        "activity/report.py",
+        "tests/test_windows.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\ntest_active_window_validates_excluded_events (test_windows.WindowTests.test_active_window_validates_excluded_events) ... ok\ntest_cli_invalid_window_has_no_json_stdout (test_windows.WindowTests.test_cli_invalid_window_has_no_json_stdout) ... ok\ntest_cli_window_output_shape (test_windows.WindowTests.test_cli_window_output_shape) ... ok\ntest_no_window_ignores_invalid_timestamps (test_windows.WindowTests.test_no_window_ignores_invalid_timestamps) ... ok\ntest_parse_timestamp_normalizes_offsets (test_windows.WindowTests.test_parse_timestamp_normalizes_offsets) ... ok\ntest_parse_timestamp_rejects_invalid_values (test_windows.WindowTests.test_parse_timestamp_rejects_invalid_values) ... ok\ntest_window_is_since_inclusive_and_until_exclusive (test_windows.WindowTests.test_window_is_since_inclusive_and_until_exclusive) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.005s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_all_event_timestamps_checked_with_window (test_hidden_windows.WindowTests.test_all_event_timestamps_checked_with_window) ... ok\ntest_bad_bounds_even_on_empty_data (test_hidden_windows.WindowTests.test_bad_bounds_even_on_empty_data) ... ok\ntest_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json) ... ok\ntest_cli_filtering (test_hidden_windows.WindowTests.test_cli_filtering) ... ok\ntest_cli_missing_timestamp_in_window (test_hidden_windows.WindowTests.test_cli_missing_timestamp_in_window) ... ok\ntest_half_open_window_exact_totals (test_hidden_windows.WindowTests.test_half_open_window_exact_totals) ... ok\ntest_no_window_preserves_legacy (test_hidden_windows.WindowTests.test_no_window_preserves_legacy) ... ok\ntest_one_sided_windows (test_hidden_windows.WindowTests.test_one_sided_windows) ... ok\ntest_parser_normalizes_offsets (test_hidden_windows.WindowTests.test_parser_normalizes_offsets) ... ok\ntest_parser_rejects_invalid (test_hidden_windows.WindowTests.test_parser_rejects_invalid) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.005s\n\nOK\n"
+        }
+      ],
+      "quality_pass": true,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "eeecdd1e024cf96da302234c2fbd520fb64836a241a9e24b3ef9244ebdb07c2d",
+        "activity/parse.py": "df88c09136d2c7d10b04e46f4fde137b387ef7767734bb176337b0a0245ba135",
+        "activity/report.py": "b87b1d68bf96280a98dde782d11b326a6cc4ace8e33a1383df2a6b9c9ad13e4e",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+        "tests/test_windows.py": "a5d1fd832e11dcb3b383e8b4deeeed5c1befd7794a87d03081a2b0b1ba494a56"
+      }
+    }
+  ],
+  "root_reports": {
+    "trial-01-5feceb66": "Implemented UTC window filtering in `activity/parse.py`, `activity/report.py`, and `activity/cli.py`; added `tests/test_windows.py`.\n\nBoth acceptance commands passed: 20 tests and compilation. Reviewed the final diff; `tests/test_legacy.py` and `activity/__init__.py` remain unchanged.\n\nNo material uncertainty identified.",
+    "trial-02-6b86b273": "Not accepted: a CSV row missing its amount produces a traceback and exit code **1**, violating the required data-error exit code **2**.\n\nChanged: `activity/parse.py`, `activity/report.py`, `activity/cli.py`, `tests/test_windows.py`. Protected files remain unchanged.\n\nChecks:\n\n- Unit tests: **11 passed**\n- Compileall: **passed**\n- Independent checks reproduced the defect above.\n\nNo repairs or retries performed. Worker usage: 244,940 total tokens; 30,668 uncached input plus output. These exclude parent usage."
+  },
+  "parent_adjudication": {
+    "direct": "accepted",
+    "quick": "rejected, required data-error exit code missed",
+    "note": "The v1 automated quality_pass fields establish mechanical checks only. The Quick parent rejected its result; those original fields are preserved, not rewritten as semantic acceptance."
+  },
+  "posthoc_probe": {
+    "predeclared": false,
+    "purpose": "independently reproduce coordinator finding and distinguish inherited defect from new requirement compliance",
+    "results": [
+      {
+        "arm": "baseline",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr_last_line": "TypeError: conversion from NoneType to Decimal is not supported"
+      },
+      {
+        "arm": "direct",
+        "exit_code": 2,
+        "stdout": "",
+        "stderr_last_line": "conversion from NoneType to Decimal is not supported"
+      },
+      {
+        "arm": "quick",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr_last_line": "TypeError: conversion from NoneType to Decimal is not supported"
+      }
+    ]
+  },
+  "decision": "failed performance thresholds and Quick semantic acceptance; early stop after one pair, no commit or push",
+  "raw_run_root": "/tmp/lunarmarch-workflow-pilot-20261010-final",
+  "source_versions": {
+    "tested_runner_sha256": "b224ad97f12de912680323ae14e269cf85194ba9c17225280d6743d796d3e9ad",
+    "tested_grader_sha256": "39ef185fddd327bd51a015e59703cb9a75a4a75a0b54095a579ef4da4fda5192",
+    "current_runner_sha256": "f6cb36e0fd4f98e344f19bcc356fa06054e6643e9e40b20b5697a1723737f158",
+    "current_grader_sha256": "3b5a8aa59b889e206064cd88214464bee11949f4706304187628df5b659f9821",
+    "note": "Current harness adds structured root acceptance and the missed malformed-row check. These changes were not used in the preserved v1 live trials."
+  },
+  "posthoc_current_grader": {
+    "predeclared": false,
+    "checks": 11,
+    "direct_passed": 11,
+    "quick_passed": 10,
+    "note": "Confirms the semantic rejection; does not alter the original ten-check live grading."
+  },
+  "offline_validation": {
+    "date": "2026-10-10",
+    "python": "3.12.3",
+    "full_suite": "50 tests passed on Linux temporary storage",
+    "seconds": 28.255,
+    "compilation": "passed with Python cache on Windows volume",
+    "skill_validator": "passed",
+    "diff_whitespace": "passed",
+    "environment_failures": [
+      "Initial final suite interrupted by full Linux filesystem",
+      "Windows-temp rerun passed 49 of 50; existing 2-second timeout test took 2.67 seconds on slow mounted storage",
+      "Focused timeout test passed on Linux in 0.145 seconds; final full Linux-temp suite passed all 50"
+    ],
+    "source_sha256": {
+      "scripts/workflow_eval.py": "f6cb36e0fd4f98e344f19bcc356fa06054e6643e9e40b20b5697a1723737f158",
+      "tests/test_workflow_eval.py": "7bdd2b526d72016e2721311268d51a0482c3d64402ced421d0ed0ba928292153",
+      "evals/workflow-efficiency/task.md": "52d8dbfd2b340c1b114d8c37adc469d12f822fb693bdb64d48199b26012bc7d3",
+      "evals/workflow-efficiency/grade.py": "3b5a8aa59b889e206064cd88214464bee11949f4706304187628df5b659f9821",
+      "scripts/lm_core.py": "7e7b368baa71ac5a2fe0e9105999e459269fc506905921ac372941f76ccb218e",
+      "scripts/worker_transports.py": "7dfbf46d7a6417332207dc843848cc2950b381f432451e4823e034162fe5e9ac",
+      "scripts/usage.py": "2fab2fdd92f2e5e02c388410a1fa752a04fe1b1a227af32ff4f2bf4a1df49205"
+    }
+  }
+}

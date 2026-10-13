@@ -13,16 +13,18 @@
 
 Use measured evidence to change these defaults. `max` is not a ceremonial quality switch.
 
-## Risk ladder
+## Workflow before model
 
-- **Trivial:** one worker and parent verification.
-- **Routine:** Builder, targeted checks, proportionate independent Luna review.
-- **Medium:** Scout when scope is unclear, Builder, Luna High review, Luna XHigh only for material disagreement.
-- **High:** research and decomposition first, isolated writer, independent review, premium review for unresolved high-impact risk. Keep destructive/live actions behind explicit user authorization.
+Choose Direct unless delegation removes substantial work from the parent or satisfies a required evidence boundary. File count and a lower worker price are insufficient reasons. The model table applies after deciding to delegate, not to every user request.
+
+- **Routine coupled work:** parent implementation and targeted verification, including changes spanning several files.
+- **Independent bounded work:** Quick with one worker; dispatch a complete packet immediately, then review its diff and recorded checks. Read inputs first only to resolve an actual ambiguity.
+- **Unclear scope:** one bounded Scout when its findings are needed before implementation. Do not add a Scout to rediscover a complete task packet.
+- **Required durable evidence or consequential risk:** use Task/March and their independent review requirements.
 
 ## Concurrency
 
-Read-only Scouts may fan out when their questions are distinct. Start with at most four and expand only when the evidence map justifies it. Start with one writer; allow two only in separate worktrees with non-overlapping ownership. Never permit overlapping writers in one checkout.
+Start with one worker. Add another only for independent work that can overlap useful parent work or another lane. Keep one writer per checkout; separate writers require non-overlapping ownership and separate worktrees. Workers never delegate. A parent waiting on the only writer has serial delegation, not a parallel speedup.
 
 ## Context inheritance
 

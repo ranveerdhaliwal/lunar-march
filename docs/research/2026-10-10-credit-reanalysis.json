@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-10",
+  "source": "https://learn.chatgpt.com/docs/pricing",
+  "source_accessed": "2026-10-10",
+  "rates_per_million": {
+    "gpt-6.1-sol": {
+      "uncached_input_tokens": 50,
+      "cached_input_tokens": 2.5,
+      "output_tokens": 250
+    },
+    "gpt-5.6-luna": {
+      "uncached_input_tokens": 5,
+      "cached_input_tokens": 0.5,
+      "output_tokens": 30
+    }
+  },
+  "assumption": "Retrospective normalized Standard-speed credit proxy. Does not establish actual charges, configured speed mode, or included subscription quota. No live calls. Original failed quality/performance result unchanged.",
+  "rows": [
+    {
+      "arm": "direct",
+      "seconds": 91.615,
+      "parts": [
+        {
+          "role": "root",
+          "model": "gpt-6.1-sol",
+          "usage": {
+            "input_tokens": 123411,
+            "cached_input_tokens": 107264,
+            "uncached_input_tokens": 16147,
+            "output_tokens": 6118,
+            "reasoning_tokens": 1384,
+            "total_tokens": 129529,
+            "uncached_input_plus_output": 22265
+          },
+          "standard_credit_proxy": 2.60501
+        }
+      ],
+      "standard_credit_proxy": 2.60501,
+      "accepted": true
+    },
+    {
+      "arm": "quick",
+      "seconds": 102.273,
+      "parts": [
+        {
+          "role": "root",
+          "model": "gpt-6.1-sol",
+          "usage": {
+            "input_tokens": 197831,
+            "cached_input_tokens": 184320,
+            "uncached_input_tokens": 13511,
+            "output_tokens": 2317,
+            "reasoning_tokens": 494,
+            "total_tokens": 200148,
+            "uncached_input_plus_output": 15828
+          },
+          "standard_credit_proxy": 1.7156
+        },
+        {
+          "role": "worker",
+          "model": "gpt-5.6-luna",
+          "usage": {
+            "input_tokens": 237680,
+            "cached_input_tokens": 214272,
+            "uncached_input_tokens": 23408,
+            "output_tokens": 7260,
+            "reasoning_tokens": 3721,
+            "total_tokens": 244940,
+            "uncached_input_plus_output": 30668
+          },
+          "standard_credit_proxy": 0.441976
+        }
+      ],
+      "standard_credit_proxy": 2.157576,
+      "accepted": false
+    }
+  ],
+  "quick_credit_proxy_reduction_percent": 17.176
+}

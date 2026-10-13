@@ -1,0 +1,1035 @@
+{
+  "date_received": "2026-10-10",
+  "status": "infrastructure_failure_incomplete_comparison",
+  "decision": "Stop after failed first pair, no repair/retry/reverse-order pair or promotion. Installed skill remains disabled; no commit or push.",
+  "manifest": {
+    "owned_paths": [
+      "ledgerfmt/formats/jsonl.py",
+      "tests/test_jsonl.py",
+      "docs/jsonl.md",
+      "ledgerfmt/formats/csv.py",
+      "tests/test_csv.py",
+      "docs/csv.md"
+    ],
+    "commands": [
+      [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "acceptance",
+        "-v"
+      ],
+      [
+        "/usr/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "ledgerfmt",
+        "tests",
+        "acceptance"
+      ]
+    ],
+    "lanes": [
+      {
+        "id": "jsonl",
+        "owned_paths": [
+          "ledgerfmt/formats/jsonl.py",
+          "tests/test_jsonl.py",
+          "docs/jsonl.md"
+        ],
+        "commands": [
+          [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-p",
+            "test_jsonl_contract.py",
+            "-v"
+          ],
+          [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "ledgerfmt",
+            "tests"
+          ]
+        ]
+      },
+      {
+        "id": "csv",
+        "owned_paths": [
+          "ledgerfmt/formats/csv.py",
+          "tests/test_csv.py",
+          "docs/csv.md"
+        ],
+        "commands": [
+          [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-p",
+            "test_csv_contract.py",
+            "-v"
+          ],
+          [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "ledgerfmt",
+            "tests"
+          ]
+        ]
+      }
+    ],
+    "format": "parallel-workflow-v1",
+    "prepared_at": "2026-10-11T02:35:12.585312+00:00",
+    "source_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "parent_model": "gpt-6-astra",
+    "worker_model": "gpt-6-luna",
+    "effort": "high",
+    "service_tier_requested": "default",
+    "metric": "weighted_cost",
+    "pricing": {
+      "source": "https://learn.chatgpt.com/docs/pricing",
+      "retrieved": "2026-10-10",
+      "unit": "Standard credits per million tokens",
+      "rates": {
+        "gpt-6-astra": {
+          "uncached_input_tokens": 250,
+          "cached_input_tokens": 25,
+          "output_tokens": 1250
+        },
+        "gpt-6.1-sol": {
+          "uncached_input_tokens": 50,
+          "cached_input_tokens": 2.5,
+          "output_tokens": 250
+        },
+        "gpt-5.6-luna": {
+          "uncached_input_tokens": 5,
+          "cached_input_tokens": 0.5,
+          "output_tokens": 30
+        },
+        "gpt-6-luna": {
+          "uncached_input_tokens": 2.5,
+          "cached_input_tokens": 0.25,
+          "output_tokens": 12.5
+        }
+      },
+      "limitation": "Normalized credit-cost proxy, not included subscription quota or an invoice; requested Standard tier is not independent proof of served tier."
+    },
+    "fixture_hashes": {
+      "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+      "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+      "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+      "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+      "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+      "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+      "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledgerfmt/formats/csv.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+      "ledgerfmt/formats/jsonl.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+      "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+      "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+    },
+    "task_sha256": "a0e6f728f70d9981dd8eef7393f9dcf2d43ca031ab7d5b6a78731b50e777ffb7",
+    "grader_sha256": "58ac4a534aaeabaa528433b10e211b82808f15b2118a60411177f890c2d8dee6",
+    "runner_hashes": {
+      "context_eval.py": "1834d7101f1fc0c1fdef5961b2ba43e4b34a4a173f9eb8ee4a7ae88d7e6f7f4c",
+      "parallel_eval.py": "01b628f3312ffedb89ada5fa4efd5ca23c8ea92702434198b331b77c5dbe0e0d",
+      "usage.py": "2fab2fdd92f2e5e02c388410a1fa752a04fe1b1a227af32ff4f2bf4a1df49205",
+      "workflow_eval.py": "413021621da088bc36406520e83b05d4b34e62b844e424763226cb42878ccbcc"
+    },
+    "order": [
+      "direct",
+      "quick",
+      "quick",
+      "direct"
+    ],
+    "max_model_calls": 8,
+    "direct_timeout": 240,
+    "worker_timeout": 180,
+    "review_timeout": 120,
+    "success_rule": "Two pairs, all quality/scope/acceptance gates and complete telemetry; parallel mean time and cost each <=90% of Direct.",
+    "stop_rule": "Stop after first pair on quality, telemetry or efficiency failure; no retries, repairs or replacement trials.",
+    "limitations": "Exploratory dirty-suite fixture; fresh CLI sessions, not accumulated chat. Setup/test authoring/controller and external approval review excluded. Standard-credit proxy, not subscription-meter usage. Skill remains disabled."
+  },
+  "trials": [
+    {
+      "sequence": 1,
+      "arm": "direct",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-parallel-exporters-20261010/trial-01/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-parallel-exporters-20261010/trial-01/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-parallel-exporters-20261010/trial-01/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 202.105,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 198740,
+          "cached_input_tokens": 162688,
+          "uncached_input_tokens": 36052,
+          "output_tokens": 7624,
+          "reasoning_tokens": 1408,
+          "total_tokens": 206364,
+          "uncached_input_plus_output": 43676
+        },
+        "prompt_sha256": "369a868e3ec85206865ef3a7ab3f4400e51d97c864609b13e69593db7bf3dc29",
+        "semantic_acceptance": true,
+        "semantic_reason": "Implemented both lanes in ledgerfmt/formats/{jsonl,csv}.py, tests/test_{jsonl,csv}.py, and docs/{jsonl,csv}.md. Reviewed the final diff; protected source files remain unchanged. All 23 unit tests, 16 acceptance tests, compileall, and diff whitespace checks passed. No unresolved requirements."
+      },
+      "workers": [],
+      "seconds": 202.107,
+      "parallel_phase_seconds": null,
+      "weighted_cost": 22.6102,
+      "combined_usage": {
+        "input_tokens": 198740,
+        "cached_input_tokens": 162688,
+        "uncached_input_tokens": 36052,
+        "output_tokens": 7624,
+        "reasoning_tokens": 1408,
+        "total_tokens": 206364,
+        "uncached_input_plus_output": 43676
+      },
+      "changed_paths": [
+        "docs/csv.md",
+        "docs/jsonl.md",
+        "ledgerfmt/formats/csv.py",
+        "ledgerfmt/formats/jsonl.py",
+        "tests/test_csv.py",
+        "tests/test_jsonl.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_account_and_amount_schema (test_csv.CsvTests.test_account_and_amount_schema) ... ok\ntest_bare_carriage_return_is_quoted (test_csv.CsvTests.test_bare_carriage_return_is_quoted) ... ok\ntest_crlf_and_quoted_multiline_input (test_csv.CsvTests.test_crlf_and_quoted_multiline_input) ... ok\ntest_empty_export_and_header_only_import (test_csv.CsvTests.test_empty_export_and_header_only_import) ... ok\ntest_generator_multiline_unicode_roundtrip (test_csv.CsvTests.test_generator_multiline_unicode_roundtrip) ... ok\ntest_header_errors (test_csv.CsvTests.test_header_errors) ... ok\ntest_io_errors_propagate (test_csv.CsvTests.test_io_errors_propagate) ... ok\ntest_late_invalid_records_do_not_write_header_or_rows (test_csv.CsvTests.test_late_invalid_records_do_not_write_header_or_rows) ... ok\ntest_malformed_quoting_and_multiline_row_context (test_csv.CsvTests.test_malformed_quoting_and_multiline_row_context) ... ok\ntest_minimal_quoting_and_lf_output (test_csv.CsvTests.test_minimal_quoting_and_lf_output) ... ok\ntest_row_width_and_blank_record_errors (test_csv.CsvTests.test_row_width_and_blank_record_errors) ... ok\ntest_tags_must_be_json_list_of_strings (test_csv.CsvTests.test_tags_must_be_json_list_of_strings) ... ok\ntest_empty_and_whitespace_lines (test_jsonl.JsonlTests.test_empty_and_whitespace_lines) ... ok\ntest_exact_object_shape_with_line_context (test_jsonl.JsonlTests.test_exact_object_shape_with_line_context) ... ok\ntest_generator_roundtrip_and_wire_encoding (test_jsonl.JsonlTests.test_generator_roundtrip_and_wire_encoding) ... ok\ntest_io_errors_propagate (test_jsonl.JsonlTests.test_io_errors_propagate) ... ok\ntest_late_invalid_records_leave_destination_untouched (test_jsonl.JsonlTests.test_late_invalid_records_leave_destination_untouched) ... ok\ntest_malformed_json_has_physical_line_context (test_jsonl.JsonlTests.test_malformed_json_has_physical_line_context) ... ok\ntest_schema_errors (test_jsonl.JsonlTests.test_schema_errors) ... ok\ntest_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 0.003s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... ok\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ok\ntest_both_directions (test_integration.IntegrationContract.test_both_directions) ... ok\ntest_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout) ... ok\ntest_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... ok\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ok\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ok\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... ok\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... ok\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ok\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.102s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "ledgerfmt",
+            "tests",
+            "acceptance"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... ok\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... ok\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+        }
+      ],
+      "final_source_hashes": {
+        "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+        "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+        "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+        "docs/csv.md": "55d42ab0a230e7d9b679e94435613a599a3871d4d547b9fad1f7a80dd329595c",
+        "docs/jsonl.md": "c9fe9b3c26899d8edf655a6e0968d3fbbc5685640e9012b792333fa7940ede4e",
+        "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+        "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ledgerfmt/formats/csv.py": "ad3d88259240affd83d6a48dda2e433ff1d17abf9620d9d549efa39d4d21c42c",
+        "ledgerfmt/formats/jsonl.py": "2074863be61c04949d9efd53bd37cf7467492fdcb7ef108bf9b9b7703ce61da5",
+        "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+        "tests/test_csv.py": "34e6c6acf2ea641266c66655c2122f5007356ce370053e14b9d6a21332dc2394",
+        "tests/test_jsonl.py": "0688beead1f6f474d78e036d01e31a816befa21038222c80d0a8dd8a65bc39c3",
+        "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+      },
+      "reused_source_bound_checks": false,
+      "root_skipped_reason": null,
+      "quality_pass": true,
+      "usage_complete": true
+    },
+    {
+      "sequence": 2,
+      "arm": "quick",
+      "root": null,
+      "workers": [
+        {
+          "model_requested": "gpt-6-luna",
+          "effort": "high",
+          "service_tier_requested": "default",
+          "command": [
+            "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+            "exec",
+            "--ephemeral",
+            "-C",
+            "/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-jsonl/project",
+            "-m",
+            "gpt-6-luna",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "agents.max_depth=0",
+            "-c",
+            "service_tier=\"default\"",
+            "-c",
+            "mcp_servers.MCP_DOCKER.enabled=false",
+            "--approve-for-me",
+            "--json",
+            "--output-last-message",
+            "/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-jsonl/report.md",
+            "-"
+          ],
+          "seconds": 46.865,
+          "exit_code": 0,
+          "usage": {
+            "input_tokens": 230776,
+            "cached_input_tokens": 203776,
+            "uncached_input_tokens": 27000,
+            "output_tokens": 3983,
+            "reasoning_tokens": 1272,
+            "total_tokens": 234759,
+            "uncached_input_plus_output": 30983
+          },
+          "prompt_sha256": "1edc08ce7ac7cd9df552d6309b6df5db0edde765b9fc6d8094cdf598a56c9f90",
+          "started_at": "2026-10-11T02:38:44.034863+00:00",
+          "finished_at": "2026-10-11T02:39:30.900737+00:00",
+          "evidence": {
+            "source_hashes": {
+              "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+              "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+              "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+              "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+              "docs/jsonl.md": "89807fa83c341c49e93cc106daedb6d545b83a684bcdeb2bde90454edacc30d8",
+              "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+              "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "ledgerfmt/formats/csv.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+              "ledgerfmt/formats/jsonl.py": "1bc8a2fdcdd6b14f629e4583d966180116e38551bd0045dc10e506f40a309a06",
+              "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+              "tests/test_jsonl.py": "11688134f88388177fa96cb5ea25b84691ffeab12dd4c1fc8b3c71ca2d926bfb",
+              "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+            },
+            "stable_during_checks": true,
+            "changed_paths": [
+              "docs/jsonl.md",
+              "ledgerfmt/formats/jsonl.py",
+              "tests/test_jsonl.py"
+            ],
+            "scope_pass": true,
+            "checks": [
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "unittest",
+                  "discover",
+                  "-s",
+                  "tests",
+                  "-v"
+                ],
+                "returncode": 0,
+                "stdout": "",
+                "stderr": "test_dump_accepts_one_shot_generator_preserves_order_and_sorted_keys (test_jsonl.JsonlTests.test_dump_accepts_one_shot_generator_preserves_order_and_sorted_keys) ... ok\ntest_empty_input_and_output (test_jsonl.JsonlTests.test_empty_input_and_output) ... ok\ntest_invalid_late_record_leaves_destination_unchanged (test_jsonl.JsonlTests.test_invalid_late_record_leaves_destination_unchanged) ... ok\ntest_load_skips_blank_lines_and_round_trips_unicode_and_scale (test_jsonl.JsonlTests.test_load_skips_blank_lines_and_round_trips_unicode_and_scale) ... ok\ntest_rejects_missing_and_extra_fields_with_line_context (test_jsonl.JsonlTests.test_rejects_missing_and_extra_fields_with_line_context) ... ok\ntest_rejects_non_objects_bad_json_and_invalid_schema_with_context (test_jsonl.JsonlTests.test_rejects_non_objects_bad_json_and_invalid_schema_with_context) ... ok\ntest_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+              },
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "unittest",
+                  "discover",
+                  "-s",
+                  "acceptance",
+                  "-p",
+                  "test_jsonl_contract.py",
+                  "-v"
+                ],
+                "returncode": 0,
+                "stdout": "",
+                "stderr": "test_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... ok\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ok\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ok\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... ok\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... ok\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ok\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+              },
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "compileall",
+                  "-q",
+                  "ledgerfmt",
+                  "tests"
+                ],
+                "returncode": 0,
+                "stdout": "",
+                "stderr": ""
+              }
+            ],
+            "tracked_diff": "diff --git a/docs/jsonl.md b/docs/jsonl.md\nindex 815d0cd..5888146 100644\n--- a/docs/jsonl.md\n+++ b/docs/jsonl.md\n@@ -1,3 +1,24 @@\n-# jsonl format\n+# JSON Lines format\n \n-Implementation pending.\n+The `ledgerfmt.formats.jsonl` module provides `load(stream)`, which returns a\n+list of ledger records, and `dump(records, stream)`, which writes records to a\n+text stream. Export accepts any finite iterable, preserves its order, and\n+validates every record before writing. Neither operation closes its stream.\n+\n+Each nonblank input line is one JSON object with exactly these fields:\n+\n+```json\n+{\"account\":\"coffee shop\",\"amount\":\"12.3400\",\"tags\":[\"food\",\"work\"]}\n+```\n+\n+`account` is a nonempty string, `amount` is a plain decimal string, and `tags`\n+is a list of strings. JSON escaping keeps embedded newlines inside a single\n+physical line. Blank or whitespace-only lines are ignored. Export uses sorted\n+keys, writes unescaped Unicode, and ends each record with one newline; exporting\n+no records produces an empty string. Decimal scale is retained.\n+\n+Convert JSON Lines from standard input to CSV on standard output with:\n+\n+```sh\n+python3 -m ledgerfmt.cli jsonl csv < ledger.jsonl > ledger.csv\n+```\ndiff --git a/ledgerfmt/formats/jsonl.py b/ledgerfmt/formats/jsonl.py\nindex dc036bc..3a27002 100644\n--- a/ledgerfmt/formats/jsonl.py\n+++ b/ledgerfmt/formats/jsonl.py\n@@ -1,6 +1,53 @@\n+\"\"\"JSON Lines import and export for ledger records.\"\"\"\n+\n+import json\n+\n+from ledgerfmt.model import record_from_wire, record_to_wire\n+\n+\n+_FIELDS = {\"account\", \"amount\", \"tags\"}\n+\n+\n def load(stream):\n-    raise NotImplementedError('implement load')\n+    \"\"\"Load nonblank JSON object lines from a text stream.\"\"\"\n+    records = []\n+    for line_number, line in enumerate(stream, start=1):\n+        if not line.strip():\n+            continue\n+        try:\n+            value = json.loads(line)\n+        except (json.JSONDecodeError, TypeError, ValueError) as error:\n+            raise ValueError(f\"line {line_number}: malformed JSON: {error}\") from error\n+\n+        if not isinstance(value, dict):\n+            raise ValueError(f\"line {line_number}: expected a JSON object\")\n+        if set(value) != _FIELDS:\n+            raise ValueError(\n+                f\"line {line_number}: expected exactly account, amount, and tags fields\"\n+            )\n+        try:\n+            record = record_from_wire(value[\"account\"], value[\"amount\"], value[\"tags\"])\n+        except (ValueError, TypeError, KeyError) as error:\n+            raise ValueError(f\"line {line_number}: invalid record: {error}\") from error\n+        records.append(record)\n+    return records\n \n \n def dump(records, stream):\n-    raise NotImplementedError('implement dump')\n+    \"\"\"Validate and serialize records before writing JSON Lines to a text stream.\"\"\"\n+    serialized = []\n+    try:\n+        iterator = iter(records)\n+    except TypeError as error:\n+        raise ValueError(\"row 1: records must be iterable\") from error\n+\n+    for row_number, record in enumerate(iterator, start=1):\n+        try:\n+            wire = record_to_wire(record)\n+            line = json.dumps(wire, ensure_ascii=False, sort_keys=True)\n+        except (ValueError, TypeError, KeyError) as error:\n+            raise ValueError(f\"row {row_number}: invalid record: {error}\") from error\n+        serialized.append(line)\n+\n+    if serialized:\n+        stream.write(\"\".join(line + \"\\n\" for line in serialized))\n",
+            "untracked_files": {
+              "tests/test_jsonl.py": "import io\nimport json\nimport unittest\nfrom decimal import Decimal\n\nfrom ledgerfmt.formats import jsonl\nfrom ledgerfmt.model import Record\n\n\nclass JsonlTests(unittest.TestCase):\n    def test_load_skips_blank_lines_and_round_trips_unicode_and_scale(self):\n        records = [Record('caf\u00e9, \"\u5e97\"\\nNorth', Decimal(\"0.0100\"), (\"x,y\", 'say \"hi\"', \"\"))]\n        output = io.StringIO()\n        jsonl.dump(iter(records), output)\n\n        self.assertEqual(output.getvalue().count(\"\\n\"), 1)\n        self.assertIn(\"caf\u00e9\", output.getvalue())\n        self.assertIn(\"\\\\n\", output.getvalue())\n        self.assertEqual(\n            jsonl.load(io.StringIO(\" \\t\\n\" + output.getvalue() + \"\\n\")), records\n        )\n        self.assertEqual(json.loads(output.getvalue())[\"amount\"], \"0.0100\")\n\n    def test_empty_input_and_output(self):\n        self.assertEqual(jsonl.load(io.StringIO(\"\\n \\t\\n\")), [])\n        output = io.StringIO()\n        self.assertIsNone(jsonl.dump(iter(()), output))\n        self.assertEqual(output.getvalue(), \"\")\n\n    def test_rejects_missing_and_extra_fields_with_line_context(self):\n        values = (\n            {\"account\": \"a\", \"amount\": \"1\"},\n            {\"account\": \"a\", \"amount\": \"1\", \"tags\": [], \"extra\": True},\n        )\n        for value in values:\n            with self.subTest(value=value), self.assertRaisesRegex(ValueError, r\"line 2\"):\n                jsonl.load(io.StringIO(\"\\n\" + json.dumps(value) + \"\\n\"))\n\n    def test_rejects_non_objects_bad_json_and_invalid_schema_with_context(self):\n        for content in (\n            \"[]\",\n            \"{broken}\",\n            '{\"account\":\"a\",\"amount\":\"1e3\",\"tags\":[]}',\n            '{\"account\":\"a\",\"amount\":\"1\",\"tags\":[null]}',\n        ):\n            with self.subTest(content=content), self.assertRaisesRegex(ValueError, r\"line 1\"):\n                jsonl.load(io.StringIO(content))\n\n    def test_dump_accepts_one_shot_generator_preserves_order_and_sorted_keys(self):\n        records = (row for row in (Record(\"second\", Decimal(\"2\")), Record(\"first\", Decimal(\"1\"))))\n        output = io.StringIO()\n        self.assertIsNone(jsonl.dump(records, output))\n\n        lines = output.getvalue().splitlines()\n        decoded = [json.loads(line) for line in lines]\n        self.assertEqual([row[\"account\"] for row in decoded], [\"second\", \"first\"])\n        self.assertEqual(list(decoded[0]), [\"account\", \"amount\", \"tags\"])\n        self.assertFalse(output.closed)\n\n    def test_invalid_late_record_leaves_destination_unchanged(self):\n        for invalid in (\n            Record(\"bad\", Decimal(\"NaN\")),\n            Record(\"\", Decimal(\"2\")),\n            Record(\"bad\", Decimal(\"2\"), (\"ok\", None)),\n        ):\n            with self.subTest(invalid=invalid):\n                output = io.StringIO(\"existing\")\n                output.seek(0, io.SEEK_END)\n                with self.assertRaisesRegex(ValueError, r\"row 2\"):\n                    jsonl.dump(iter((Record(\"good\", Decimal(\"1\")), invalid)), output)\n                self.assertEqual(output.getvalue(), \"existing\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+            }
+          },
+          "lane": "jsonl",
+          "quality_pass": true
+        },
+        {
+          "model_requested": "gpt-6-luna",
+          "effort": "high",
+          "service_tier_requested": "default",
+          "command": [
+            "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+            "exec",
+            "--ephemeral",
+            "-C",
+            "/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project",
+            "-m",
+            "gpt-6-luna",
+            "-c",
+            "model_reasoning_effort=\"high\"",
+            "-c",
+            "agents.max_depth=0",
+            "-c",
+            "service_tier=\"default\"",
+            "-c",
+            "mcp_servers.MCP_DOCKER.enabled=false",
+            "--approve-for-me",
+            "--json",
+            "--output-last-message",
+            "/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/report.md",
+            "-"
+          ],
+          "seconds": 0.493,
+          "exit_code": 1,
+          "usage": {
+            "input_tokens": null,
+            "cached_input_tokens": null,
+            "uncached_input_tokens": null,
+            "output_tokens": null,
+            "reasoning_tokens": null,
+            "total_tokens": null,
+            "uncached_input_plus_output": null
+          },
+          "prompt_sha256": "e99f7fce8dfa76198daac9ab86638fcbe20a42e0a84871e7cc08271a51236111",
+          "started_at": "2026-10-11T02:38:44.036209+00:00",
+          "finished_at": "2026-10-11T02:38:44.530422+00:00",
+          "evidence": {
+            "source_hashes": {
+              "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+              "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+              "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+              "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+              "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+              "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+              "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "ledgerfmt/formats/csv.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+              "ledgerfmt/formats/jsonl.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+              "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+              "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+            },
+            "stable_during_checks": true,
+            "changed_paths": [],
+            "scope_pass": false,
+            "checks": [
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "unittest",
+                  "discover",
+                  "-s",
+                  "tests",
+                  "-v"
+                ],
+                "returncode": 0,
+                "stdout": "",
+                "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+              },
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "unittest",
+                  "discover",
+                  "-s",
+                  "acceptance",
+                  "-p",
+                  "test_csv_contract.py",
+                  "-v"
+                ],
+                "returncode": 1,
+                "stdout": "",
+                "stderr": "t dump\n\n======================================================================\nERROR: test_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 25, in test_quoted_error_context\n    with self.assertRaises(ValueError) as error:csv.load(io.StringIO('account,amount,tags\\n\"unterminated'))\n                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='amount,account,tags\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,amount\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,tags,extra\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/acceptance/test_csv_contract.py\", line 11, in test_roundtrip_and_scale\n    out=io.StringIO();self.assertIsNone(csv.dump(iter(rows),out))\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-csv/project/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nFAILED (errors=15)\n"
+              },
+              {
+                "command": [
+                  "/usr/bin/python3",
+                  "-m",
+                  "compileall",
+                  "-q",
+                  "ledgerfmt",
+                  "tests"
+                ],
+                "returncode": 0,
+                "stdout": "",
+                "stderr": ""
+              }
+            ],
+            "tracked_diff": "",
+            "untracked_files": {}
+          },
+          "lane": "csv",
+          "quality_pass": false
+        }
+      ],
+      "seconds": 47.011,
+      "parallel_phase_seconds": 47.011,
+      "weighted_cost": null,
+      "combined_usage": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "uncached_input_tokens": null,
+        "output_tokens": null,
+        "reasoning_tokens": null,
+        "total_tokens": null,
+        "uncached_input_plus_output": null
+      },
+      "changed_paths": [],
+      "scope_pass": false,
+      "topology_pass": false,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-v"
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value=7)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/acceptance/test_jsonl_contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/acceptance/test_jsonl_contract.py\", line 33, in test_order_and_sorted_keys\n    out=io.StringIO();jsonl.dump([Record('b',Decimal('2')),Record('a',Decimal('1'))],out)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/jsonl.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/acceptance/test_jsonl_contract.py\", line 11, in test_roundtrip_scale_unicode\n    out=io.StringIO();jsonl.dump(iter(rows),out)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/jsonl.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nFAIL: test_both_directions (test_integration.IntegrationContract.test_both_directions)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/acceptance/test_integration.py\", line 11, in test_both_directions\n    result=self.convert('jsonl','csv',json.dumps(original)+'\\n');self.assertEqual(result.returncode,0,result.stderr)\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/cli.py\", line 22, in <module>\n    if __name__ == '__main__': raise SystemExit(main())\n                                                ^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/cli.py\", line 15, in main\n    records = source.load(sys.stdin)\n              ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n\n======================================================================\nFAIL: test_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/acceptance/test_integration.py\", line 16, in test_invalid_late_input_no_stdout\n    result=self.convert(source,target,text);self.assertEqual(result.returncode,2);self.assertEqual(result.stdout,'');self.assertTrue(result.stderr)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 2\n\n----------------------------------------------------------------------\nRan 16 tests in 0.182s\n\nFAILED (failures=2, errors=25)\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "ledgerfmt",
+            "tests",
+            "acceptance"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden",
+            "-v"
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... ERROR\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... ERROR\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ERROR\n\n======================================================================\nERROR: test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/test_hidden.py\", line 20, in test_atomic_schema_error_preserves_cursor\n    with self.assertRaises(ValueError):module.dump([Record('a',Decimal('1')),Record('b',Decimal('2'),('ok',4))],out)\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/test_hidden.py\", line 12, in test_cross_format_generator_roundtrip\n    a=io.StringIO();first.dump((r for r in rows),a)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/test_hidden.py\", line 25, in test_finite_exponent_and_negative_zero\n    out=io.StringIO();module.dump(rows,out);actual=module.load(io.StringIO(out.getvalue()))\n                      ^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-exporters-20261010/trial-02/project/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (errors=3)\n"
+        }
+      ],
+      "final_source_hashes": {
+        "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+        "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+        "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+        "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+        "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+        "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+        "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ledgerfmt/formats/csv.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+        "ledgerfmt/formats/jsonl.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+        "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+        "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+      },
+      "reused_source_bound_checks": false,
+      "root_skipped_reason": "worker or integration checks failed",
+      "quality_pass": false,
+      "usage_complete": false
+    }
+  ],
+  "summary": {
+    "metric": "weighted_cost",
+    "trials": 2,
+    "planned_trials": 4,
+    "metrics": {
+      "direct": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 202.107,
+        "total_tokens": 206364.0,
+        "uncached_input_plus_output": 43676.0,
+        "weighted_cost": 22.6102
+      },
+      "quick": {
+        "trials": 1,
+        "all_quality_pass": false,
+        "seconds": 47.011,
+        "total_tokens": null,
+        "uncached_input_plus_output": null,
+        "weighted_cost": null
+      }
+    },
+    "complete": false,
+    "thresholds_met": false,
+    "successful": false,
+    "early_stop": true
+  },
+  "known_worker_weighted_cost_only": {
+    "jsonl": 0.1682315,
+    "csv": null
+  },
+  "csv_startup_error": "Error: thread/start: thread/start failed: failed to load configuration: Failed to read config file /mnt/c/Users/ranve/.codex/config.toml: No data available (os error 61) (code -32600)\n",
+  "calibration": {
+    "note": "Reference and mutants are calibration-only; not visible in model fixtures.",
+    "checks": [
+      {
+        "name": "unimplemented_negative_control",
+        "source_hashes": {
+          "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+          "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+          "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+          "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+          "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+          "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+          "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/formats/csv.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+          "ledgerfmt/formats/jsonl.py": "dca8b1b40baad22285c306accfe21f38b2a96400bffa76f078efa29b38bcb219",
+          "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+          "test_hidden.py": "58ac4a534aaeabaa528433b10e211b82808f15b2118a60411177f890c2d8dee6",
+          "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ERROR\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... \n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1') ... ERROR\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,[],extra') ... ERROR\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='\\n') ... ERROR\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,NaN,[]') ... ERROR\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,garbage') ... ERROR\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,{}') ... ERROR\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ERROR\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ERROR\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ERROR\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... \n  test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='') ... ERROR\n  test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='amount,account,tags\\n') ... ERROR\n  test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,amount\\n') ... ERROR\n  test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,tags,extra\\n') ... ERROR\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ERROR\ntest_both_directions (test_integration.IntegrationContract.test_both_directions) ... FAIL\ntest_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout) ... FAIL\ntest_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... ERROR\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ERROR\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ERROR\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... ERROR\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... \n  test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value={'account': 'a', 'amount': '1'}) ... ERROR\n  test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value={'account': 'a', 'amount': '1', 'tags': [], 'extra': 0}) ... ERROR\n  test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value=[]) ... ERROR\n  test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value=7) ... ERROR\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ERROR\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ERROR\n\n======================================================================\nERROR: test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 30, in test_atomic_error_before_header\n    with self.assertRaises(ValueError):csv.dump(iter([Record('a',Decimal('1')),bad]),out)\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,[],extra')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,NaN,[]')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,garbage')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,{}')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_crlf (test_csv_contract.CsvContract.test_crlf)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 33, in test_crlf\n    self.assertEqual(csv.load(io.StringIO('account,amount,tags\\r\\na,1.00,[]\\r\\n')),[Record('a',Decimal('1.00'))])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_empty_header (test_csv_contract.CsvContract.test_empty_header)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 16, in test_empty_header\n    out=io.StringIO();csv.dump([],out);self.assertEqual(out.getvalue(),'account,amount,tags\\n')\n                      ^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 25, in test_quoted_error_context\n    with self.assertRaises(ValueError) as error:csv.load(io.StringIO('account,amount,tags\\n\"unterminated'))\n                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='amount,account,tags\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,amount\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_reject_headers (test_csv_contract.CsvContract.test_reject_headers) (text='account,amount,tags,extra\\n')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 20, in test_reject_headers\n    with self.subTest(text=text),self.assertRaises(ValueError):csv.load(io.StringIO(text))\n                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 11, in test_roundtrip_and_scale\n    out=io.StringIO();self.assertIsNone(csv.dump(iter(rows),out))\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 30, in test_atomic_late_error\n    with self.assertRaises(ValueError):jsonl.dump(iter([Record('a',Decimal('1')),bad]),out)\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 25, in test_bad_json_context\n    with self.assertRaises(ValueError) as error:jsonl.load(io.StringIO('\\n{broken}\\n'))\n                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 23, in test_bad_wire_schema\n    with self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps({'account':'a','amount':amount,'tags':tags})))\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_empty (test_jsonl_contract.JsonlContract.test_empty)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 16, in test_empty\n    self.assertEqual(jsonl.load(io.StringIO('\\n \\t\\n')),[])\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value={'account': 'a', 'amount': '1'})\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value={'account': 'a', 'amount': '1', 'tags': [], 'extra': 0})\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value=[])\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) (value=7)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 20, in test_exact_keys\n    with self.subTest(value=value),self.assertRaises(ValueError):jsonl.load(io.StringIO(json.dumps(value)))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n======================================================================\nERROR: test_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 33, in test_order_and_sorted_keys\n    out=io.StringIO();jsonl.dump([Record('b',Decimal('2')),Record('a',Decimal('1'))],out)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 11, in test_roundtrip_scale_unicode\n    out=io.StringIO();jsonl.dump(iter(rows),out)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nFAIL: test_both_directions (test_integration.IntegrationContract.test_both_directions)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_integration.py\", line 11, in test_both_directions\n    result=self.convert('jsonl','csv',json.dumps(original)+'\\n');self.assertEqual(result.returncode,0,result.stderr)\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/cli.py\", line 22, in <module>\n    if __name__ == '__main__': raise SystemExit(main())\n                                                ^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/cli.py\", line 15, in main\n    records = source.load(sys.stdin)\n              ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 2, in load\n    raise NotImplementedError('implement load')\nNotImplementedError: implement load\n\n\n======================================================================\nFAIL: test_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_integration.py\", line 16, in test_invalid_late_input_no_stdout\n    result=self.convert(source,target,text);self.assertEqual(result.returncode,2);self.assertEqual(result.stdout,'');self.assertTrue(result.stderr)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 2\n\n----------------------------------------------------------------------\nRan 16 tests in 0.133s\n\nFAILED (failures=2, errors=25)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "ledgerfmt",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "test_hidden",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... ERROR\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... ERROR\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ERROR\n\n======================================================================\nERROR: test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 20, in test_atomic_schema_error_preserves_cursor\n    with self.assertRaises(ValueError):module.dump([Record('a',Decimal('1')),Record('b',Decimal('2'),('ok',4))],out)\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 12, in test_cross_format_generator_roundtrip\n    a=io.StringIO();first.dump((r for r in rows),a)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n======================================================================\nERROR: test_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 25, in test_finite_exponent_and_negative_zero\n    out=io.StringIO();module.dump(rows,out);actual=module.load(io.StringIO(out.getvalue()))\n                      ^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/csv.py\", line 6, in dump\n    raise NotImplementedError('implement dump')\nNotImplementedError: implement dump\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nFAILED (errors=3)\n"
+          }
+        ]
+      },
+      {
+        "name": "known_good",
+        "source_hashes": {
+          "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+          "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+          "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+          "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+          "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+          "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+          "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/formats/csv.py": "7b274b46548936fcfdb6e1d3d77546d37356d4e43dc2ebc23daad6c6039e4206",
+          "ledgerfmt/formats/jsonl.py": "8b5dd88e2fbb270ce8dac20a497be446216d0a428aaa1201394c6daed7a65f76",
+          "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+          "test_hidden.py": "58ac4a534aaeabaa528433b10e211b82808f15b2118a60411177f890c2d8dee6",
+          "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... ok\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ok\ntest_both_directions (test_integration.IntegrationContract.test_both_directions) ... ok\ntest_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout) ... ok\ntest_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... ok\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ok\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ok\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... ok\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... ok\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ok\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.099s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "ledgerfmt",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "test_hidden",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... ok\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... ok\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+          }
+        ]
+      },
+      {
+        "name": "non_atomic_jsonl",
+        "source_hashes": {
+          "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+          "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+          "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+          "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+          "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+          "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+          "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/formats/csv.py": "7b274b46548936fcfdb6e1d3d77546d37356d4e43dc2ebc23daad6c6039e4206",
+          "ledgerfmt/formats/jsonl.py": "5017e484b8018c6189c97eff86a0b1601f5b7ef45a2952b492823caf966a4fd3",
+          "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+          "test_hidden.py": "58ac4a534aaeabaa528433b10e211b82808f15b2118a60411177f890c2d8dee6",
+          "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... ok\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ok\ntest_both_directions (test_integration.IntegrationContract.test_both_directions) ... ERROR\ntest_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout) ... ok\ntest_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... FAIL\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ok\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ok\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... FAIL\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... ok\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ERROR\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ERROR\n\n======================================================================\nERROR: test_both_directions (test_integration.IntegrationContract.test_both_directions)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_integration.py\", line 13, in test_both_directions\n    self.assertEqual(json.loads(back.stdout),original)\n                     ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\n======================================================================\nERROR: test_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 34, in test_order_and_sorted_keys\n    decoded=[json.loads(line) for line in out.getvalue().splitlines()]\n             ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\n======================================================================\nERROR: test_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 9, in load\n    value=json.loads(line)\n          ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 13, in test_roundtrip_scale_unicode\n    self.assertIn('caf\u00e9',out.getvalue());self.assertEqual(jsonl.load(io.StringIO(out.getvalue())),rows)\n                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 12, in load\n    except (ValueError,TypeError) as e:raise ValueError(f'line {index}: {e}') from e\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: line 1: Expecting value: line 1 column 1 (char 0)\n\n======================================================================\nFAIL: test_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 31, in test_atomic_late_error\n    self.assertEqual(out.getvalue(),'prefix')\nAssertionError: 'prefixpartial' != 'prefix'\n- prefixpartial\n+ prefix\n\n\n======================================================================\nFAIL: test_empty (test_jsonl_contract.JsonlContract.test_empty)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_jsonl_contract.py\", line 17, in test_empty\n    out=io.StringIO();self.assertIsNone(jsonl.dump([],out));self.assertEqual(out.getvalue(),'')\n                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'partial' != ''\n- partial\n\n\n----------------------------------------------------------------------\nRan 16 tests in 0.105s\n\nFAILED (failures=2, errors=3)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "ledgerfmt",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "test_hidden",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... FAIL\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... ERROR\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ERROR\n\n======================================================================\nERROR: test_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 9, in load\n    value=json.loads(line)\n          ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 14, in test_cross_format_generator_roundtrip\n    actual=second.load(io.StringIO(b.getvalue()))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 12, in load\n    except (ValueError,TypeError) as e:raise ValueError(f'line {index}: {e}') from e\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: line 1: Expecting value: line 1 column 1 (char 0)\n\n======================================================================\nERROR: test_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 9, in load\n    value=json.loads(line)\n          ^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/json/decoder.py\", line 355, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 25, in test_finite_exponent_and_negative_zero\n    out=io.StringIO();module.dump(rows,out);actual=module.load(io.StringIO(out.getvalue()))\n                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-parallel-calibration/ledgerfmt/formats/jsonl.py\", line 12, in load\n    except (ValueError,TypeError) as e:raise ValueError(f'line {index}: {e}') from e\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: line 1: Expecting value: line 1 column 1 (char 0)\n\n======================================================================\nFAIL: test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 21, in test_atomic_schema_error_preserves_cursor\n    self.assertEqual(out.getvalue(),'untouched');self.assertEqual(out.tell(),3)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'untpartial' != 'untouched'\n- untpartial\n+ untouched\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nFAILED (failures=1, errors=2)\n"
+          }
+        ]
+      },
+      {
+        "name": "csv_discards_tags",
+        "source_hashes": {
+          "acceptance/test_csv_contract.py": "22406f14413afec166c5858f95b1d3b60e23bcb4afc9956a4f17cf64b3d3758f",
+          "acceptance/test_integration.py": "8d1532517c84360a3b0bf5fc3d989cf746b103443afac3db87f2cfbba34569c6",
+          "acceptance/test_jsonl_contract.py": "5875699b1e651427a7986475d3a804608da13cfa9a6ed8e689af627002642134",
+          "docs/csv.md": "9db73ad69ab7c2bfdbaca5ed6b6b39606d5e1a8532ee864c5b8ad8e24f16b12e",
+          "docs/jsonl.md": "fa1b21e44766b78a10d5eeb7947d3590e99da29c2bc6effb46bd1a7bf0514129",
+          "ledgerfmt/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/cli.py": "72f63784e3ff5d57a914ee19dc6530548cc1ffcfafa79aad6e208c9f9cda9e6b",
+          "ledgerfmt/formats/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ledgerfmt/formats/csv.py": "2053a7c31093cc4272996e92ad7bb89865839da1c48be18f97bd39988d3a042c",
+          "ledgerfmt/formats/jsonl.py": "8b5dd88e2fbb270ce8dac20a497be446216d0a428aaa1201394c6daed7a65f76",
+          "ledgerfmt/model.py": "e342ab708604e2b37bc5a7ab3bc2cb74637006c7f8032c2a550a01e744b72c2c",
+          "test_hidden.py": "58ac4a534aaeabaa528433b10e211b82808f15b2118a60411177f890c2d8dee6",
+          "tests/test_model.py": "fc7643851ff88f2441fcb5e599f7fba4b748e0ab78edf1abc5f2f3507570f3b1"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_invalid_record (test_model.ModelTests.test_invalid_record) ... ok\ntest_invalid_wire (test_model.ModelTests.test_invalid_wire) ... ok\ntest_plain_decimal (test_model.ModelTests.test_plain_decimal) ... ok\ntest_roundtrip (test_model.ModelTests.test_roundtrip) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... \n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,garbage') ... FAIL\n  test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,{}') ... FAIL\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... FAIL\ntest_both_directions (test_integration.IntegrationContract.test_both_directions) ... FAIL\ntest_invalid_late_input_no_stdout (test_integration.IntegrationContract.test_invalid_late_input_no_stdout) ... ok\ntest_atomic_late_error (test_jsonl_contract.JsonlContract.test_atomic_late_error) ... ok\ntest_bad_json_context (test_jsonl_contract.JsonlContract.test_bad_json_context) ... ok\ntest_bad_wire_schema (test_jsonl_contract.JsonlContract.test_bad_wire_schema) ... ok\ntest_empty (test_jsonl_contract.JsonlContract.test_empty) ... ok\ntest_exact_keys (test_jsonl_contract.JsonlContract.test_exact_keys) ... ok\ntest_order_and_sorted_keys (test_jsonl_contract.JsonlContract.test_order_and_sorted_keys) ... ok\ntest_roundtrip_scale_unicode (test_jsonl_contract.JsonlContract.test_roundtrip_scale_unicode) ... ok\n\n======================================================================\nFAIL: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,garbage')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\nAssertionError: ValueError not raised\n\n======================================================================\nFAIL: test_bad_rows (test_csv_contract.CsvContract.test_bad_rows) (row='a,1,{}')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 23, in test_bad_rows\n    with self.subTest(row=row),self.assertRaises(ValueError):csv.load(io.StringIO('account,amount,tags\\n'+row+'\\n'))\nAssertionError: ValueError not raised\n\n======================================================================\nFAIL: test_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_csv_contract.py\", line 13, in test_roundtrip_and_scale\n    self.assertEqual(csv.load(io.StringIO(out.getvalue())),rows)\nAssertionError: Lists differ: [Reco[17 chars]\\n\"q\"', amount=Decimal('-2.000'), tags=())] != [Reco[17 chars]\\n\"q\"', amount=Decimal('-2.000'), tags=('one,two', '\"', '\\n'))]\n\nFirst differing element 0:\nRecor[15 chars],\\n\"q\"', amount=Decimal('-2.000'), tags=())\nRecor[15 chars],\\n\"q\"', amount=Decimal('-2.000'), tags=('one,two', '\"', '\\n'))\n\n- [Record(account='caf\u00e9,\\n\"q\"', amount=Decimal('-2.000'), tags=())]\n+ [Record(account='caf\u00e9,\\n\"q\"',\n+         amount=Decimal('-2.000'),\n+         tags=('one,two', '\"', '\\n'))]\n\n======================================================================\nFAIL: test_both_directions (test_integration.IntegrationContract.test_both_directions)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/acceptance/test_integration.py\", line 13, in test_both_directions\n    self.assertEqual(json.loads(back.stdout),original)\nAssertionError: {'account': 'a,\u96ea', 'amount': '0.0200', 'tags': []} != {'account': 'a,\u96ea', 'amount': '0.0200', 'tags': ['x', 'x', '']}\n- {'account': 'a,\u96ea', 'amount': '0.0200', 'tags': []}\n+ {'account': 'a,\u96ea', 'amount': '0.0200', 'tags': ['x', 'x', '']}\n?                                                 ++++++++++++\n\n\n----------------------------------------------------------------------\nRan 16 tests in 0.108s\n\nFAILED (failures=4)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "ledgerfmt",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "test_hidden",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_atomic_schema_error_preserves_cursor (test_hidden.ExportProbes.test_atomic_schema_error_preserves_cursor) ... ok\ntest_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip) ... FAIL\ntest_finite_exponent_and_negative_zero (test_hidden.ExportProbes.test_finite_exponent_and_negative_zero) ... ok\n\n======================================================================\nFAIL: test_cross_format_generator_roundtrip (test_hidden.ExportProbes.test_cross_format_generator_roundtrip)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-parallel-calibration/test_hidden.py\", line 15, in test_cross_format_generator_roundtrip\n    self.assertEqual(actual,rows)\nAssertionError: Lists differ: [Reco[51 chars]ags=()), Record(account='-2\\n,\"\u96ea', amount=Deci[333 chars]=())] != [Reco[51 chars]ags=('a', 'a', '\\r\\n')), Record(account='-2\\n,[445 chars]n'))]\n\nFirst differing element 0:\nRecord(account='-3\\n,\"\u96ea', amount=Decimal('-3.00100'), tags=())\nRecord(account='-3\\n,\"\u96ea', amount=Decimal('-3.00100'), tags=('a', 'a', '\\r\\n'))\n\nDiff is 1593 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nFAILED (failures=1)\n"
+          }
+        ]
+      }
+    ]
+  },
+  "offline_tests_passed": 60,
+  "frozen_hashes_revalidated": true,
+  "artifacts": {
+    "trial-01/root/prompt.md": "Implement two independent ledger import/export formats for an existing conversion CLI. This is a complete two-lane task with six owned files. Shared schema, CLI and protected acceptance checks are supplied; do not change them.\n\nShared API and schema:\n- Each formatter implements load(stream) -> list[Record] and dump(records, stream) -> None for text streams. dump accepts any finite iterable of Record, including a one-shot generator, preserves input order and never mutates records or closes streams.\n- Reuse protected ledgerfmt.model.record_from_wire and record_to_wire for all schema validation and Decimal encoding. account is a nonempty string; amount on the wire is a plain decimal string (no exponent, float, NaN or infinity); tags is a list of strings. Duplicate and empty tags are preserved. Decimal scale must survive round trips; record_to_wire already expands exponents for export.\n- A malformed format or schema raises ValueError with useful context identifying the bad line/row. Do not allow KeyError, TypeError, JSONDecodeError details without context, or NotImplementedError to escape as data-error behavior. Stream I/O errors may propagate.\n- dump must validate and serialize ALL records before writing anything to the destination. If any row is invalid, raise ValueError and leave stream content unchanged. This requirement covers data errors, not rollback after I/O errors. No flush/close requirement.\n- load returns no partial result on any error. Support Unicode, embedded commas/quotes/newlines in account and tags through standard escaping/quoting. No BOM, comments, duplicate-JSON-key detection, streaming memory limits or new CLI flags are required.\n\nLane jsonl, owned ledgerfmt/formats/jsonl.py, tests/test_jsonl.py, docs/jsonl.md:\n- One JSON object per nonblank input line, with exactly keys account, amount, tags. Ignore blank/whitespace-only lines. Reject scalars, arrays, missing/extra fields and malformed JSON. Empty input returns [].\n- Emit sorted JSON object keys, ensure_ascii=False and one newline per record; empty output is ''. Standard JSON separators are fine. Use escaped newlines inside JSON strings, not additional physical lines.\n- Add focused tests beyond the supplied examples, including a generator, invalid late rows, missing/extra keys and Unicode. Document API, format, sample and jsonl-to-csv CLI use.\n\nLane csv, owned ledgerfmt/formats/csv.py, tests/test_csv.py, docs/csv.md:\n- Require exact first-row header account,amount,tags in that order; reject missing, duplicate, reordered or extra header columns. Every following CSV record must contain exactly three fields. Empty input is a header error; header-only input returns []. Blank records are errors.\n- amount field uses shared schema. tags field is a JSON list of strings encoded inside a standard quoted CSV cell. Parse using csv with strict=True and standard JSON. Reject malformed quoting, bad tag JSON and wrong field count with ValueError and row context. Accept LF or CRLF and standard quoted multiline fields.\n- Emit the header even for no records, use csv.writer with lineterminator='\\n', minimal quoting, JSON ensure_ascii=False for tags. Preserve Decimal scale.\n- Add focused tests beyond supplied examples, including empty/header errors, generator, multiline fields, invalid late rows, tags and row width. Document API, format, sample and csv-to-jsonl CLI use.\n\nIntegration is already wired in protected ledgerfmt/cli.py. `python3 -m ledgerfmt.cli jsonl csv` or reverse reads stdin, writes stdout and returns 2 with stderr/no stdout for invalid input. No lane needs another lane's implementation to pass its own acceptance file. Both implementations must work when merged without editing shared files.\n\nRead model.py, the relevant acceptance/test_<lane>_contract.py and your inputs together. All files outside the six owned paths, including supplied tests and acceptance files, are protected. Do not implement shared validation again or broaden the contract. Final checks for the complete task:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q ledgerfmt tests acceptance\n\nCPU only, no network/GPU, dependencies, model calls, delegation or commits. Finish after the requested implementation, tests and documentation pass. Report changed files, check results and unresolved requirements concisely.\n\nImplement BOTH lanes yourself; inspect the final diff and run the listed checks.\n\nCPU only. Do not delegate, launch models, load skills, install dependencies, use network/GPU, or commit. Work inside this checkout; do not inspect evaluator files or other trials.\n\nReturn the required JSON acceptance decision. Set accepted=false for any unresolved material defect; mechanical tests alone do not establish acceptance.\n",
+    "trial-01/root/report.md": "{\"accepted\":true,\"reason\":\"Implemented both lanes in ledgerfmt/formats/{jsonl,csv}.py, tests/test_{jsonl,csv}.py, and docs/{jsonl,csv}.md. Reviewed the final diff; protected source files remain unchanged. All 23 unit tests, 16 acceptance tests, compileall, and diff whitespace checks passed. No unresolved requirements.\"}",
+    "trial-01/project/ledgerfmt/formats/jsonl.py": "\"\"\"JSON Lines import and atomic, validated export for ledger records.\"\"\"\n\nimport json\n\nfrom ledgerfmt.model import record_from_wire, record_to_wire\n\n\ndef load(stream):\n    \"\"\"Read one wire object per nonblank line, reporting physical line numbers.\"\"\"\n    records = []\n    for line_number, line in enumerate(stream, 1):\n        if not line.strip():\n            continue\n        try:\n            wire = json.loads(line)\n            if not isinstance(wire, dict) or set(wire) != {\"account\", \"amount\", \"tags\"}:\n                raise ValueError(\"expected an object with exactly account, amount, tags\")\n            records.append(record_from_wire(**wire))\n        except ValueError as error:\n            raise ValueError(f\"JSONL line {line_number}: {error}\") from error\n    return records\n\n\ndef dump(records, stream):\n    \"\"\"Serialize every record before making any write to the caller's stream.\"\"\"\n    lines = []\n    for row_number, record in enumerate(records, 1):\n        try:\n            wire = record_to_wire(record)\n            lines.append(json.dumps(wire, sort_keys=True, ensure_ascii=False) + \"\\n\")\n        except (ValueError, TypeError) as error:\n            raise ValueError(f\"JSONL row {row_number}: {error}\") from error\n    stream.write(\"\".join(lines))\n",
+    "trial-01/project/tests/test_jsonl.py": "import io\nimport json\nimport unittest\nfrom decimal import Decimal\n\nfrom ledgerfmt.formats import jsonl\nfrom ledgerfmt.model import Record\n\n\nclass JsonlTests(unittest.TestCase):\n    def test_generator_roundtrip_and_wire_encoding(self):\n        records = [\n            Record('\u96ea, \"cash\"\\nnext', Decimal('-0.0100'), ('', '\u96ea', '\u96ea', '\\n\"')),\n            Record('second', Decimal('1E+3')),\n        ]\n        original = list(records)\n        output = io.StringIO()\n        self.assertIsNone(jsonl.dump((record for record in records), output))\n        text = output.getvalue()\n        self.assertFalse(output.closed)\n        self.assertEqual(text.count('\\n'), 2)\n        self.assertTrue(text.endswith('\\n'))\n        self.assertIn('\u96ea', text)\n        wires = [json.loads(line) for line in text.splitlines()]\n        self.assertEqual(list(wires[0]), ['account', 'amount', 'tags'])\n        self.assertEqual([wire['amount'] for wire in wires], ['-0.0100', '1000'])\n        source = io.StringIO(text)\n        loaded = jsonl.load(source)\n        self.assertEqual(loaded, records)\n        self.assertEqual(loaded[0].amount.as_tuple(), records[0].amount.as_tuple())\n        self.assertFalse(source.closed)\n        self.assertEqual(records, original)\n\n    def test_empty_and_whitespace_lines(self):\n        for text in ('', '\\n \\t\\r\\n'):\n            self.assertEqual(jsonl.load(io.StringIO(text)), [])\n        output = io.StringIO()\n        jsonl.dump(iter(()), output)\n        self.assertEqual(output.getvalue(), '')\n        self.assertEqual(\n            jsonl.load(io.StringIO('\\n {\"tags\": [], \"amount\": \"1\", \"account\": \"a\"}\\n\\t')),\n            [Record('a', Decimal('1'))],\n        )\n\n    def test_exact_object_shape_with_line_context(self):\n        valid = {'account': 'a', 'amount': '1', 'tags': []}\n        bad_values = [None, True, 3, 'text', [], [valid]]\n        bad_values += [{key: value for key, value in valid.items() if key != missing}\n                       for missing in valid]\n        bad_values.append(dict(valid, extra=0))\n        for bad in bad_values:\n            with self.subTest(bad=bad):\n                with self.assertRaisesRegex(ValueError, r'line 3:'):\n                    jsonl.load(io.StringIO(json.dumps(valid) + '\\n\\n' + json.dumps(bad)))\n\n    def test_malformed_json_has_physical_line_context(self):\n        for bad in ('{', '{\"account\": \"a\",}', '{} {}', '{\"account\":\"a\\nb\"}'):\n            with self.subTest(bad=bad):\n                with self.assertRaisesRegex(ValueError, r'line 2:') as error:\n                    jsonl.load(io.StringIO('\\n' + bad))\n                self.assertIs(type(error.exception), ValueError)\n\n    def test_schema_errors(self):\n        valid = {'account': 'a', 'amount': '1', 'tags': []}\n        invalid_fields = {\n            'account': ['', None, 1],\n            'amount': [1, 1.5, None, '1e2', 'NaN', 'Infinity', '+1', '01', '1.'],\n            'tags': [None, 'tag', {}, [1]],\n        }\n        for field, values in invalid_fields.items():\n            for value in values:\n                with self.subTest(field=field, value=value):\n                    with self.assertRaisesRegex(ValueError, r'line 1:'):\n                        jsonl.load(io.StringIO(json.dumps(dict(valid, **{field: value}))))\n\n    def test_late_invalid_records_leave_destination_untouched(self):\n        invalid = [\n            None, {}, Record('', Decimal('1')), Record('a', 1),\n            Record('a', Decimal('NaN')), Record('a', Decimal('Infinity')),\n            Record('a', Decimal('1'), ['x']), Record('a', Decimal('1'), ('x', None)),\n        ]\n        for bad in invalid:\n            with self.subTest(bad=bad):\n                output = io.StringIO('existing content')\n                output.seek(3)\n                with self.assertRaisesRegex(ValueError, r'row 2:'):\n                    jsonl.dump((row for row in [Record('good', Decimal('1')), bad]), output)\n                self.assertEqual(output.getvalue(), 'existing content')\n                self.assertEqual(output.tell(), 3)\n                self.assertFalse(output.closed)\n\n    def test_io_errors_propagate(self):\n        class BrokenOutput:\n            def write(self, text):\n                raise OSError('write failed')\n\n        with self.assertRaisesRegex(OSError, 'write failed'):\n            jsonl.dump([Record('a', Decimal('1'))], BrokenOutput())\n",
+    "trial-01/project/docs/jsonl.md": "# JSONL format\n\n`ledgerfmt.formats.jsonl.load(stream) -> list[Record]` reads a text stream.\nEach nonblank physical line must contain one JSON object with exactly `account`,\n`amount`, and `tags`. Blank lines are ignored; empty input returns `[]`.\nThe shared schema requires a nonempty account string, a plain decimal amount\nstring (no exponent or nonfinite value), and a list of tag strings.\n\n`dump(records, stream) -> None` accepts any finite iterable, including a one-shot\ngenerator. It emits sorted object keys, literal Unicode, and one terminating\nnewline per record. Quotes and embedded newlines are JSON-escaped. Empty input\nproduces an empty string. Order, duplicate and empty tags, and Decimal scale are\npreserved; positive Decimal exponents are expanded to plain decimal strings.\n\nExample (one physical line):\n\n```json\n{\"account\": \"caf\u00e9, \\\"savings\\\"\", \"amount\": \"12.300\", \"tags\": [\"travel\", \"\", \"travel\"]}\n```\n\nBoth functions leave caller-owned streams open and do not mutate records.\nData errors raise `ValueError` with a physical input line or output record number;\nloading never returns partial results. Export validates and serializes the entire\niterable before writing, so data errors leave destination content unchanged.\nStream I/O errors may propagate; writes are not rolled back after an I/O failure.\n\nConvert JSONL on stdin to CSV on stdout:\n\n```sh\npython3 -m ledgerfmt.cli jsonl csv < ledger.jsonl > ledger.csv\n```\n\nInvalid input produces an error on stderr, no stdout, and exit status 2.\n",
+    "trial-01/project/ledgerfmt/formats/csv.py": "\"\"\"CSV ledger import and atomic, validated export.\"\"\"\n\nimport csv\nimport io\nimport json\n\nfrom ledgerfmt.model import record_from_wire, record_to_wire\n\n\n_HEADER = [\"account\", \"amount\", \"tags\"]\n\n\ndef load(stream):\n    \"\"\"Read the exact header and three-field records using strict CSV parsing.\"\"\"\n    reader = csv.reader(stream, strict=True)\n    records = []\n    row_number = 1\n    try:\n        if next(reader, None) != _HEADER:\n            raise ValueError(\"CSV row 1: expected header account,amount,tags\")\n        row_number = 2\n        for row in reader:\n            try:\n                if len(row) != 3:\n                    raise ValueError(f\"expected 3 fields, got {len(row)}\")\n                account, amount, tags = row\n                records.append(record_from_wire(account, amount, json.loads(tags)))\n            except ValueError as error:\n                raise ValueError(f\"CSV row {row_number}: {error}\") from error\n            row_number += 1\n    except csv.Error as error:\n        raise ValueError(\n            f\"CSV row {row_number} (line {reader.line_num}): {error}\"\n        ) from error\n    return records\n\n\ndef dump(records, stream):\n    \"\"\"Buffer the header and all serialized rows before writing the output.\"\"\"\n    buffer = io.StringIO(newline=\"\")\n    writer = csv.writer(buffer, lineterminator=\"\\n\", quoting=csv.QUOTE_MINIMAL)\n    writer.writerow(_HEADER)\n    for row_number, record in enumerate(records, 2):\n        try:\n            wire = record_to_wire(record)\n            account = wire[\"account\"]\n            fields = [wire[\"amount\"], json.dumps(wire[\"tags\"], ensure_ascii=False)]\n            # With LF terminators csv.writer does not quote a bare CR, although\n            # csv.reader treats it as a record boundary. Quote that account cell\n            # explicitly; this branch cannot contain any quotes needing escape.\n            if \"\\r\" in account and not any(char in account for char in ',\"\\n'):\n                buffer.write('\"' + account + '\",')\n                writer.writerow(fields)\n            else:\n                writer.writerow([account, *fields])\n        except (ValueError, TypeError, csv.Error) as error:\n            raise ValueError(f\"CSV row {row_number}: {error}\") from error\n    stream.write(buffer.getvalue())\n",
+    "trial-01/project/tests/test_csv.py": "import csv as standard_csv\nimport io\nimport json\nimport unittest\nfrom decimal import Decimal\n\nfrom ledgerfmt.formats import csv\nfrom ledgerfmt.model import Record\n\n\nHEADER = 'account,amount,tags\\n'\n\n\ndef csv_row(fields):\n    output = io.StringIO(newline='')\n    standard_csv.writer(output, lineterminator='\\n').writerow(fields)\n    return output.getvalue()\n\n\nclass CsvTests(unittest.TestCase):\n    def test_generator_multiline_unicode_roundtrip(self):\n        records = [\n            Record('\u96ea, \"cash\"\\nnext\\r\\nlast', Decimal('-0.0100'), ('', '\u96ea', '\u96ea', '\\n\"')),\n            Record('second', Decimal('1E+3')),\n        ]\n        original = list(records)\n        output = io.StringIO(newline='')\n        self.assertIsNone(csv.dump((record for record in records), output))\n        text = output.getvalue()\n        self.assertFalse(output.closed)\n        self.assertTrue(text.startswith(HEADER))\n        self.assertTrue(text.endswith('\\n'))\n        self.assertIn('\u96ea', text)\n        fields = list(standard_csv.reader(io.StringIO(text, newline='')))\n        self.assertEqual([row[1] for row in fields[1:]], ['-0.0100', '1000'])\n        self.assertEqual(json.loads(fields[1][2]), list(records[0].tags))\n        source = io.StringIO(text, newline='')\n        loaded = csv.load(source)\n        self.assertEqual(loaded, records)\n        self.assertEqual(loaded[0].amount.as_tuple(), records[0].amount.as_tuple())\n        self.assertFalse(source.closed)\n        self.assertEqual(records, original)\n\n    def test_empty_export_and_header_only_import(self):\n        output = io.StringIO()\n        csv.dump((row for row in []), output)\n        self.assertEqual(output.getvalue(), HEADER)\n        for text in (HEADER, HEADER.rstrip('\\n'), HEADER.replace('\\n', '\\r\\n')):\n            self.assertEqual(csv.load(io.StringIO(text)), [])\n\n    def test_header_errors(self):\n        for header in ('', '\\n', 'account,amount\\n', 'account,amount,amount\\n',\n                       'amount,account,tags\\n', 'account,amount,tags,extra\\n',\n                       'account, amount,tags\\n', '\"account,amount,tags\\n'):\n            with self.subTest(header=header):\n                with self.assertRaisesRegex(ValueError, r'row 1'):\n                    csv.load(io.StringIO(header))\n\n    def test_minimal_quoting_and_lf_output(self):\n        output = io.StringIO()\n        csv.dump([Record('cash', Decimal('1.00'))], output)\n        self.assertEqual(output.getvalue(), HEADER + 'cash,1.00,[]\\n')\n\n    def test_crlf_and_quoted_multiline_input(self):\n        text = 'account,amount,tags\\r\\n\"a\\r\\nb\",1.00,\"[\"\"x\"\", \"\"\"\"]\"\\r\\n'\n        self.assertEqual(csv.load(io.StringIO(text, newline='')),\n                         [Record('a\\r\\nb', Decimal('1.00'), ('x', ''))])\n\n    def test_bare_carriage_return_is_quoted(self):\n        records = [Record('a\\rb', Decimal('1.00'))]\n        output = io.StringIO(newline='')\n        csv.dump(records, output)\n        self.assertEqual(output.getvalue(), HEADER + '\"a\\rb\",1.00,[]\\n')\n        self.assertEqual(csv.load(io.StringIO(output.getvalue(), newline='')), records)\n\n    def test_row_width_and_blank_record_errors(self):\n        for row in ('\\n', ' \\n', 'a,1\\n', 'a,1,[],extra\\n', ',,\\n'):\n            with self.subTest(row=row):\n                with self.assertRaisesRegex(ValueError, r'row 3:'):\n                    csv.load(io.StringIO(HEADER + 'good,1,[]\\n' + row))\n\n    def test_tags_must_be_json_list_of_strings(self):\n        for tags in ('', 'broken', '[', '{}', 'null', '1', '\"tag\"', '[null]', '[1]'):\n            with self.subTest(tags=tags):\n                with self.assertRaisesRegex(ValueError, r'row 2:') as error:\n                    csv.load(io.StringIO(HEADER + csv_row(['a', '1', tags])))\n                self.assertIs(type(error.exception), ValueError)\n\n    def test_account_and_amount_schema(self):\n        for account, amount in (('', '1'), ('a', '1e2'), ('a', 'NaN'), ('a', 'Infinity'),\n                                ('a', '+1'), ('a', '01'), ('a', '1.'), ('a', ' 1')):\n            with self.subTest(account=account, amount=amount):\n                with self.assertRaisesRegex(ValueError, r'row 2:'):\n                    csv.load(io.StringIO(HEADER + csv_row([account, amount, '[]'])))\n\n    def test_malformed_quoting_and_multiline_row_context(self):\n        prefix = HEADER + csv_row(['good\\nmultiline', '1', '[]'])\n        for row in ('\"unterminated', '\"bad\"junk,1,[]\\n', 'a,1,\"[]\"junk\\n'):\n            with self.subTest(row=row):\n                with self.assertRaisesRegex(ValueError, r'row 3 .*line'):\n                    csv.load(io.StringIO(prefix + row))\n        with self.assertRaisesRegex(ValueError, r'row 3:'):\n            csv.load(io.StringIO(prefix + 'a,1,broken\\n'))\n\n    def test_late_invalid_records_do_not_write_header_or_rows(self):\n        invalid = [\n            None, {}, Record('', Decimal('1')), Record('a', 1),\n            Record('a', Decimal('NaN')), Record('a', Decimal('-Infinity')),\n            Record('a', Decimal('1'), ['x']), Record('a', Decimal('1'), ('x', None)),\n        ]\n        for bad in invalid:\n            with self.subTest(bad=bad):\n                output = io.StringIO('existing content')\n                output.seek(3)\n                with self.assertRaisesRegex(ValueError, r'row 3:'):\n                    csv.dump((row for row in [Record('good', Decimal('1')), bad]), output)\n                self.assertEqual(output.getvalue(), 'existing content')\n                self.assertEqual(output.tell(), 3)\n                self.assertFalse(output.closed)\n\n    def test_io_errors_propagate(self):\n        class BrokenOutput:\n            def write(self, text):\n                raise OSError('write failed')\n\n        with self.assertRaisesRegex(OSError, 'write failed'):\n            csv.dump([Record('a', Decimal('1'))], BrokenOutput())\n",
+    "trial-01/project/docs/csv.md": "# CSV format\n\n`ledgerfmt.formats.csv.load(stream) -> list[Record]` reads a text stream with\nthe exact first-row header `account,amount,tags`, in that order. Empty input,\nmissing/extra/duplicate/reordered header fields, blank records, and data records\nwith anything other than three fields are errors. Header-only input returns `[]`.\nParsing uses Python's standard CSV reader with `strict=True`; LF and CRLF record\nendings and quoted multiline fields are supported. For files, open text streams\nwith `newline=''` to preserve newlines within fields.\n\nThe shared schema requires a nonempty account string and a plain decimal amount\nstring (no exponent or nonfinite value). The tags cell contains a JSON list of\nstrings. Standard CSV quoting doubles JSON quotation marks inside quoted cells:\n\n```csv\naccount,amount,tags\n\"caf\u00e9, savings\",12.300,\"[\"\"travel\"\", \"\"\"\", \"\"travel\"\"]\"\n```\n\n`dump(records, stream) -> None` accepts any finite iterable, including a one-shot\ngenerator. It always emits the header, uses minimal CSV quoting and LF record\nendings, and encodes tags as JSON with literal Unicode. Record order, duplicate\nand empty tags, and Decimal scale survive round trips; positive Decimal exponents\nare expanded to plain decimal strings.\n\nBoth functions leave caller-owned streams open and do not mutate records.\nData errors raise `ValueError` with a CSV record number (the header is row 1,\neven when later records span multiple physical lines). Loading never returns a\npartial result. Export validates and serializes all records before writing even\nthe header, so data errors leave destination content unchanged. Stream I/O errors\nmay propagate; writes are not rolled back after an I/O failure.\n\nConvert CSV on stdin to JSONL on stdout:\n\n```sh\npython3 -m ledgerfmt.cli csv jsonl < ledger.csv > ledger.jsonl\n```\n\nInvalid input produces an error on stderr, no stdout, and exit status 2.\n",
+    "trial-02/project/ledgerfmt/formats/jsonl.py": "def load(stream):\n    raise NotImplementedError('implement load')\n\n\ndef dump(records, stream):\n    raise NotImplementedError('implement dump')\n",
+    "trial-02/project/docs/jsonl.md": "# jsonl format\n\nImplementation pending.\n",
+    "trial-02/project/ledgerfmt/formats/csv.py": "def load(stream):\n    raise NotImplementedError('implement load')\n\n\ndef dump(records, stream):\n    raise NotImplementedError('implement dump')\n",
+    "trial-02/project/docs/csv.md": "# csv format\n\nImplementation pending.\n",
+    "trial-02/worker-jsonl/prompt.md": "Implement two independent ledger import/export formats for an existing conversion CLI. This is a complete two-lane task with six owned files. Shared schema, CLI and protected acceptance checks are supplied; do not change them.\n\nShared API and schema:\n- Each formatter implements load(stream) -> list[Record] and dump(records, stream) -> None for text streams. dump accepts any finite iterable of Record, including a one-shot generator, preserves input order and never mutates records or closes streams.\n- Reuse protected ledgerfmt.model.record_from_wire and record_to_wire for all schema validation and Decimal encoding. account is a nonempty string; amount on the wire is a plain decimal string (no exponent, float, NaN or infinity); tags is a list of strings. Duplicate and empty tags are preserved. Decimal scale must survive round trips; record_to_wire already expands exponents for export.\n- A malformed format or schema raises ValueError with useful context identifying the bad line/row. Do not allow KeyError, TypeError, JSONDecodeError details without context, or NotImplementedError to escape as data-error behavior. Stream I/O errors may propagate.\n- dump must validate and serialize ALL records before writing anything to the destination. If any row is invalid, raise ValueError and leave stream content unchanged. This requirement covers data errors, not rollback after I/O errors. No flush/close requirement.\n- load returns no partial result on any error. Support Unicode, embedded commas/quotes/newlines in account and tags through standard escaping/quoting. No BOM, comments, duplicate-JSON-key detection, streaming memory limits or new CLI flags are required.\n\nLane jsonl, owned ledgerfmt/formats/jsonl.py, tests/test_jsonl.py, docs/jsonl.md:\n- One JSON object per nonblank input line, with exactly keys account, amount, tags. Ignore blank/whitespace-only lines. Reject scalars, arrays, missing/extra fields and malformed JSON. Empty input returns [].\n- Emit sorted JSON object keys, ensure_ascii=False and one newline per record; empty output is ''. Standard JSON separators are fine. Use escaped newlines inside JSON strings, not additional physical lines.\n- Add focused tests beyond the supplied examples, including a generator, invalid late rows, missing/extra keys and Unicode. Document API, format, sample and jsonl-to-csv CLI use.\n\nLane csv, owned ledgerfmt/formats/csv.py, tests/test_csv.py, docs/csv.md:\n- Require exact first-row header account,amount,tags in that order; reject missing, duplicate, reordered or extra header columns. Every following CSV record must contain exactly three fields. Empty input is a header error; header-only input returns []. Blank records are errors.\n- amount field uses shared schema. tags field is a JSON list of strings encoded inside a standard quoted CSV cell. Parse using csv with strict=True and standard JSON. Reject malformed quoting, bad tag JSON and wrong field count with ValueError and row context. Accept LF or CRLF and standard quoted multiline fields.\n- Emit the header even for no records, use csv.writer with lineterminator='\\n', minimal quoting, JSON ensure_ascii=False for tags. Preserve Decimal scale.\n- Add focused tests beyond supplied examples, including empty/header errors, generator, multiline fields, invalid late rows, tags and row width. Document API, format, sample and csv-to-jsonl CLI use.\n\nIntegration is already wired in protected ledgerfmt/cli.py. `python3 -m ledgerfmt.cli jsonl csv` or reverse reads stdin, writes stdout and returns 2 with stderr/no stdout for invalid input. No lane needs another lane's implementation to pass its own acceptance file. Both implementations must work when merged without editing shared files.\n\nRead model.py, the relevant acceptance/test_<lane>_contract.py and your inputs together. All files outside the six owned paths, including supplied tests and acceptance files, are protected. Do not implement shared validation again or broaden the contract. Final checks for the complete task:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q ledgerfmt tests acceptance\n\nCPU only, no network/GPU, dependencies, model calls, delegation or commits. Finish after the requested implementation, tests and documentation pass. Report changed files, check results and unresolved requirements concisely.\n\nYour assignment is ONLY lane jsonl.\nOwned paths: ledgerfmt/formats/jsonl.py, tests/test_jsonl.py, docs/jsonl.md. Do not implement or modify the other lane.\nRun these lane checks: [[\"/usr/bin/python3\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-v\"], [\"/usr/bin/python3\", \"-m\", \"unittest\", \"discover\", \"-s\", \"acceptance\", \"-p\", \"test_jsonl_contract.py\", \"-v\"], [\"/usr/bin/python3\", \"-m\", \"compileall\", \"-q\", \"ledgerfmt\", \"tests\"]]. The other formatter may remain unimplemented in your isolated checkout.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nNo agents or model calls, coordinator skills, network, GPU operations, dependencies or commits. Stay in this checkout; do not inspect other trials or evaluator files. Return <=150 words of paths, checks and unresolved requirements.\n",
+    "trial-02/worker-jsonl/report.md": "Implemented the JSONL lane in [jsonl.py](/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-jsonl/project/ledgerfmt/formats/jsonl.py), added focused tests in [test_jsonl.py](/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-jsonl/project/tests/test_jsonl.py), and documented the API, format, sample, and CLI in [jsonl.md](/tmp/lunarmarch-parallel-exporters-20261010/trial-02/worker-jsonl/project/docs/jsonl.md).\n\nAll requested checks passed: tests (10), JSONL acceptance checks (7), and compileall. `git diff --check` also passed. No unresolved JSONL requirements.",
+    "trial-02/worker-jsonl/project/ledgerfmt/formats/jsonl.py": "\"\"\"JSON Lines import and export for ledger records.\"\"\"\n\nimport json\n\nfrom ledgerfmt.model import record_from_wire, record_to_wire\n\n\n_FIELDS = {\"account\", \"amount\", \"tags\"}\n\n\ndef load(stream):\n    \"\"\"Load nonblank JSON object lines from a text stream.\"\"\"\n    records = []\n    for line_number, line in enumerate(stream, start=1):\n        if not line.strip():\n            continue\n        try:\n            value = json.loads(line)\n        except (json.JSONDecodeError, TypeError, ValueError) as error:\n            raise ValueError(f\"line {line_number}: malformed JSON: {error}\") from error\n\n        if not isinstance(value, dict):\n            raise ValueError(f\"line {line_number}: expected a JSON object\")\n        if set(value) != _FIELDS:\n            raise ValueError(\n                f\"line {line_number}: expected exactly account, amount, and tags fields\"\n            )\n        try:\n            record = record_from_wire(value[\"account\"], value[\"amount\"], value[\"tags\"])\n        except (ValueError, TypeError, KeyError) as error:\n            raise ValueError(f\"line {line_number}: invalid record: {error}\") from error\n        records.append(record)\n    return records\n\n\ndef dump(records, stream):\n    \"\"\"Validate and serialize records before writing JSON Lines to a text stream.\"\"\"\n    serialized = []\n    try:\n        iterator = iter(records)\n    except TypeError as error:\n        raise ValueError(\"row 1: records must be iterable\") from error\n\n    for row_number, record in enumerate(iterator, start=1):\n        try:\n            wire = record_to_wire(record)\n            line = json.dumps(wire, ensure_ascii=False, sort_keys=True)\n        except (ValueError, TypeError, KeyError) as error:\n            raise ValueError(f\"row {row_number}: invalid record: {error}\") from error\n        serialized.append(line)\n\n    if serialized:\n        stream.write(\"\".join(line + \"\\n\" for line in serialized))\n",
+    "trial-02/worker-jsonl/project/tests/test_jsonl.py": "import io\nimport json\nimport unittest\nfrom decimal import Decimal\n\nfrom ledgerfmt.formats import jsonl\nfrom ledgerfmt.model import Record\n\n\nclass JsonlTests(unittest.TestCase):\n    def test_load_skips_blank_lines_and_round_trips_unicode_and_scale(self):\n        records = [Record('caf\u00e9, \"\u5e97\"\\nNorth', Decimal(\"0.0100\"), (\"x,y\", 'say \"hi\"', \"\"))]\n        output = io.StringIO()\n        jsonl.dump(iter(records), output)\n\n        self.assertEqual(output.getvalue().count(\"\\n\"), 1)\n        self.assertIn(\"caf\u00e9\", output.getvalue())\n        self.assertIn(\"\\\\n\", output.getvalue())\n        self.assertEqual(\n            jsonl.load(io.StringIO(\" \\t\\n\" + output.getvalue() + \"\\n\")), records\n        )\n        self.assertEqual(json.loads(output.getvalue())[\"amount\"], \"0.0100\")\n\n    def test_empty_input_and_output(self):\n        self.assertEqual(jsonl.load(io.StringIO(\"\\n \\t\\n\")), [])\n        output = io.StringIO()\n        self.assertIsNone(jsonl.dump(iter(()), output))\n        self.assertEqual(output.getvalue(), \"\")\n\n    def test_rejects_missing_and_extra_fields_with_line_context(self):\n        values = (\n            {\"account\": \"a\", \"amount\": \"1\"},\n            {\"account\": \"a\", \"amount\": \"1\", \"tags\": [], \"extra\": True},\n        )\n        for value in values:\n            with self.subTest(value=value), self.assertRaisesRegex(ValueError, r\"line 2\"):\n                jsonl.load(io.StringIO(\"\\n\" + json.dumps(value) + \"\\n\"))\n\n    def test_rejects_non_objects_bad_json_and_invalid_schema_with_context(self):\n        for content in (\n            \"[]\",\n            \"{broken}\",\n            '{\"account\":\"a\",\"amount\":\"1e3\",\"tags\":[]}',\n            '{\"account\":\"a\",\"amount\":\"1\",\"tags\":[null]}',\n        ):\n            with self.subTest(content=content), self.assertRaisesRegex(ValueError, r\"line 1\"):\n                jsonl.load(io.StringIO(content))\n\n    def test_dump_accepts_one_shot_generator_preserves_order_and_sorted_keys(self):\n        records = (row for row in (Record(\"second\", Decimal(\"2\")), Record(\"first\", Decimal(\"1\"))))\n        output = io.StringIO()\n        self.assertIsNone(jsonl.dump(records, output))\n\n        lines = output.getvalue().splitlines()\n        decoded = [json.loads(line) for line in lines]\n        self.assertEqual([row[\"account\"] for row in decoded], [\"second\", \"first\"])\n        self.assertEqual(list(decoded[0]), [\"account\", \"amount\", \"tags\"])\n        self.assertFalse(output.closed)\n\n    def test_invalid_late_record_leaves_destination_unchanged(self):\n        for invalid in (\n            Record(\"bad\", Decimal(\"NaN\")),\n            Record(\"\", Decimal(\"2\")),\n            Record(\"bad\", Decimal(\"2\"), (\"ok\", None)),\n        ):\n            with self.subTest(invalid=invalid):\n                output = io.StringIO(\"existing\")\n                output.seek(0, io.SEEK_END)\n                with self.assertRaisesRegex(ValueError, r\"row 2\"):\n                    jsonl.dump(iter((Record(\"good\", Decimal(\"1\")), invalid)), output)\n                self.assertEqual(output.getvalue(), \"existing\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+    "trial-02/worker-jsonl/project/docs/jsonl.md": "# JSON Lines format\n\nThe `ledgerfmt.formats.jsonl` module provides `load(stream)`, which returns a\nlist of ledger records, and `dump(records, stream)`, which writes records to a\ntext stream. Export accepts any finite iterable, preserves its order, and\nvalidates every record before writing. Neither operation closes its stream.\n\nEach nonblank input line is one JSON object with exactly these fields:\n\n```json\n{\"account\":\"coffee shop\",\"amount\":\"12.3400\",\"tags\":[\"food\",\"work\"]}\n```\n\n`account` is a nonempty string, `amount` is a plain decimal string, and `tags`\nis a list of strings. JSON escaping keeps embedded newlines inside a single\nphysical line. Blank or whitespace-only lines are ignored. Export uses sorted\nkeys, writes unescaped Unicode, and ends each record with one newline; exporting\nno records produces an empty string. Decimal scale is retained.\n\nConvert JSON Lines from standard input to CSV on standard output with:\n\n```sh\npython3 -m ledgerfmt.cli jsonl csv < ledger.jsonl > ledger.csv\n```\n",
+    "trial-02/worker-jsonl/project/ledgerfmt/formats/csv.py": "def load(stream):\n    raise NotImplementedError('implement load')\n\n\ndef dump(records, stream):\n    raise NotImplementedError('implement dump')\n",
+    "trial-02/worker-jsonl/project/docs/csv.md": "# csv format\n\nImplementation pending.\n",
+    "trial-02/worker-csv/prompt.md": "Implement two independent ledger import/export formats for an existing conversion CLI. This is a complete two-lane task with six owned files. Shared schema, CLI and protected acceptance checks are supplied; do not change them.\n\nShared API and schema:\n- Each formatter implements load(stream) -> list[Record] and dump(records, stream) -> None for text streams. dump accepts any finite iterable of Record, including a one-shot generator, preserves input order and never mutates records or closes streams.\n- Reuse protected ledgerfmt.model.record_from_wire and record_to_wire for all schema validation and Decimal encoding. account is a nonempty string; amount on the wire is a plain decimal string (no exponent, float, NaN or infinity); tags is a list of strings. Duplicate and empty tags are preserved. Decimal scale must survive round trips; record_to_wire already expands exponents for export.\n- A malformed format or schema raises ValueError with useful context identifying the bad line/row. Do not allow KeyError, TypeError, JSONDecodeError details without context, or NotImplementedError to escape as data-error behavior. Stream I/O errors may propagate.\n- dump must validate and serialize ALL records before writing anything to the destination. If any row is invalid, raise ValueError and leave stream content unchanged. This requirement covers data errors, not rollback after I/O errors. No flush/close requirement.\n- load returns no partial result on any error. Support Unicode, embedded commas/quotes/newlines in account and tags through standard escaping/quoting. No BOM, comments, duplicate-JSON-key detection, streaming memory limits or new CLI flags are required.\n\nLane jsonl, owned ledgerfmt/formats/jsonl.py, tests/test_jsonl.py, docs/jsonl.md:\n- One JSON object per nonblank input line, with exactly keys account, amount, tags. Ignore blank/whitespace-only lines. Reject scalars, arrays, missing/extra fields and malformed JSON. Empty input returns [].\n- Emit sorted JSON object keys, ensure_ascii=False and one newline per record; empty output is ''. Standard JSON separators are fine. Use escaped newlines inside JSON strings, not additional physical lines.\n- Add focused tests beyond the supplied examples, including a generator, invalid late rows, missing/extra keys and Unicode. Document API, format, sample and jsonl-to-csv CLI use.\n\nLane csv, owned ledgerfmt/formats/csv.py, tests/test_csv.py, docs/csv.md:\n- Require exact first-row header account,amount,tags in that order; reject missing, duplicate, reordered or extra header columns. Every following CSV record must contain exactly three fields. Empty input is a header error; header-only input returns []. Blank records are errors.\n- amount field uses shared schema. tags field is a JSON list of strings encoded inside a standard quoted CSV cell. Parse using csv with strict=True and standard JSON. Reject malformed quoting, bad tag JSON and wrong field count with ValueError and row context. Accept LF or CRLF and standard quoted multiline fields.\n- Emit the header even for no records, use csv.writer with lineterminator='\\n', minimal quoting, JSON ensure_ascii=False for tags. Preserve Decimal scale.\n- Add focused tests beyond supplied examples, including empty/header errors, generator, multiline fields, invalid late rows, tags and row width. Document API, format, sample and csv-to-jsonl CLI use.\n\nIntegration is already wired in protected ledgerfmt/cli.py. `python3 -m ledgerfmt.cli jsonl csv` or reverse reads stdin, writes stdout and returns 2 with stderr/no stdout for invalid input. No lane needs another lane's implementation to pass its own acceptance file. Both implementations must work when merged without editing shared files.\n\nRead model.py, the relevant acceptance/test_<lane>_contract.py and your inputs together. All files outside the six owned paths, including supplied tests and acceptance files, are protected. Do not implement shared validation again or broaden the contract. Final checks for the complete task:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q ledgerfmt tests acceptance\n\nCPU only, no network/GPU, dependencies, model calls, delegation or commits. Finish after the requested implementation, tests and documentation pass. Report changed files, check results and unresolved requirements concisely.\n\nYour assignment is ONLY lane csv.\nOwned paths: ledgerfmt/formats/csv.py, tests/test_csv.py, docs/csv.md. Do not implement or modify the other lane.\nRun these lane checks: [[\"/usr/bin/python3\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-v\"], [\"/usr/bin/python3\", \"-m\", \"unittest\", \"discover\", \"-s\", \"acceptance\", \"-p\", \"test_csv_contract.py\", \"-v\"], [\"/usr/bin/python3\", \"-m\", \"compileall\", \"-q\", \"ledgerfmt\", \"tests\"]]. The other formatter may remain unimplemented in your isolated checkout.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nNo agents or model calls, coordinator skills, network, GPU operations, dependencies or commits. Stay in this checkout; do not inspect other trials or evaluator files. Return <=150 words of paths, checks and unresolved requirements.\n",
+    "trial-02/worker-csv/project/ledgerfmt/formats/jsonl.py": "def load(stream):\n    raise NotImplementedError('implement load')\n\n\ndef dump(records, stream):\n    raise NotImplementedError('implement dump')\n",
+    "trial-02/worker-csv/project/docs/jsonl.md": "# jsonl format\n\nImplementation pending.\n",
+    "trial-02/worker-csv/project/ledgerfmt/formats/csv.py": "def load(stream):\n    raise NotImplementedError('implement load')\n\n\ndef dump(records, stream):\n    raise NotImplementedError('implement dump')\n",
+    "trial-02/worker-csv/project/docs/csv.md": "# csv format\n\nImplementation pending.\n"
+  },
+  "raw_evidence_path": "/tmp/lunarmarch-parallel-exporters-20261010",
+  "limitations": [
+    "No successful parallel workflow or review timing; failed-attempt time is not completion speed.",
+    "Missing CSV telemetry means total parallel usage/cost is unknown, not zero.",
+    "Failure reading shared config during concurrent startup does not prove contention was its cause.",
+    "Two worker launches overlapped, but only one reached a completed model result; no proof of two productive model sessions overlapping.",
+    "Setup/test authoring/controller and external approval review excluded.",
+    "Weighted Standard-credit proxy is not included subscription usage or an invoice.",
+    "Fresh CLI sessions proxy main-chat work; requested models/tier not independently attested served identities.",
+    "Familiar development fixture with dirty suite override; no general performance claim."
+  ]
+}

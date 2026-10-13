@@ -14,7 +14,9 @@
   ],
   "protected_invariants": [],
   "invariant_commands": [],
+  "max_attempts": 4,
   "max_reviewer_attempts": 2,
+  "max_auditor_attempts": 2,
   "inputs": ["counter.py", "tests/test_counter.py"],
   "non_goals": ["Do not add dependencies.", "Do not change increment behavior."],
   "depends_on": []

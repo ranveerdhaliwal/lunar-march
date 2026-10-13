@@ -1,0 +1,317 @@
+{
+  "manifest": {
+    "received": "2026-10-10",
+    "fixture": "examples/smoke-project",
+    "repository_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "model_requested": "gpt-5.6-luna",
+    "effort": "high",
+    "transport": "codex",
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "python": "3.12.3",
+    "worker_timeout_seconds": 90,
+    "check_timeout_seconds": 20,
+    "max_model_calls": 3,
+    "gpu_used": false,
+    "parent_usage": "not reported",
+    "account_meter_attribution": "not attempted; another chat is active",
+    "fixture_sha256": {
+      "counter.py": "332ffa3f57e876f4a41137bcb9ac3f34c6153f84e898f6ea1977215b2b4fc18a",
+      "tests/test_counter.py": "b298b7695e17c5770ff87e9ddcc7f454a682278e6e3a4a687871c85d252359cf"
+    },
+    "source_sha256": {
+      "scripts/lm_core.py": "7e7b368baa71ac5a2fe0e9105999e459269fc506905921ac372941f76ccb218e",
+      "scripts/lunarmarch.py": "b1282f1158d40a90c35d24ff8d218cd09ab46835207b474443cfae0b38d630e7",
+      "scripts/worker_transports.py": "7dfbf46d7a6417332207dc843848cc2950b381f432451e4823e034162fe5e9ac",
+      "scripts/usage.py": "2fab2fdd92f2e5e02c388410a1fa752a04fe1b1a227af32ff4f2bf4a1df49205",
+      "SKILL.md": "404822c3b9201634882f21a873f0a7a3a3b1613801f41bd2a95bb3dded66ea08"
+    }
+  },
+  "scope": "one fixture, one trial per arm, external Codex transport; CPU-only local checks",
+  "comparison_limits": [
+    "No inference about general model/workflow performance",
+    "Parent/controller and approval-review usage excluded",
+    "Time excludes parent inspection and between-call delays",
+    "One pre-model trust-check rejection has missing usage; retained separately",
+    "Another chat was active, so no account-meter attribution"
+  ],
+  "quick": {
+    "model_seconds": 28.73,
+    "exit_code": 0,
+    "usage": {
+      "input_tokens": 78054,
+      "cached_input_tokens": 69376,
+      "uncached_input_tokens": 8678,
+      "output_tokens": 1117,
+      "reasoning_tokens": 369,
+      "total_tokens": 79171,
+      "uncached_input_plus_output": 9795
+    },
+    "changes": [
+      "counter.py"
+    ],
+    "checks": [
+      {
+        "kind": "acceptance",
+        "command": "python3 -m unittest discover -s tests -v",
+        "returncode": 0,
+        "started_at": "2026-10-11T00:21:33+00:00",
+        "finished_at": "2026-10-11T00:21:33+00:00",
+        "stdout": "",
+        "stderr": "test_clamp_above_range (test_counter.CounterTests.test_clamp_above_range) ... ok\ntest_clamp_below_range (test_counter.CounterTests.test_clamp_below_range) ... ok\ntest_clamp_inside_range (test_counter.CounterTests.test_clamp_inside_range) ... ok\ntest_increment (test_counter.CounterTests.test_increment) ... ok\ntest_invalid_range (test_counter.CounterTests.test_invalid_range) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+      },
+      {
+        "kind": "acceptance",
+        "command": "python3 -c \"from counter import increment; assert all(increment(v) == v + 1 for v in range(-20, 21))\"",
+        "returncode": 0,
+        "started_at": "2026-10-11T00:21:33+00:00",
+        "finished_at": "2026-10-11T00:21:34+00:00",
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "property_checks": {
+      "returncode": 0,
+      "stdout": "property checks passed",
+      "stderr": ""
+    },
+    "command": [
+      "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+      "exec",
+      "--ephemeral",
+      "-C",
+      "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/quick/project",
+      "-m",
+      "gpt-5.6-luna",
+      "-c",
+      "model_reasoning_effort=\"high\"",
+      "-c",
+      "agents.max_depth=0",
+      "--json",
+      "--output-last-message",
+      "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/quick/report.md",
+      "--approve-for-me",
+      "-"
+    ],
+    "parent_review": {
+      "accepted": true,
+      "findings": [],
+      "inspected": "counter.py and frozen changed paths; public and property check results"
+    }
+  },
+  "durable": {
+    "builder": {
+      "attempt": "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/durable/run/attempts/clamp-count/builder-1",
+      "launcher_seconds": 31.595,
+      "exit_code": 0,
+      "usage": {
+        "input_tokens": 145920,
+        "cached_input_tokens": 132864,
+        "uncached_input_tokens": 13056,
+        "output_tokens": 1909,
+        "reasoning_tokens": 765,
+        "total_tokens": 147829,
+        "uncached_input_plus_output": 14965
+      },
+      "gate": {
+        "format": "lunarmarch-gate-v1",
+        "checked_at": "2026-10-11T00:22:12+00:00",
+        "attempt": "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/durable/run/attempts/clamp-count/builder-1",
+        "task_id": "clamp-count",
+        "role": "builder",
+        "clear": true,
+        "errors": [],
+        "warnings": [],
+        "changed_paths": [
+          "counter.py"
+        ],
+        "meaning": "Objective integrity only; semantic acceptance remains with an independent reviewer and parent."
+      },
+      "property_checks": {
+        "returncode": 0,
+        "stdout": "property checks passed",
+        "stderr": ""
+      }
+    },
+    "reviewer": {
+      "attempt": "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/durable/run/attempts/clamp-count/reviewer-1",
+      "launcher_seconds": 17.397,
+      "exit_code": 0,
+      "usage": {
+        "input_tokens": 43003,
+        "cached_input_tokens": 37120,
+        "uncached_input_tokens": 5883,
+        "output_tokens": 794,
+        "reasoning_tokens": 288,
+        "total_tokens": 43797,
+        "uncached_input_plus_output": 6677
+      },
+      "gate": {
+        "format": "lunarmarch-gate-v1",
+        "checked_at": "2026-10-11T00:22:53+00:00",
+        "attempt": "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/durable/run/attempts/clamp-count/reviewer-1",
+        "task_id": "clamp-count",
+        "role": "reviewer",
+        "clear": true,
+        "errors": [],
+        "warnings": [],
+        "changed_paths": [],
+        "meaning": "Objective integrity only; semantic acceptance remains with an independent reviewer and parent."
+      },
+      "property_checks": {
+        "returncode": 0,
+        "stdout": "property checks passed",
+        "stderr": ""
+      }
+    },
+    "combined_launcher_seconds": 48.992,
+    "combined_usage": {
+      "input_tokens": 188923,
+      "cached_input_tokens": 169984,
+      "uncached_input_tokens": 18939,
+      "output_tokens": 2703,
+      "reasoning_tokens": 1053,
+      "total_tokens": 191626,
+      "uncached_input_plus_output": 21642
+    },
+    "accepted": true,
+    "status": {
+      "run_id": "run",
+      "goal": "Implement clamp_count and independently review it",
+      "mode": "task",
+      "status": "complete",
+      "progress": {
+        "tasks": {
+          "accepted": 1,
+          "total": 1
+        },
+        "phases": null
+      },
+      "attempt_budget": {
+        "limit": 2,
+        "used": 2,
+        "remaining": 0
+      },
+      "attempts_by_role": {
+        "builder": 1,
+        "reviewer": 1
+      },
+      "usage": {
+        "input_tokens": {
+          "reported_sum": 188923,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "cached_input_tokens": {
+          "reported_sum": 169984,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "uncached_input_tokens": {
+          "reported_sum": 18939,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "output_tokens": {
+          "reported_sum": 2703,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "reasoning_tokens": {
+          "reported_sum": 1053,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "total_tokens": {
+          "reported_sum": 191626,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        },
+        "uncached_input_plus_output": {
+          "reported_sum": 21642,
+          "reported_attempts": 2,
+          "missing_attempts": 0
+        }
+      },
+      "reservation_locked": false,
+      "running_or_unknown_attempts": 0,
+      "next_action": "report completed run",
+      "phases": {
+        "main": {
+          "audit_attempt": null,
+          "freeze": null,
+          "status": "active",
+          "task_ids": [
+            "clamp-count"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "task_id": "clamp-count",
+          "phase": "main",
+          "status": "accepted",
+          "attempts": [
+            {
+              "name": "builder-1",
+              "role": "builder",
+              "lifecycle": "gated"
+            },
+            {
+              "name": "reviewer-1",
+              "role": "reviewer",
+              "lifecycle": "gated"
+            }
+          ],
+          "attempt_budget": {
+            "limit": 2,
+            "used": 2,
+            "remaining": 0
+          }
+        }
+      ]
+    },
+    "third_attempt_blocked": "run attempt budget exhausted (2); parent adjudication is required"
+  },
+  "pre_model_failures": [
+    {
+      "model_seconds": 0.277,
+      "exit_code": 1,
+      "usage": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "uncached_input_tokens": null,
+        "output_tokens": null,
+        "reasoning_tokens": null,
+        "total_tokens": null,
+        "uncached_input_plus_output": null
+      },
+      "changes": [],
+      "checks": [],
+      "property_checks": null,
+      "command": [
+        "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+        "exec",
+        "--ephemeral",
+        "-C",
+        "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/quick/project",
+        "-m",
+        "gpt-5.6-luna",
+        "-c",
+        "model_reasoning_effort=\"high\"",
+        "-c",
+        "agents.max_depth=0",
+        "--json",
+        "--output-last-message",
+        "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv/quick/report.md",
+        "--approve-for-me",
+        "-"
+      ]
+    }
+  ],
+  "raw_run_root": "/tmp/lunarmarch-simple-test-20261010-ocmlrmjv",
+  "harness_sha256": "90448622f23860cc6dacc63ff07856e9ad744bb468eeec0cf56c7a03e5c80f2b",
+  "builder_prompt_sha256": {
+    "quick": "65a10868a1f945aa9ad3947c02557a7ee2a8fc52bec9888646575a0c5f65febc",
+    "durable": "65a10868a1f945aa9ad3947c02557a7ee2a8fc52bec9888646575a0c5f65febc"
+  }
+}

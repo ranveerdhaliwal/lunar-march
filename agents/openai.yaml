@@ -1,6 +1,6 @@
 interface:
   display_name: "LunarMarch"
-  short_description: "Orchestrate bounded multi-model work"
-  default_prompt: "Use $lunar-march to execute this project with durable evidence, using Luna by default or an explicitly selected OpenCode worker."
+  short_description: "Bound delegation and retain durable evidence"
+  default_prompt: "Use $lunar-march to choose the smallest useful workflow for this task, with bounded delegation and durable evidence when needed."
 policy:
   allow_implicit_invocation: true

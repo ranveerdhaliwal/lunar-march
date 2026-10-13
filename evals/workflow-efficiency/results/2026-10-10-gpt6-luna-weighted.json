@@ -1,0 +1,463 @@
+{
+  "date_received": "2026-10-10",
+  "status": "tested_rejected_quality_early_stop",
+  "decision": "No promotion, commit or push; first pair failed correctness. No retries or reverse-order pair.",
+  "raw_evidence_path": "/tmp/lunarmarch-gpt6-luna-weighted-20261010",
+  "manifest": {
+    "format": "lunarmarch-workflow-pilot-v3",
+    "prepared_at": "2026-10-11T01:17:53.631324+00:00",
+    "profile": "lean",
+    "parent_model": "gpt-6-astra",
+    "worker_model": "gpt-6-luna",
+    "effort": "high",
+    "metric": "weighted_cost",
+    "pricing": {
+      "source": "https://learn.chatgpt.com/docs/pricing",
+      "retrieved": "2026-10-10",
+      "unit": "Standard credits per million tokens",
+      "rates": {
+        "gpt-6-astra": {
+          "uncached_input_tokens": 250,
+          "cached_input_tokens": 25,
+          "output_tokens": 1250
+        },
+        "gpt-6.1-sol": {
+          "uncached_input_tokens": 50,
+          "cached_input_tokens": 2.5,
+          "output_tokens": 250
+        },
+        "gpt-5.6-luna": {
+          "uncached_input_tokens": 5,
+          "cached_input_tokens": 0.5,
+          "output_tokens": 30
+        },
+        "gpt-6-luna": {
+          "uncached_input_tokens": 2.5,
+          "cached_input_tokens": 0.25,
+          "output_tokens": 12.5
+        }
+      },
+      "limitation": "Normalized credit-cost proxy, not included subscription quota or an invoice; requested Standard tier is not independent proof of served tier."
+    },
+    "service_tier_requested": "default",
+    "local_overrides": [
+      "MCP_DOCKER disabled for these CPU-only fixture calls"
+    ],
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "source_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "dirty_suite_override": true,
+    "publication_scope": "exploratory pilot, not a general performance claim",
+    "fixture_hashes": {
+      "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+      "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+      "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+      "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+      "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+    },
+    "task_sha256": "52d8dbfd2b340c1b114d8c37adc469d12f822fb693bdb64d48199b26012bc7d3",
+    "grader_sha256": "36e348fc5eefe55e1a47c3b3663a5dc43ba00cc6f1db1765e88ab8e420af65b6",
+    "runner_sha256": "aa84653f94e5347d61d2dce5de2d35a7a6a24417159ec0a4c4578eb83bd3ffb3",
+    "skill_sha256": "56ce5fa02cb852ded1dcb6b9a1818671487f7bc04c756f5c1ae010807de8d965",
+    "python": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+    "root_timeout": 360,
+    "worker_timeout": 180,
+    "max_model_calls": 6,
+    "order": [
+      "direct",
+      "quick",
+      "quick",
+      "direct"
+    ],
+    "success_rule": "all quality/scope/acceptance checks pass; complete telemetry; two counterbalanced pairs; Quick mean time and weighted Standard-credit cost each <=90% of Direct",
+    "stop_rule": "stop after first pair on quality/infrastructure failure or if Quick fails any efficiency threshold; no replacement trials",
+    "dispatch_policy": "launcher starts worker, then fresh parent review; no nested CLI",
+    "cost_limits": "weighted credit proxy only, no subscription-meter or invoice inference; root and worker included, benchmark setup/controller and external approval review excluded"
+  },
+  "trials": [
+    {
+      "sequence": 1,
+      "arm": "direct",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-01-5feceb66/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-01-5feceb66/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-01-5feceb66/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 128.794,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 126133,
+          "cached_input_tokens": 98048,
+          "uncached_input_tokens": 28085,
+          "output_tokens": 5130,
+          "reasoning_tokens": 743,
+          "total_tokens": 131263,
+          "uncached_input_plus_output": 33215
+        },
+        "prompt_sha256": "53e77122c97d7d5df566def9ffc6536578f018eca839a339c704cbf35ecf948a",
+        "semantic_acceptance": true,
+        "semantic_reason": "Implemented UTC window filtering in activity/parse.py, activity/report.py, and activity/cli.py; added tests/test_windows.py. All 19 tests and compileall passed. Final diff reviewed, including boundary semantics, error handling, and legacy compatibility. tests/test_legacy.py and package __init__.py remain unchanged. No unmet requirements or material uncertainty identified."
+      },
+      "worker": null,
+      "seconds": 128.796,
+      "weighted_cost": 15.88495,
+      "combined_usage": {
+        "input_tokens": 126133,
+        "cached_input_tokens": 98048,
+        "uncached_input_tokens": 28085,
+        "output_tokens": 5130,
+        "reasoning_tokens": 743,
+        "total_tokens": 131263,
+        "uncached_input_plus_output": 33215
+      },
+      "changed_paths": [
+        "activity/cli.py",
+        "activity/parse.py",
+        "activity/report.py",
+        "tests/test_windows.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\ntest_invalid_or_naive_timestamps (test_windows.TimestampTests.test_invalid_or_naive_timestamps) ... ok\ntest_iso_offsets_normalize_to_utc (test_windows.TimestampTests.test_iso_offsets_normalize_to_utc) ... ok\ntest_cli_csv_data_errors (test_windows.WindowCliTests.test_cli_csv_data_errors) ... ok\ntest_cli_invalid_bounds (test_windows.WindowCliTests.test_cli_invalid_bounds) ... ok\ntest_cli_single_bounds (test_windows.WindowCliTests.test_cli_single_bounds) ... ok\ntest_cli_success_and_module_invocation (test_windows.WindowCliTests.test_cli_success_and_module_invocation) ... ok\ntest_csv_without_timestamp_is_compatible_only_without_window (test_windows.WindowCliTests.test_csv_without_timestamp_is_compatible_only_without_window) ... ok\ntest_raw_bad_timestamps_are_ignored_without_bounds (test_windows.WindowCliTests.test_raw_bad_timestamps_are_ignored_without_bounds) ... ok\ntest_either_bound_can_be_omitted (test_windows.WindowTests.test_either_bound_can_be_omitted) ... ok\ntest_empty_window_results (test_windows.WindowTests.test_empty_window_results) ... ok\ntest_every_timestamp_is_validated_for_each_kind_of_window (test_windows.WindowTests.test_every_timestamp_is_validated_for_each_kind_of_window) ... ok\ntest_half_open_window_exact_totals_and_sorted_categories (test_windows.WindowTests.test_half_open_window_exact_totals_and_sorted_categories) ... ok\ntest_invalid_bounds_even_with_no_events (test_windows.WindowTests.test_invalid_bounds_even_with_no_events) ... ok\ntest_offset_bounds (test_windows.WindowTests.test_offset_bounds) ... ok\ntest_without_bounds_timestamp_validity_is_ignored (test_windows.WindowTests.test_without_bounds_timestamp_validity_is_ignored) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 0.040s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_all_event_timestamps_checked_with_window (test_hidden_windows.WindowTests.test_all_event_timestamps_checked_with_window) ... ok\ntest_bad_bounds_even_on_empty_data (test_hidden_windows.WindowTests.test_bad_bounds_even_on_empty_data) ... ok\ntest_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json) ... ok\ntest_cli_filtering (test_hidden_windows.WindowTests.test_cli_filtering) ... ok\ntest_cli_missing_timestamp_in_window (test_hidden_windows.WindowTests.test_cli_missing_timestamp_in_window) ... ok\ntest_cli_short_csv_row_is_data_error (test_hidden_windows.WindowTests.test_cli_short_csv_row_is_data_error) ... ok\ntest_half_open_window_exact_totals (test_hidden_windows.WindowTests.test_half_open_window_exact_totals) ... ok\ntest_no_window_preserves_legacy (test_hidden_windows.WindowTests.test_no_window_preserves_legacy) ... ok\ntest_one_sided_windows (test_hidden_windows.WindowTests.test_one_sided_windows) ... ok\ntest_parser_normalizes_offsets (test_hidden_windows.WindowTests.test_parser_normalizes_offsets) ... ok\ntest_parser_rejects_invalid (test_hidden_windows.WindowTests.test_parser_rejects_invalid) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.198s\n\nOK\n"
+        }
+      ],
+      "reused_source_bound_checks": false,
+      "root_skipped_reason": null,
+      "quality_pass": true,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "6d937891f3274fb5c5120cf1f8d3bfe4fd172c8b0be195af5abb6c74bcb18ab1",
+        "activity/parse.py": "4821d948e0332055bf509e83fdb54b6e5c622340cdb5543a3ca067b3cae1285e",
+        "activity/report.py": "a7741f7af32302a62d865db093b79941cd315cd13c396dfa7f84683b55129e88",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+        "tests/test_windows.py": "36b437fb7c07ebaad5f5aba6554218f650b63bde5cbea780d09759ed03ae855d"
+      }
+    },
+    {
+      "sequence": 2,
+      "arm": "quick",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 48.836,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 59233,
+          "cached_input_tokens": 36608,
+          "uncached_input_tokens": 22625,
+          "output_tokens": 1345,
+          "reasoning_tokens": 255,
+          "total_tokens": 60578,
+          "uncached_input_plus_output": 23970
+        },
+        "prompt_sha256": "904f4a02bd1b8566a103b9b8cad823bae1efdfe89388c9435a88a1586347c407",
+        "semantic_acceptance": false,
+        "semantic_reason": "Two confirmed defects: parse_timestamp accepts malformed offsets such as +01:60 instead of raising ValueError; a CSV row missing its amount exits the CLI with code 1 and a TypeError traceback instead of code 2. Changed paths match the four allowed files. Source hashes match the recorded passing 13 tests and compileall checks, but independent probes expose these uncovered requirement failures. No files changed."
+      },
+      "worker": {
+        "model_requested": "gpt-6-luna",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6-luna",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/worker/report.md",
+          "-"
+        ],
+        "seconds": 47.959,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 149197,
+          "cached_input_tokens": 126976,
+          "uncached_input_tokens": 22221,
+          "output_tokens": 4327,
+          "reasoning_tokens": 1359,
+          "total_tokens": 153524,
+          "uncached_input_plus_output": 26548
+        },
+        "prompt_sha256": "55007d187743aef0cb0cd6a2b5a74b28358ff2b989fdc0f84ae37acc2b6940b1"
+      },
+      "seconds": 96.892,
+      "weighted_cost": 8.394084,
+      "combined_usage": {
+        "input_tokens": 208430,
+        "cached_input_tokens": 163584,
+        "uncached_input_tokens": 44846,
+        "output_tokens": 5672,
+        "reasoning_tokens": 1614,
+        "total_tokens": 214102,
+        "uncached_input_plus_output": 50518
+      },
+      "changed_paths": [
+        "activity/cli.py",
+        "activity/parse.py",
+        "activity/report.py",
+        "tests/test_windows.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\ntest_parse_timestamp_normalizes_z_and_offset (test_windows.TimestampTests.test_parse_timestamp_normalizes_z_and_offset) ... ok\ntest_parse_timestamp_rejects_empty_naive_and_malformed (test_windows.TimestampTests.test_parse_timestamp_rejects_empty_naive_and_malformed) ... ok\ntest_bounds_must_be_aware_and_in_order (test_windows.WindowTests.test_bounds_must_be_aware_and_in_order) ... ok\ntest_cli_errors_have_no_json_stdout (test_windows.WindowTests.test_cli_errors_have_no_json_stdout) ... ok\ntest_cli_window_emits_existing_json_shape (test_windows.WindowTests.test_cli_window_emits_existing_json_shape) ... ok\ntest_legacy_csv_still_loads_without_window (test_windows.WindowTests.test_legacy_csv_still_loads_without_window) ... ok\ntest_no_window_ignores_timestamp_validity (test_windows.WindowTests.test_no_window_ignores_timestamp_validity) ... ok\ntest_since_inclusive_until_exclusive_and_exact_totals (test_windows.WindowTests.test_since_inclusive_until_exclusive_and_exact_totals) ... ok\ntest_window_validates_every_row_even_when_outside (test_windows.WindowTests.test_window_validates_every_row_even_when_outside) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.005s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "test_all_event_timestamps_checked_with_window (test_hidden_windows.WindowTests.test_all_event_timestamps_checked_with_window) ... ok\ntest_bad_bounds_even_on_empty_data (test_hidden_windows.WindowTests.test_bad_bounds_even_on_empty_data) ... ok\ntest_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json) ... ok\ntest_cli_filtering (test_hidden_windows.WindowTests.test_cli_filtering) ... ok\ntest_cli_missing_timestamp_in_window (test_hidden_windows.WindowTests.test_cli_missing_timestamp_in_window) ... ok\ntest_cli_short_csv_row_is_data_error (test_hidden_windows.WindowTests.test_cli_short_csv_row_is_data_error) ... FAIL\ntest_half_open_window_exact_totals (test_hidden_windows.WindowTests.test_half_open_window_exact_totals) ... ok\ntest_no_window_preserves_legacy (test_hidden_windows.WindowTests.test_no_window_preserves_legacy) ... ok\ntest_one_sided_windows (test_hidden_windows.WindowTests.test_one_sided_windows) ... ok\ntest_parser_normalizes_offsets (test_hidden_windows.WindowTests.test_parser_normalizes_offsets) ... ok\ntest_parser_rejects_invalid (test_hidden_windows.WindowTests.test_parser_rejects_invalid) ... ok\n\n======================================================================\nFAIL: test_cli_short_csv_row_is_data_error (test_hidden_windows.WindowTests.test_cli_short_csv_row_is_data_error)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project/test_hidden_windows.py\", line 78, in test_cli_short_csv_row_is_data_error\n    self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 2\n\n----------------------------------------------------------------------\nRan 11 tests in 0.222s\n\nFAILED (failures=1)\n"
+        }
+      ],
+      "reused_source_bound_checks": true,
+      "root_skipped_reason": null,
+      "quality_pass": false,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "aa8f0a869878921bbfda115cf870728023d9e43d62b147287661abe1219e31a3",
+        "activity/parse.py": "b0c954635b6e0d17aa9141cdd276ae3a07f789817b459b60bda9dae622372ef6",
+        "activity/report.py": "b87e7415744794c0a97ed7dfbdc883b4fb8c3a43c83268b39b664a059465c5cd",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+        "tests/test_windows.py": "e119024e19f3e31af639b8e1eb20c3338016ad6600eb86e6821912b3c95c6f8b"
+      }
+    }
+  ],
+  "summary": {
+    "metric": "weighted_cost",
+    "trials": 2,
+    "planned_trials": 4,
+    "metrics": {
+      "direct": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 128.796,
+        "total_tokens": 131263.0,
+        "uncached_input_plus_output": 33215.0,
+        "weighted_cost": 15.88495
+      },
+      "quick": {
+        "trials": 1,
+        "all_quality_pass": false,
+        "seconds": 96.892,
+        "total_tokens": 214102.0,
+        "uncached_input_plus_output": 50518.0,
+        "weighted_cost": 8.394084
+      }
+    },
+    "complete": false,
+    "thresholds_met": false,
+    "successful": false,
+    "early_stop": true
+  },
+  "observed_first_pair_reductions_percent": {
+    "seconds": 24.770955619739745,
+    "weighted_cost": 47.157000808941795
+  },
+  "role_weighted_cost": {
+    "direct_astra": 15.88495,
+    "quick_astra_review": 8.2527,
+    "quick_luna_implementation": 0.141384
+  },
+  "preflight": {
+    "offline_tests_passed": 54,
+    "calibration": {
+      "grader_sha256": "36e348fc5eefe55e1a47c3b3663a5dc43ba00cc6f1db1765e88ab8e420af65b6",
+      "checks": [
+        {
+          "name": "known_good",
+          "path": "/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project",
+          "source_hashes": {
+            "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+            "activity/cli.py": "3891d4f9e5e1448e88dd9318224fd582943dab33ea4e2f8aa582f011f671947e",
+            "activity/parse.py": "6b9a052dfead5dec588a0a43809022301637b3c7389d897ae80a46670684f9f3",
+            "activity/report.py": "a7741f7af32302a62d865db093b79941cd315cd13c396dfa7f84683b55129e88",
+            "test_hidden_windows.py": "3b5a8aa59b889e206064cd88214464bee11949f4706304187628df5b659f9821",
+            "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+            "tests/test_windows.py": "6b97f336d92b5b20591ec272fb7105e6ab31ca9c3c99e5b4ac3a89080a7bffe7"
+          },
+          "exit_code": 0,
+          "stderr": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.433s\n\nOK\n"
+        },
+        {
+          "name": "known_bad_missing_amount",
+          "path": "/tmp/lunarmarch-workflow-pilot-20261010-final/trial-02-6b86b273/project",
+          "source_hashes": {
+            "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+            "activity/cli.py": "eeecdd1e024cf96da302234c2fbd520fb64836a241a9e24b3ef9244ebdb07c2d",
+            "activity/parse.py": "df88c09136d2c7d10b04e46f4fde137b387ef7767734bb176337b0a0245ba135",
+            "activity/report.py": "b87b1d68bf96280a98dde782d11b326a6cc4ace8e33a1383df2a6b9c9ad13e4e",
+            "test_hidden_windows.py": "39ef185fddd327bd51a015e59703cb9a75a4a75a0b54095a579ef4da4fda5192",
+            "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+            "tests/test_windows.py": "a5d1fd832e11dcb3b383e8b4deeeed5c1befd7794a87d03081a2b0b1ba494a56"
+          },
+          "exit_code": 1,
+          "stderr": ".....F.....\n======================================================================\nFAIL: test_cli_short_csv_row_is_data_error (<run_path>.WindowTests.test_cli_short_csv_row_is_data_error)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ranveer/app/LunarMarch/evals/workflow-efficiency/grade.py\", line 78, in test_cli_short_csv_row_is_data_error\n    self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 2\n\n----------------------------------------------------------------------\nRan 11 tests in 0.554s\n\nFAILED (failures=1)\n"
+        }
+      ]
+    },
+    "frozen_manifest_revalidated_after_trials": true
+  },
+  "artifacts": {
+    "trial-01-5feceb66/root/prompt.md": "Add optional UTC time-window filtering to this CSV activity reporting tool. This is one feature across three modules, not a redesign.\n\nRequired interfaces and behavior:\n- In activity/parse.py add parse_timestamp(text) returning a timezone-aware datetime normalized to UTC. Support ISO timestamps with Z or numeric offsets; reject naive, empty, malformed timestamps with ValueError.\n- Keep load_events(path) compatible with existing callers. Timestamps on Event may remain raw text; legacy CSVs without a timestamp column must still work when no window is requested.\n- In activity/report.py extend summarize(events, *, since=None, until=None), where bounds are timezone-aware datetimes. A row is included at since and excluded at until. Either bound can be omitted. Normalize offsets for comparison. Reject naive bounds, and since >= until with ValueError. With an active window, every event must have a valid aware timestamp, even if another event would be excluded. Without bounds preserve legacy output and ignore timestamp validity.\n- In activity/cli.py add --since and --until flags parsed via parse_timestamp. Validation/data errors return exit code 2, useful stderr, and no JSON stdout. Success emits the existing single JSON shape: count and category totals, exact Decimal arithmetic, sorted categories. No extra metadata. Preserve invocation via python3 -m activity.cli.\n- Add focused tests in tests/test_windows.py. Existing tests/test_legacy.py and package __init__.py must remain unchanged.\n\nInputs: activity/parse.py, activity/report.py, activity/cli.py, tests/test_legacy.py.\nOwned paths: activity/parse.py, activity/report.py, activity/cli.py, tests/test_windows.py only.\nAcceptance commands: python3 -m unittest discover -s tests -v; python3 -m compileall -q activity tests.\nDo not add dependencies, network/GPU operations, commits, or unrelated refactors. Finish once requirements and checks pass; optional improvements are outside scope. Return a concise final report with changed files, checks and material uncertainty.\n\nComplete this task yourself in this main agent. Do not delegate, launch other model calls, or use orchestration skills. Implement, check and inspect your final diff.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nCPU only. Work inside this project. Do not inspect the evaluator source, other projects, or files outside the named worker report and evidence artifact. Do not touch GPU processes or install dependencies.\n\nReturn the required JSON acceptance decision. Set accepted=false for any unresolved material defect; mechanical tests alone do not establish acceptance.\n",
+    "trial-01-5feceb66/root/report.md": "{\"accepted\":true,\"reason\":\"Implemented UTC window filtering in activity/parse.py, activity/report.py, and activity/cli.py; added tests/test_windows.py. All 19 tests and compileall passed. Final diff reviewed, including boundary semantics, error handling, and legacy compatibility. tests/test_legacy.py and package __init__.py remain unchanged. No unmet requirements or material uncertainty identified.\"}",
+    "trial-01-5feceb66/project/activity/__init__.py": "\"\"\"Small CSV activity reporting tool.\"\"\"\n",
+    "trial-01-5feceb66/project/activity/cli.py": "import argparse\nimport csv\nimport json\nimport sys\nfrom decimal import InvalidOperation\nfrom .parse import load_events, parse_timestamp\nfrom .report import summarize\n\n\ndef main(argv=None) -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument('input')\n    parser.add_argument('--since', type=parse_timestamp)\n    parser.add_argument('--until', type=parse_timestamp)\n    args = parser.parse_args(argv)\n    try:\n        result = summarize(load_events(args.input), since=args.since, until=args.until)\n    except InvalidOperation:\n        print('Invalid decimal amount in CSV', file=sys.stderr)\n        return 2\n    except (OSError, ValueError, KeyError, TypeError, csv.Error) as error:\n        print(str(error), file=sys.stderr)\n        return 2\n    print(json.dumps(result, sort_keys=True))\n    return 0\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n",
+    "trial-01-5feceb66/project/activity/parse.py": "import csv\nfrom dataclasses import dataclass\nfrom datetime import datetime, timezone\nfrom decimal import Decimal\nfrom pathlib import Path\n\n\n@dataclass(frozen=True)\nclass Event:\n    category: str\n    amount: Decimal\n    timestamp: str | None = None\n\n\ndef parse_timestamp(text: str) -> datetime:\n    \"\"\"Parse an ISO timestamp with an explicit timezone and normalize to UTC.\"\"\"\n    if not isinstance(text, str) or not text.strip():\n        raise ValueError('Timestamp must be a nonempty ISO timestamp with a timezone')\n    value = text.strip()\n    if value.endswith('Z'):\n        value = value[:-1] + '+00:00'\n    try:\n        timestamp = datetime.fromisoformat(value)\n    except ValueError as error:\n        raise ValueError(f'Invalid ISO timestamp: {text!r}') from error\n    if timestamp.utcoffset() is None:\n        raise ValueError(f'Timestamp must include a timezone: {text!r}')\n    return timestamp.astimezone(timezone.utc)\n\n\ndef load_events(path: str | Path) -> list[Event]:\n    with open(path, newline='', encoding='utf-8') as stream:\n        return [Event(row['category'], Decimal(row['amount']), row.get('timestamp'))\n                for row in csv.DictReader(stream)]\n",
+    "trial-01-5feceb66/project/activity/report.py": "from datetime import datetime, timezone\nfrom decimal import Decimal\nfrom .parse import Event, parse_timestamp\n\n\ndef summarize(events: list[Event], *, since: datetime | None = None,\n              until: datetime | None = None) -> dict:\n    for name, bound in (('since', since), ('until', until)):\n        if bound is not None and bound.utcoffset() is None:\n            raise ValueError(f'{name} must be timezone-aware')\n    since = since.astimezone(timezone.utc) if since is not None else None\n    until = until.astimezone(timezone.utc) if until is not None else None\n    if since is not None and until is not None and since >= until:\n        raise ValueError('since must be earlier than until')\n\n    totals: dict[str, Decimal] = {}\n    count = 0\n    for event in events:\n        if since is not None or until is not None:\n            timestamp = parse_timestamp(event.timestamp)\n            if since is not None and timestamp < since:\n                continue\n            if until is not None and timestamp >= until:\n                continue\n        count += 1\n        totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\n    return {'count': count,\n            'totals': {key: str(totals[key]) for key in sorted(totals)}}\n",
+    "trial-01-5feceb66/project/test_hidden_windows.py": "\"\"\"Post-run behavior checks; copied into each project only after agents exit.\"\"\"\nimport subprocess\nimport sys\nimport json\nimport tempfile\nimport unittest\nfrom datetime import datetime, timezone, timedelta\nfrom decimal import Decimal\nfrom pathlib import Path\nfrom activity.parse import Event,parse_timestamp,load_events\nfrom activity.report import summarize\n\n\nclass WindowTests(unittest.TestCase):\n    def test_parser_normalizes_offsets(self):\n        expected=datetime(2026,10,10,10,tzinfo=timezone.utc)\n        for value in ('2026-10-10T10:00:00Z','2026-10-10T12:00:00+02:00','2026-10-10T03:00:00-07:00'):\n            self.assertEqual(parse_timestamp(value),expected)\n            self.assertEqual(parse_timestamp(value).utcoffset(),timedelta(0))\n\n    def test_parser_rejects_invalid(self):\n        for value in ('','2026-10-10','2026-10-10T10:00:00','garbage','2026-13-01T00:00:00Z'):\n            with self.subTest(value=value),self.assertRaises(ValueError):parse_timestamp(value)\n\n    def test_half_open_window_exact_totals(self):\n        rows=[Event('a',Decimal('0.1'),'2026-10-10T10:00:00Z'),\n              Event('a',Decimal('0.2'),'2026-10-10T12:30:00+02:00'),\n              Event('b',Decimal('7'),'2026-10-10T11:00:00Z'),\n              Event('b',Decimal('9'),'2026-10-10T09:59:59Z')]\n        self.assertEqual(summarize(rows,since=parse_timestamp('2026-10-10T10:00:00Z'),until=parse_timestamp('2026-10-10T11:00:00Z')),{'count':2,'totals':{'a':'0.3'}})\n\n    def test_one_sided_windows(self):\n        rows=[Event('x',Decimal('1'),'2026-10-10T09:00:00Z'),Event('x',Decimal('2'),'2026-10-10T10:00:00Z')]\n        bound=parse_timestamp('2026-10-10T10:00:00Z')\n        self.assertEqual(summarize(rows,since=bound),{'count':1,'totals':{'x':'2'}})\n        self.assertEqual(summarize(rows,until=bound),{'count':1,'totals':{'x':'1'}})\n\n    def test_bad_bounds_even_on_empty_data(self):\n        aware=parse_timestamp('2026-10-10T10:00:00Z')\n        naive=datetime(2026,10,10)\n        for kwargs in ({'since':naive},{'until':naive},{'since':aware,'until':aware},{'since':aware,'until':aware-timedelta(seconds=1)}):\n            with self.subTest(kwargs=kwargs),self.assertRaises(ValueError):summarize([],**kwargs)\n\n    def test_all_event_timestamps_checked_with_window(self):\n        since=parse_timestamp('2026-10-10T10:00:00Z')\n        until=parse_timestamp('2026-10-10T11:00:00Z')\n        for stamp in (None,'','bad','2026-10-10T09:00:00'):\n            with self.subTest(stamp=stamp),self.assertRaises(ValueError):\n                summarize([Event('a',Decimal('1'),'2026-10-10T12:00:00Z'),Event('b',Decimal('2'),stamp)],since=since,until=until)\n\n    def test_no_window_preserves_legacy(self):\n        rows=[Event('a',Decimal('1'),None),Event('a',Decimal('2'),'bad')]\n        self.assertEqual(summarize(rows),{'count':2,'totals':{'a':'3'}})\n\n    def invoke(self,csv,args):\n        with tempfile.TemporaryDirectory() as temporary:\n            path=Path(temporary)/'data.csv';path.write_text(csv)\n            result = subprocess.run([sys.executable, '-m', 'activity.cli', str(path), *args],\n                                    text=True, capture_output=True, timeout=10)\n            return result.returncode, result.stdout, result.stderr\n\n    def test_cli_filtering(self):\n        code,stdout,stderr=self.invoke('category,amount,timestamp\\na,0.10,2026-10-10T10:00:00Z\\na,0.20,2026-10-10T10:30:00Z\\nb,9,2026-10-10T11:00:00Z\\n',['--since','2026-10-10T10:00:00Z','--until','2026-10-10T11:00:00Z'])\n        self.assertEqual(code,0);self.assertEqual(stderr,'');self.assertEqual(json.loads(stdout),{'count':2,'totals':{'a':'0.30'}})\n\n    def test_cli_errors_no_partial_json(self):\n        csv='category,amount,timestamp\\na,1,2026-10-10T10:00:00Z\\nb,2,bad\\n'\n        for args in (['--since','bad'],['--since','2026-10-10T12:00:00Z','--until','2026-10-10T10:00:00Z'],['--since','2026-10-10T09:00:00Z']):\n            code,stdout,stderr=self.invoke(csv,args)\n            self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n\n    def test_cli_missing_timestamp_in_window(self):\n        code,stdout,stderr=self.invoke('category,amount\\na,1\\n',['--until','2026-10-10T11:00:00Z'])\n        self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n\n    def test_cli_short_csv_row_is_data_error(self):\n        code,stdout,stderr=self.invoke('category,amount,timestamp\\na\\n',[])\n        self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n",
+    "trial-01-5feceb66/project/tests/test_legacy.py": "import contextlib\nimport io\nimport json\nimport tempfile\nimport unittest\nfrom pathlib import Path\nfrom decimal import Decimal\nfrom activity.parse import Event, load_events\nfrom activity.report import summarize\nfrom activity.cli import main\n\n\nclass LegacyTests(unittest.TestCase):\n    def test_exact_decimal_summary(self):\n        self.assertEqual(summarize([Event('b',Decimal('0.1')),Event('b',Decimal('0.2')),Event('a',Decimal('2'))]),\n                         {'count':3,'totals':{'a':'2','b':'0.3'}})\n\n    def test_empty(self):\n        self.assertEqual(summarize([]), {'count':0,'totals':{}})\n\n    def test_csv_without_timestamps_and_cli(self):\n        with tempfile.TemporaryDirectory() as temporary:\n            path=Path(temporary)/'events.csv'\n            path.write_text('category,amount\\nb,0.10\\na,2.00\\nb,0.20\\n')\n            self.assertEqual(len(load_events(path)),3)\n            stdout=io.StringIO()\n            with contextlib.redirect_stdout(stdout):\n                self.assertEqual(main([str(path)]),0)\n            self.assertEqual(json.loads(stdout.getvalue()), {'count':3,'totals':{'a':'2.00','b':'0.30'}})\n\n    def test_missing_file_no_json(self):\n        stdout,stderr=io.StringIO(),io.StringIO()\n        with contextlib.redirect_stdout(stdout),contextlib.redirect_stderr(stderr):\n            self.assertEqual(main(['/nonexistent/activity-fixture.csv']),2)\n        self.assertEqual(stdout.getvalue(),'')\n        self.assertTrue(stderr.getvalue())\n",
+    "trial-01-5feceb66/project/tests/test_windows.py": "import contextlib\nimport io\nimport json\nimport subprocess\nimport sys\nimport tempfile\nimport unittest\nfrom datetime import datetime, timedelta, timezone\nfrom decimal import Decimal\nfrom pathlib import Path\n\nfrom activity.cli import main\nfrom activity.parse import Event, load_events, parse_timestamp\nfrom activity.report import summarize\n\n\nclass TimestampTests(unittest.TestCase):\n    def test_iso_offsets_normalize_to_utc(self):\n        expected = datetime(2026, 10, 10, 12, 30, 15, 123456, timezone.utc)\n        for text in ('2026-10-10T12:30:15.123456Z',\n                     '2026-10-10T18:00:15.123456+05:30',\n                     '2026-10-10T08:30:15.123456-04:00'):\n            with self.subTest(text=text):\n                actual = parse_timestamp(text)\n                self.assertEqual(actual, expected)\n                self.assertIs(actual.tzinfo, timezone.utc)\n\n    def test_invalid_or_naive_timestamps(self):\n        for text in ('', ' ', 'bad', '2026-10-10', '2026-10-10T12:00:00',\n                     '2026-02-30T12:00:00Z', '2026-10-10T12:00:00+25:00',\n                     '2026-10-10T12:00:00Zjunk', None):\n            with self.subTest(text=text), self.assertRaises(ValueError):\n                parse_timestamp(text)\n\n\nclass WindowTests(unittest.TestCase):\n    def setUp(self):\n        self.since = parse_timestamp('2026-10-10T12:00:00Z')\n        self.until = parse_timestamp('2026-10-10T13:00:00Z')\n        self.events = [\n            Event('outside', Decimal('100'), '2026-10-10T11:59:59.999999Z'),\n            Event('b', Decimal('0.10'), '2026-10-10T14:00:00+02:00'),\n            Event('b', Decimal('0.20'), '2026-10-10T07:30:00-05:00'),\n            Event('a', Decimal('2.00'), '2026-10-10T12:59:59.999999Z'),\n            Event('outside', Decimal('200'), '2026-10-10T13:00:00Z'),\n        ]\n\n    def test_half_open_window_exact_totals_and_sorted_categories(self):\n        result = summarize(self.events, since=self.since, until=self.until)\n        self.assertEqual(result, {'count': 3, 'totals': {'a': '2.00', 'b': '0.30'}})\n        self.assertEqual(list(result['totals']), ['a', 'b'])\n\n    def test_either_bound_can_be_omitted(self):\n        self.assertEqual(summarize(self.events, since=self.until),\n                         {'count': 1, 'totals': {'outside': '200'}})\n        self.assertEqual(summarize(self.events, until=self.since),\n                         {'count': 1, 'totals': {'outside': '100'}})\n\n    def test_offset_bounds(self):\n        since = datetime(2026, 10, 10, 17, 30,\n                         tzinfo=timezone(timedelta(hours=5, minutes=30)))\n        until = datetime(2026, 10, 10, 9, tzinfo=timezone(timedelta(hours=-4)))\n        self.assertEqual(summarize(self.events, since=since, until=until),\n                         summarize(self.events, since=self.since, until=self.until))\n\n    def test_invalid_bounds_even_with_no_events(self):\n        naive = datetime(2026, 10, 10, 12)\n        equal_offset = datetime(2026, 10, 10, 14,\n                                tzinfo=timezone(timedelta(hours=2)))\n        for bounds in ({'since': naive}, {'until': naive},\n                       {'since': self.since, 'until': self.since},\n                       {'since': self.since, 'until': equal_offset},\n                       {'since': self.until, 'until': self.since}):\n            with self.subTest(bounds=bounds), self.assertRaises(ValueError):\n                summarize([], **bounds)\n\n    def test_every_timestamp_is_validated_for_each_kind_of_window(self):\n        excluded = Event('excluded', Decimal('1'), '2020-01-01T00:00:00Z')\n        after = Event('after', Decimal('1'), '2030-01-01T00:00:00Z')\n        for timestamp in (None, '', 'malformed', '2026-10-10T12:30:00'):\n            for bounds in ({'since': self.since}, {'until': self.until},\n                           {'since': self.since, 'until': self.until}):\n                with self.subTest(timestamp=timestamp, bounds=bounds):\n                    with self.assertRaises(ValueError):\n                        summarize([excluded, after, Event('bad', Decimal('1'), timestamp)],\n                                  **bounds)\n\n    def test_without_bounds_timestamp_validity_is_ignored(self):\n        events = [Event('a', Decimal('0.1'), timestamp)\n                  for timestamp in (None, '', 'malformed', '2026-10-10T12:00:00')]\n        self.assertEqual(summarize(events), {'count': 4, 'totals': {'a': '0.4'}})\n\n    def test_empty_window_results(self):\n        for events in ([], self.events):\n            self.assertEqual(summarize(events, since=self.until + timedelta(days=1)),\n                             {'count': 0, 'totals': {}})\n\n\nclass WindowCliTests(unittest.TestCase):\n    def setUp(self):\n        temporary = tempfile.TemporaryDirectory()\n        self.addCleanup(temporary.cleanup)\n        self.path = Path(temporary.name) / 'events.csv'\n        self.path.write_text(\n            'category,amount,timestamp\\n'\n            'b,0.10,2026-10-10T12:00:00Z\\n'\n            'a,2.00,2026-10-10T12:30:00Z\\n'\n            'b,0.20,2026-10-10T12:45:00Z\\n'\n            'outside,9,2026-10-10T13:00:00Z\\n', encoding='utf-8')\n\n    def run_cli(self, *flags):\n        stdout, stderr = io.StringIO(), io.StringIO()\n        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):\n            try:\n                code = main([str(self.path), *flags])\n            except SystemExit as error:\n                code = error.code\n        return code, stdout.getvalue(), stderr.getvalue()\n\n    def assert_cli_error(self, *flags):\n        code, stdout, stderr = self.run_cli(*flags)\n        self.assertEqual(code, 2)\n        self.assertEqual(stdout, '')\n        self.assertTrue(stderr.strip())\n        return stderr\n\n    def test_cli_success_and_module_invocation(self):\n        flags = ['--since', '2026-10-10T14:00:00+02:00',\n                 '--until', '2026-10-10T09:00:00-04:00']\n        expected = {'count': 3, 'totals': {'a': '2.00', 'b': '0.30'}}\n        code, stdout, stderr = self.run_cli(*flags)\n        self.assertEqual(code, 0)\n        self.assertEqual(stderr, '')\n        self.assertEqual(len(stdout.splitlines()), 1)\n        self.assertEqual(json.loads(stdout), expected)\n        self.assertLess(stdout.index('\"a\"'), stdout.index('\"b\"'))\n        process = subprocess.run(\n            [sys.executable, '-m', 'activity.cli', str(self.path), *flags],\n            capture_output=True, text=True, check=False)\n        self.assertEqual(process.returncode, 0, process.stderr)\n        self.assertEqual(process.stdout, stdout)\n        self.assertEqual(process.stderr, '')\n\n    def test_cli_single_bounds(self):\n        for flag, expected_count in (('--since', 1), ('--until', 3)):\n            code, stdout, stderr = self.run_cli(flag, '2026-10-10T13:00:00Z')\n            self.assertEqual(code, 0, stderr)\n            self.assertEqual(json.loads(stdout)['count'], expected_count)\n\n    def test_cli_invalid_bounds(self):\n        for flag in ('--since', '--until'):\n            for value in ('', 'bad', '2026-10-10T12:00:00'):\n                with self.subTest(flag=flag, value=value):\n                    self.assertIn(flag, self.assert_cli_error(flag, value))\n        for until in ('2026-10-10T12:00:00Z', '2026-10-10T11:00:00Z'):\n            self.assertIn('since', self.assert_cli_error(\n                '--since', '2026-10-10T12:00:00Z', '--until', until))\n\n    def test_csv_without_timestamp_is_compatible_only_without_window(self):\n        self.path.write_text('category,amount\\nb,0.10\\na,2.00\\nb,0.20\\n')\n        self.assertIsNone(load_events(self.path)[0].timestamp)\n        code, stdout, stderr = self.run_cli()\n        self.assertEqual(code, 0, stderr)\n        self.assertEqual(json.loads(stdout),\n                         {'count': 3, 'totals': {'a': '2.00', 'b': '0.30'}})\n        self.assertIn('Timestamp', self.assert_cli_error('--since', '2026-10-10T12:00:00Z'))\n\n    def test_raw_bad_timestamps_are_ignored_without_bounds(self):\n        self.path.write_text('category,amount,timestamp\\na,1,bad\\n')\n        self.assertEqual(load_events(self.path)[0].timestamp, 'bad')\n        code, stdout, stderr = self.run_cli()\n        self.assertEqual(code, 0, stderr)\n        self.assertEqual(json.loads(stdout), {'count': 1, 'totals': {'a': '1'}})\n        self.assertIn('timestamp', self.assert_cli_error('--until', '2026-10-10T12:00:00Z'))\n\n    def test_cli_csv_data_errors(self):\n        for content in ('category,amount\\na,not-a-number\\n',\n                        'category,amount\\na\\n',\n                        'category\\na\\n'):\n            with self.subTest(content=content):\n                self.path.write_text(content)\n                self.assert_cli_error()\n\n\nif __name__ == '__main__':\n    unittest.main()\n",
+    "trial-02-6b86b273/root/prompt.md": "Add optional UTC time-window filtering to this CSV activity reporting tool. This is one feature across three modules, not a redesign.\n\nRequired interfaces and behavior:\n- In activity/parse.py add parse_timestamp(text) returning a timezone-aware datetime normalized to UTC. Support ISO timestamps with Z or numeric offsets; reject naive, empty, malformed timestamps with ValueError.\n- Keep load_events(path) compatible with existing callers. Timestamps on Event may remain raw text; legacy CSVs without a timestamp column must still work when no window is requested.\n- In activity/report.py extend summarize(events, *, since=None, until=None), where bounds are timezone-aware datetimes. A row is included at since and excluded at until. Either bound can be omitted. Normalize offsets for comparison. Reject naive bounds, and since >= until with ValueError. With an active window, every event must have a valid aware timestamp, even if another event would be excluded. Without bounds preserve legacy output and ignore timestamp validity.\n- In activity/cli.py add --since and --until flags parsed via parse_timestamp. Validation/data errors return exit code 2, useful stderr, and no JSON stdout. Success emits the existing single JSON shape: count and category totals, exact Decimal arithmetic, sorted categories. No extra metadata. Preserve invocation via python3 -m activity.cli.\n- Add focused tests in tests/test_windows.py. Existing tests/test_legacy.py and package __init__.py must remain unchanged.\n\nInputs: activity/parse.py, activity/report.py, activity/cli.py, tests/test_legacy.py.\nOwned paths: activity/parse.py, activity/report.py, activity/cli.py, tests/test_windows.py only.\nAcceptance commands: python3 -m unittest discover -s tests -v; python3 -m compileall -q activity tests.\nDo not add dependencies, network/GPU operations, commits, or unrelated refactors. Finish once requirements and checks pass; optional improvements are outside scope. Return a concise final report with changed files, checks and material uncertainty.\n\nA single implementation worker has already completed this assignment. You are the independent acceptance reviewer. Do not implement, repair, select a workflow, load coordinator skills, or launch any agents.\nRead /tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/worker/evidence.json and /tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/worker/report.md. The launcher generated the diff, source hashes and fresh public-check results after the worker exited. Inspect the diff and coverage against the task, independently probing any uncovered or doubtful behavior. Reuse recorded passing checks on unchanged files; do not rerun them merely to repeat the worker. Read additional source only to resolve a concrete review question. Reject any unmet requirement and return the required JSON acceptance decision. Do not read hidden graders or other trials.\n\nCPU only. Work inside this project. Do not inspect the evaluator source, other projects, or files outside the named worker report and evidence artifact. Do not touch GPU processes or install dependencies.\n\nReturn the required JSON acceptance decision. Set accepted=false for any unresolved material defect; mechanical tests alone do not establish acceptance.\n",
+    "trial-02-6b86b273/root/report.md": "{\"accepted\":false,\"reason\":\"Two confirmed defects: parse_timestamp accepts malformed offsets such as +01:60 instead of raising ValueError; a CSV row missing its amount exits the CLI with code 1 and a TypeError traceback instead of code 2. Changed paths match the four allowed files. Source hashes match the recorded passing 13 tests and compileall checks, but independent probes expose these uncovered requirement failures. No files changed.\"}",
+    "trial-02-6b86b273/worker/prompt.md": "Add optional UTC time-window filtering to this CSV activity reporting tool. This is one feature across three modules, not a redesign.\n\nRequired interfaces and behavior:\n- In activity/parse.py add parse_timestamp(text) returning a timezone-aware datetime normalized to UTC. Support ISO timestamps with Z or numeric offsets; reject naive, empty, malformed timestamps with ValueError.\n- Keep load_events(path) compatible with existing callers. Timestamps on Event may remain raw text; legacy CSVs without a timestamp column must still work when no window is requested.\n- In activity/report.py extend summarize(events, *, since=None, until=None), where bounds are timezone-aware datetimes. A row is included at since and excluded at until. Either bound can be omitted. Normalize offsets for comparison. Reject naive bounds, and since >= until with ValueError. With an active window, every event must have a valid aware timestamp, even if another event would be excluded. Without bounds preserve legacy output and ignore timestamp validity.\n- In activity/cli.py add --since and --until flags parsed via parse_timestamp. Validation/data errors return exit code 2, useful stderr, and no JSON stdout. Success emits the existing single JSON shape: count and category totals, exact Decimal arithmetic, sorted categories. No extra metadata. Preserve invocation via python3 -m activity.cli.\n- Add focused tests in tests/test_windows.py. Existing tests/test_legacy.py and package __init__.py must remain unchanged.\n\nInputs: activity/parse.py, activity/report.py, activity/cli.py, tests/test_legacy.py.\nOwned paths: activity/parse.py, activity/report.py, activity/cli.py, tests/test_windows.py only.\nAcceptance commands: python3 -m unittest discover -s tests -v; python3 -m compileall -q activity tests.\nDo not add dependencies, network/GPU operations, commits, or unrelated refactors. Finish once requirements and checks pass; optional improvements are outside scope. Return a concise final report with changed files, checks and material uncertainty.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nYou are an already assigned implementation worker. Do not load coordinator skills, select a workflow, or delegate. Return <=150 words with changed paths, check results and unmet requirements.\n",
+    "trial-02-6b86b273/worker/report.md": "Implemented UTC time-window filtering in [parse.py](/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project/activity/parse.py), [report.py](/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project/activity/report.py), [cli.py](/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project/activity/cli.py), and added [test_windows.py](/tmp/lunarmarch-gpt6-luna-weighted-20261010/trial-02-6b86b273/project/tests/test_windows.py). Legacy tests and `activity/__init__.py` remain unchanged.\n\nChecks passed: `python3 -m unittest discover -s tests -v` (13 tests), `python3 -m compileall -q activity tests`, and `git diff --check`. No known unmet requirements.",
+    "trial-02-6b86b273/worker/evidence.json": "{\n  \"source_hashes\": {\n    \"activity/__init__.py\": \"f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35\",\n    \"activity/cli.py\": \"aa8f0a869878921bbfda115cf870728023d9e43d62b147287661abe1219e31a3\",\n    \"activity/parse.py\": \"b0c954635b6e0d17aa9141cdd276ae3a07f789817b459b60bda9dae622372ef6\",\n    \"activity/report.py\": \"b87e7415744794c0a97ed7dfbdc883b4fb8c3a43c83268b39b664a059465c5cd\",\n    \"tests/test_legacy.py\": \"0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216\",\n    \"tests/test_windows.py\": \"e119024e19f3e31af639b8e1eb20c3338016ad6600eb86e6821912b3c95c6f8b\"\n  },\n  \"stable_during_checks\": true,\n  \"changed_paths\": [\n    \"activity/cli.py\",\n    \"activity/parse.py\",\n    \"activity/report.py\",\n    \"tests/test_windows.py\"\n  ],\n  \"scope_pass\": true,\n  \"checks\": [\n    {\n      \"command\": [\n        \"/usr/bin/python3\",\n        \"-m\",\n        \"unittest\",\n        \"discover\",\n        \"-s\",\n        \"tests\",\n        \"-v\"\n      ],\n      \"returncode\": 0,\n      \"stdout\": \"\",\n      \"stderr\": \"test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\\ntest_parse_timestamp_normalizes_z_and_offset (test_windows.TimestampTests.test_parse_timestamp_normalizes_z_and_offset) ... ok\\ntest_parse_timestamp_rejects_empty_naive_and_malformed (test_windows.TimestampTests.test_parse_timestamp_rejects_empty_naive_and_malformed) ... ok\\ntest_bounds_must_be_aware_and_in_order (test_windows.WindowTests.test_bounds_must_be_aware_and_in_order) ... ok\\ntest_cli_errors_have_no_json_stdout (test_windows.WindowTests.test_cli_errors_have_no_json_stdout) ... ok\\ntest_cli_window_emits_existing_json_shape (test_windows.WindowTests.test_cli_window_emits_existing_json_shape) ... ok\\ntest_legacy_csv_still_loads_without_window (test_windows.WindowTests.test_legacy_csv_still_loads_without_window) ... ok\\ntest_no_window_ignores_timestamp_validity (test_windows.WindowTests.test_no_window_ignores_timestamp_validity) ... ok\\ntest_since_inclusive_until_exclusive_and_exact_totals (test_windows.WindowTests.test_since_inclusive_until_exclusive_and_exact_totals) ... ok\\ntest_window_validates_every_row_even_when_outside (test_windows.WindowTests.test_window_validates_every_row_even_when_outside) ... ok\\n\\n----------------------------------------------------------------------\\nRan 13 tests in 0.005s\\n\\nOK\\n\"\n    },\n    {\n      \"command\": [\n        \"/usr/bin/python3\",\n        \"-m\",\n        \"compileall\",\n        \"-q\",\n        \"activity\",\n        \"tests\"\n      ],\n      \"returncode\": 0,\n      \"stdout\": \"\",\n      \"stderr\": \"\"\n    }\n  ],\n  \"tracked_diff\": \"diff --git a/activity/cli.py b/activity/cli.py\\nindex 5971cc9..022f37b 100644\\n--- a/activity/cli.py\\n+++ b/activity/cli.py\\n@@ -1,17 +1,21 @@\\n import argparse\\n import json\\n import sys\\n-from .parse import load_events\\n+from .parse import load_events, parse_timestamp\\n from .report import summarize\\n \\n \\n def main(argv=None) -> int:\\n     parser = argparse.ArgumentParser()\\n     parser.add_argument('input')\\n+    parser.add_argument('--since')\\n+    parser.add_argument('--until')\\n     args = parser.parse_args(argv)\\n     try:\\n-        result = summarize(load_events(args.input))\\n-    except (OSError, ValueError, KeyError) as error:\\n+        since = parse_timestamp(args.since) if args.since is not None else None\\n+        until = parse_timestamp(args.until) if args.until is not None else None\\n+        result = summarize(load_events(args.input), since=since, until=until)\\n+    except (OSError, ValueError, KeyError, ArithmeticError) as error:\\n         print(str(error), file=sys.stderr)\\n         return 2\\n     print(json.dumps(result, sort_keys=True))\\ndiff --git a/activity/parse.py b/activity/parse.py\\nindex 1d56c3e..6302eb5 100644\\n--- a/activity/parse.py\\n+++ b/activity/parse.py\\n@@ -1,5 +1,6 @@\\n import csv\\n from dataclasses import dataclass\\n+from datetime import datetime, timezone\\n from decimal import Decimal\\n from pathlib import Path\\n \\n@@ -11,6 +12,19 @@ class Event:\\n     timestamp: str | None = None\\n \\n \\n+def parse_timestamp(text: str) -> datetime:\\n+    \\\"\\\"\\\"Parse an ISO timestamp and normalize it to UTC.\\\"\\\"\\\"\\n+    if not isinstance(text, str) or not text.strip():\\n+        raise ValueError('timestamp must be a non-empty ISO timestamp')\\n+    try:\\n+        value = datetime.fromisoformat(text.strip().replace('Z', '+00:00'))\\n+    except ValueError as error:\\n+        raise ValueError(f'invalid timestamp: {text!r}') from error\\n+    if value.tzinfo is None or value.utcoffset() is None:\\n+        raise ValueError(f'timestamp must include a timezone: {text!r}')\\n+    return value.astimezone(timezone.utc)\\n+\\n+\\n def load_events(path: str | Path) -> list[Event]:\\n     with open(path, newline='', encoding='utf-8') as stream:\\n         return [Event(row['category'], Decimal(row['amount']), row.get('timestamp'))\\ndiff --git a/activity/report.py b/activity/report.py\\nindex d1b648b..2e35c24 100644\\n--- a/activity/report.py\\n+++ b/activity/report.py\\n@@ -1,10 +1,35 @@\\n+from datetime import datetime, timezone\\n from decimal import Decimal\\n-from .parse import Event\\n+from .parse import Event, parse_timestamp\\n \\n \\n-def summarize(events: list[Event]) -> dict:\\n+def summarize(events: list[Event], *, since: datetime | None = None,\\n+              until: datetime | None = None) -> dict:\\n+    def normalize_bound(bound: datetime | None, name: str) -> datetime | None:\\n+        if bound is None:\\n+            return None\\n+        if not isinstance(bound, datetime) or bound.tzinfo is None or bound.utcoffset() is None:\\n+            raise ValueError(f'{name} must be a timezone-aware datetime')\\n+        return bound.astimezone(timezone.utc)\\n+\\n+    since = normalize_bound(since, 'since')\\n+    until = normalize_bound(until, 'until')\\n+    if since is not None and until is not None and since >= until:\\n+        raise ValueError('since must be earlier than until')\\n+\\n     totals: dict[str, Decimal] = {}\\n+    count = 0\\n+    active_window = since is not None or until is not None\\n     for event in events:\\n+        if active_window:\\n+            if event.timestamp is None:\\n+                raise ValueError('event is missing a timestamp')\\n+            timestamp = parse_timestamp(event.timestamp)\\n+            if since is not None and timestamp < since:\\n+                continue\\n+            if until is not None and timestamp >= until:\\n+                continue\\n         totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\\n-    return {'count': len(events),\\n+        count += 1\\n+    return {'count': count,\\n             'totals': {key: str(totals[key]) for key in sorted(totals)}}\\n\",\n  \"untracked_files\": {\n    \"tests/test_windows.py\": \"import contextlib\\nimport io\\nimport json\\nimport tempfile\\nimport unittest\\nfrom datetime import datetime, timezone\\nfrom decimal import Decimal\\nfrom pathlib import Path\\n\\nfrom activity.cli import main\\nfrom activity.parse import Event, load_events, parse_timestamp\\nfrom activity.report import summarize\\n\\n\\nclass TimestampTests(unittest.TestCase):\\n    def test_parse_timestamp_normalizes_z_and_offset(self):\\n        self.assertEqual(parse_timestamp('2024-01-01T01:00:00+01:00'),\\n                         datetime(2024, 1, 1, tzinfo=timezone.utc))\\n        self.assertEqual(parse_timestamp('2024-01-01T00:00:00Z'),\\n                         datetime(2024, 1, 1, tzinfo=timezone.utc))\\n\\n    def test_parse_timestamp_rejects_empty_naive_and_malformed(self):\\n        for value in ('', '   ', '2024-01-01T00:00:00', 'not a timestamp'):\\n            with self.subTest(value=value), self.assertRaises(ValueError):\\n                parse_timestamp(value)\\n\\n\\nclass WindowTests(unittest.TestCase):\\n    def setUp(self):\\n        self.events = [\\n            Event('early', Decimal('1'), '2024-01-01T00:00:00Z'),\\n            Event('start', Decimal('0.1'), '2024-01-01T01:00:00+01:00'),\\n            Event('inside', Decimal('0.2'), '2024-01-01T00:30:00Z'),\\n            Event('end', Decimal('9'), '2024-01-01T01:00:00Z'),\\n        ]\\n\\n    def test_since_inclusive_until_exclusive_and_exact_totals(self):\\n        result = summarize(self.events,\\n                           since=datetime(2024, 1, 1, tzinfo=timezone.utc),\\n                           until=datetime.fromisoformat('2024-01-01T02:00:00+01:00'))\\n        self.assertEqual(result, {'count': 3, 'totals': {'early': '1', 'inside': '0.2', 'start': '0.1'}})\\n\\n    def test_bounds_must_be_aware_and_in_order(self):\\n        with self.assertRaises(ValueError):\\n            summarize([], since=datetime(2024, 1, 1))\\n        with self.assertRaises(ValueError):\\n            summarize([], since=parse_timestamp('2024-01-02T00:00:00Z'),\\n                      until=parse_timestamp('2024-01-02T00:00:00Z'))\\n\\n    def test_window_validates_every_row_even_when_outside(self):\\n        events = [Event('outside', Decimal('1'), '2020-01-01T00:00:00Z'),\\n                  Event('bad', Decimal('1'), 'invalid')]\\n        with self.assertRaises(ValueError):\\n            summarize(events, since=parse_timestamp('2024-01-01T00:00:00Z'))\\n\\n    def test_no_window_ignores_timestamp_validity(self):\\n        self.assertEqual(summarize([Event('legacy', Decimal('2'), 'invalid')]),\\n                         {'count': 1, 'totals': {'legacy': '2'}})\\n\\n    def test_cli_window_emits_existing_json_shape(self):\\n        with tempfile.TemporaryDirectory() as temporary:\\n            path = Path(temporary) / 'events.csv'\\n            path.write_text('category,amount,timestamp\\\\na,0.1,2024-01-01T00:00:00Z\\\\nb,0.2,2024-01-02T00:00:00Z\\\\n')\\n            stdout, stderr = io.StringIO(), io.StringIO()\\n            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):\\n                code = main([str(path), '--since', '2024-01-01T00:00:00Z',\\n                             '--until', '2024-01-02T00:00:00Z'])\\n            self.assertEqual(code, 0)\\n            self.assertEqual(json.loads(stdout.getvalue()), {'count': 1, 'totals': {'a': '0.1'}})\\n            self.assertEqual(stderr.getvalue(), '')\\n\\n    def test_cli_errors_have_no_json_stdout(self):\\n        with tempfile.TemporaryDirectory() as temporary:\\n            path = Path(temporary) / 'events.csv'\\n            path.write_text('category,amount\\\\na,1\\\\n')\\n            stdout, stderr = io.StringIO(), io.StringIO()\\n            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):\\n                code = main([str(path), '--since', '2024-01-01T00:00:00'])\\n            self.assertEqual(code, 2)\\n            self.assertEqual(stdout.getvalue(), '')\\n            self.assertTrue(stderr.getvalue())\\n\\n    def test_legacy_csv_still_loads_without_window(self):\\n        with tempfile.TemporaryDirectory() as temporary:\\n            path = Path(temporary) / 'events.csv'\\n            path.write_text('category,amount\\\\na,1\\\\n')\\n            events = load_events(path)\\n            self.assertIsNone(events[0].timestamp)\\n            self.assertEqual(summarize(events), {'count': 1, 'totals': {'a': '1'}})\\n\\n\\nif __name__ == '__main__':\\n    unittest.main()\\n\"\n  }\n}\n",
+    "trial-02-6b86b273/project/activity/__init__.py": "\"\"\"Small CSV activity reporting tool.\"\"\"\n",
+    "trial-02-6b86b273/project/activity/cli.py": "import argparse\nimport json\nimport sys\nfrom .parse import load_events, parse_timestamp\nfrom .report import summarize\n\n\ndef main(argv=None) -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument('input')\n    parser.add_argument('--since')\n    parser.add_argument('--until')\n    args = parser.parse_args(argv)\n    try:\n        since = parse_timestamp(args.since) if args.since is not None else None\n        until = parse_timestamp(args.until) if args.until is not None else None\n        result = summarize(load_events(args.input), since=since, until=until)\n    except (OSError, ValueError, KeyError, ArithmeticError) as error:\n        print(str(error), file=sys.stderr)\n        return 2\n    print(json.dumps(result, sort_keys=True))\n    return 0\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n",
+    "trial-02-6b86b273/project/activity/parse.py": "import csv\nfrom dataclasses import dataclass\nfrom datetime import datetime, timezone\nfrom decimal import Decimal\nfrom pathlib import Path\n\n\n@dataclass(frozen=True)\nclass Event:\n    category: str\n    amount: Decimal\n    timestamp: str | None = None\n\n\ndef parse_timestamp(text: str) -> datetime:\n    \"\"\"Parse an ISO timestamp and normalize it to UTC.\"\"\"\n    if not isinstance(text, str) or not text.strip():\n        raise ValueError('timestamp must be a non-empty ISO timestamp')\n    try:\n        value = datetime.fromisoformat(text.strip().replace('Z', '+00:00'))\n    except ValueError as error:\n        raise ValueError(f'invalid timestamp: {text!r}') from error\n    if value.tzinfo is None or value.utcoffset() is None:\n        raise ValueError(f'timestamp must include a timezone: {text!r}')\n    return value.astimezone(timezone.utc)\n\n\ndef load_events(path: str | Path) -> list[Event]:\n    with open(path, newline='', encoding='utf-8') as stream:\n        return [Event(row['category'], Decimal(row['amount']), row.get('timestamp'))\n                for row in csv.DictReader(stream)]\n",
+    "trial-02-6b86b273/project/activity/report.py": "from datetime import datetime, timezone\nfrom decimal import Decimal\nfrom .parse import Event, parse_timestamp\n\n\ndef summarize(events: list[Event], *, since: datetime | None = None,\n              until: datetime | None = None) -> dict:\n    def normalize_bound(bound: datetime | None, name: str) -> datetime | None:\n        if bound is None:\n            return None\n        if not isinstance(bound, datetime) or bound.tzinfo is None or bound.utcoffset() is None:\n            raise ValueError(f'{name} must be a timezone-aware datetime')\n        return bound.astimezone(timezone.utc)\n\n    since = normalize_bound(since, 'since')\n    until = normalize_bound(until, 'until')\n    if since is not None and until is not None and since >= until:\n        raise ValueError('since must be earlier than until')\n\n    totals: dict[str, Decimal] = {}\n    count = 0\n    active_window = since is not None or until is not None\n    for event in events:\n        if active_window:\n            if event.timestamp is None:\n                raise ValueError('event is missing a timestamp')\n            timestamp = parse_timestamp(event.timestamp)\n            if since is not None and timestamp < since:\n                continue\n            if until is not None and timestamp >= until:\n                continue\n        totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\n        count += 1\n    return {'count': count,\n            'totals': {key: str(totals[key]) for key in sorted(totals)}}\n",
+    "trial-02-6b86b273/project/test_hidden_windows.py": "\"\"\"Post-run behavior checks; copied into each project only after agents exit.\"\"\"\nimport subprocess\nimport sys\nimport json\nimport tempfile\nimport unittest\nfrom datetime import datetime, timezone, timedelta\nfrom decimal import Decimal\nfrom pathlib import Path\nfrom activity.parse import Event,parse_timestamp,load_events\nfrom activity.report import summarize\n\n\nclass WindowTests(unittest.TestCase):\n    def test_parser_normalizes_offsets(self):\n        expected=datetime(2026,10,10,10,tzinfo=timezone.utc)\n        for value in ('2026-10-10T10:00:00Z','2026-10-10T12:00:00+02:00','2026-10-10T03:00:00-07:00'):\n            self.assertEqual(parse_timestamp(value),expected)\n            self.assertEqual(parse_timestamp(value).utcoffset(),timedelta(0))\n\n    def test_parser_rejects_invalid(self):\n        for value in ('','2026-10-10','2026-10-10T10:00:00','garbage','2026-13-01T00:00:00Z'):\n            with self.subTest(value=value),self.assertRaises(ValueError):parse_timestamp(value)\n\n    def test_half_open_window_exact_totals(self):\n        rows=[Event('a',Decimal('0.1'),'2026-10-10T10:00:00Z'),\n              Event('a',Decimal('0.2'),'2026-10-10T12:30:00+02:00'),\n              Event('b',Decimal('7'),'2026-10-10T11:00:00Z'),\n              Event('b',Decimal('9'),'2026-10-10T09:59:59Z')]\n        self.assertEqual(summarize(rows,since=parse_timestamp('2026-10-10T10:00:00Z'),until=parse_timestamp('2026-10-10T11:00:00Z')),{'count':2,'totals':{'a':'0.3'}})\n\n    def test_one_sided_windows(self):\n        rows=[Event('x',Decimal('1'),'2026-10-10T09:00:00Z'),Event('x',Decimal('2'),'2026-10-10T10:00:00Z')]\n        bound=parse_timestamp('2026-10-10T10:00:00Z')\n        self.assertEqual(summarize(rows,since=bound),{'count':1,'totals':{'x':'2'}})\n        self.assertEqual(summarize(rows,until=bound),{'count':1,'totals':{'x':'1'}})\n\n    def test_bad_bounds_even_on_empty_data(self):\n        aware=parse_timestamp('2026-10-10T10:00:00Z')\n        naive=datetime(2026,10,10)\n        for kwargs in ({'since':naive},{'until':naive},{'since':aware,'until':aware},{'since':aware,'until':aware-timedelta(seconds=1)}):\n            with self.subTest(kwargs=kwargs),self.assertRaises(ValueError):summarize([],**kwargs)\n\n    def test_all_event_timestamps_checked_with_window(self):\n        since=parse_timestamp('2026-10-10T10:00:00Z')\n        until=parse_timestamp('2026-10-10T11:00:00Z')\n        for stamp in (None,'','bad','2026-10-10T09:00:00'):\n            with self.subTest(stamp=stamp),self.assertRaises(ValueError):\n                summarize([Event('a',Decimal('1'),'2026-10-10T12:00:00Z'),Event('b',Decimal('2'),stamp)],since=since,until=until)\n\n    def test_no_window_preserves_legacy(self):\n        rows=[Event('a',Decimal('1'),None),Event('a',Decimal('2'),'bad')]\n        self.assertEqual(summarize(rows),{'count':2,'totals':{'a':'3'}})\n\n    def invoke(self,csv,args):\n        with tempfile.TemporaryDirectory() as temporary:\n            path=Path(temporary)/'data.csv';path.write_text(csv)\n            result = subprocess.run([sys.executable, '-m', 'activity.cli', str(path), *args],\n                                    text=True, capture_output=True, timeout=10)\n            return result.returncode, result.stdout, result.stderr\n\n    def test_cli_filtering(self):\n        code,stdout,stderr=self.invoke('category,amount,timestamp\\na,0.10,2026-10-10T10:00:00Z\\na,0.20,2026-10-10T10:30:00Z\\nb,9,2026-10-10T11:00:00Z\\n',['--since','2026-10-10T10:00:00Z','--until','2026-10-10T11:00:00Z'])\n        self.assertEqual(code,0);self.assertEqual(stderr,'');self.assertEqual(json.loads(stdout),{'count':2,'totals':{'a':'0.30'}})\n\n    def test_cli_errors_no_partial_json(self):\n        csv='category,amount,timestamp\\na,1,2026-10-10T10:00:00Z\\nb,2,bad\\n'\n        for args in (['--since','bad'],['--since','2026-10-10T12:00:00Z','--until','2026-10-10T10:00:00Z'],['--since','2026-10-10T09:00:00Z']):\n            code,stdout,stderr=self.invoke(csv,args)\n            self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n\n    def test_cli_missing_timestamp_in_window(self):\n        code,stdout,stderr=self.invoke('category,amount\\na,1\\n',['--until','2026-10-10T11:00:00Z'])\n        self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n\n    def test_cli_short_csv_row_is_data_error(self):\n        code,stdout,stderr=self.invoke('category,amount,timestamp\\na\\n',[])\n        self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n",
+    "trial-02-6b86b273/project/tests/test_legacy.py": "import contextlib\nimport io\nimport json\nimport tempfile\nimport unittest\nfrom pathlib import Path\nfrom decimal import Decimal\nfrom activity.parse import Event, load_events\nfrom activity.report import summarize\nfrom activity.cli import main\n\n\nclass LegacyTests(unittest.TestCase):\n    def test_exact_decimal_summary(self):\n        self.assertEqual(summarize([Event('b',Decimal('0.1')),Event('b',Decimal('0.2')),Event('a',Decimal('2'))]),\n                         {'count':3,'totals':{'a':'2','b':'0.3'}})\n\n    def test_empty(self):\n        self.assertEqual(summarize([]), {'count':0,'totals':{}})\n\n    def test_csv_without_timestamps_and_cli(self):\n        with tempfile.TemporaryDirectory() as temporary:\n            path=Path(temporary)/'events.csv'\n            path.write_text('category,amount\\nb,0.10\\na,2.00\\nb,0.20\\n')\n            self.assertEqual(len(load_events(path)),3)\n            stdout=io.StringIO()\n            with contextlib.redirect_stdout(stdout):\n                self.assertEqual(main([str(path)]),0)\n            self.assertEqual(json.loads(stdout.getvalue()), {'count':3,'totals':{'a':'2.00','b':'0.30'}})\n\n    def test_missing_file_no_json(self):\n        stdout,stderr=io.StringIO(),io.StringIO()\n        with contextlib.redirect_stdout(stdout),contextlib.redirect_stderr(stderr):\n            self.assertEqual(main(['/nonexistent/activity-fixture.csv']),2)\n        self.assertEqual(stdout.getvalue(),'')\n        self.assertTrue(stderr.getvalue())\n",
+    "trial-02-6b86b273/project/tests/test_windows.py": "import contextlib\nimport io\nimport json\nimport tempfile\nimport unittest\nfrom datetime import datetime, timezone\nfrom decimal import Decimal\nfrom pathlib import Path\n\nfrom activity.cli import main\nfrom activity.parse import Event, load_events, parse_timestamp\nfrom activity.report import summarize\n\n\nclass TimestampTests(unittest.TestCase):\n    def test_parse_timestamp_normalizes_z_and_offset(self):\n        self.assertEqual(parse_timestamp('2024-01-01T01:00:00+01:00'),\n                         datetime(2024, 1, 1, tzinfo=timezone.utc))\n        self.assertEqual(parse_timestamp('2024-01-01T00:00:00Z'),\n                         datetime(2024, 1, 1, tzinfo=timezone.utc))\n\n    def test_parse_timestamp_rejects_empty_naive_and_malformed(self):\n        for value in ('', '   ', '2024-01-01T00:00:00', 'not a timestamp'):\n            with self.subTest(value=value), self.assertRaises(ValueError):\n                parse_timestamp(value)\n\n\nclass WindowTests(unittest.TestCase):\n    def setUp(self):\n        self.events = [\n            Event('early', Decimal('1'), '2024-01-01T00:00:00Z'),\n            Event('start', Decimal('0.1'), '2024-01-01T01:00:00+01:00'),\n            Event('inside', Decimal('0.2'), '2024-01-01T00:30:00Z'),\n            Event('end', Decimal('9'), '2024-01-01T01:00:00Z'),\n        ]\n\n    def test_since_inclusive_until_exclusive_and_exact_totals(self):\n        result = summarize(self.events,\n                           since=datetime(2024, 1, 1, tzinfo=timezone.utc),\n                           until=datetime.fromisoformat('2024-01-01T02:00:00+01:00'))\n        self.assertEqual(result, {'count': 3, 'totals': {'early': '1', 'inside': '0.2', 'start': '0.1'}})\n\n    def test_bounds_must_be_aware_and_in_order(self):\n        with self.assertRaises(ValueError):\n            summarize([], since=datetime(2024, 1, 1))\n        with self.assertRaises(ValueError):\n            summarize([], since=parse_timestamp('2024-01-02T00:00:00Z'),\n                      until=parse_timestamp('2024-01-02T00:00:00Z'))\n\n    def test_window_validates_every_row_even_when_outside(self):\n        events = [Event('outside', Decimal('1'), '2020-01-01T00:00:00Z'),\n                  Event('bad', Decimal('1'), 'invalid')]\n        with self.assertRaises(ValueError):\n            summarize(events, since=parse_timestamp('2024-01-01T00:00:00Z'))\n\n    def test_no_window_ignores_timestamp_validity(self):\n        self.assertEqual(summarize([Event('legacy', Decimal('2'), 'invalid')]),\n                         {'count': 1, 'totals': {'legacy': '2'}})\n\n    def test_cli_window_emits_existing_json_shape(self):\n        with tempfile.TemporaryDirectory() as temporary:\n            path = Path(temporary) / 'events.csv'\n            path.write_text('category,amount,timestamp\\na,0.1,2024-01-01T00:00:00Z\\nb,0.2,2024-01-02T00:00:00Z\\n')\n            stdout, stderr = io.StringIO(), io.StringIO()\n            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):\n                code = main([str(path), '--since', '2024-01-01T00:00:00Z',\n                             '--until', '2024-01-02T00:00:00Z'])\n            self.assertEqual(code, 0)\n            self.assertEqual(json.loads(stdout.getvalue()), {'count': 1, 'totals': {'a': '0.1'}})\n            self.assertEqual(stderr.getvalue(), '')\n\n    def test_cli_errors_have_no_json_stdout(self):\n        with tempfile.TemporaryDirectory() as temporary:\n            path = Path(temporary) / 'events.csv'\n            path.write_text('category,amount\\na,1\\n')\n            stdout, stderr = io.StringIO(), io.StringIO()\n            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):\n                code = main([str(path), '--since', '2024-01-01T00:00:00'])\n            self.assertEqual(code, 2)\n            self.assertEqual(stdout.getvalue(), '')\n            self.assertTrue(stderr.getvalue())\n\n    def test_legacy_csv_still_loads_without_window(self):\n        with tempfile.TemporaryDirectory() as temporary:\n            path = Path(temporary) / 'events.csv'\n            path.write_text('category,amount\\na,1\\n')\n            events = load_events(path)\n            self.assertIsNone(events[0].timestamp)\n            self.assertEqual(summarize(events), {'count': 1, 'totals': {'a': '1'}})\n\n\nif __name__ == '__main__':\n    unittest.main()\n"
+  },
+  "limitations": [
+    "One pair stopped on failure; no accepted Quick completion or repair cost measured.",
+    "Fresh CLI sessions proxy main-agent work; not this accumulated chat.",
+    "Known development fixture, not held-out evaluation.",
+    "Requested identities and tier, not attestation of served model/tier.",
+    "Normalized credit proxy, not invoice or included subscription quota.",
+    "Setup/controller and external approval-review time/usage excluded.",
+    "No inference about durable LunarMarch or global model defaults."
+  ]
+}

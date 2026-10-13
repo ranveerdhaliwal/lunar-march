@@ -1,0 +1,39 @@
+{
+  "owned_paths": [
+    "activity/report.py",
+    "activity/cli.py",
+    "activity/service.py",
+    "activity/__init__.py",
+    "README.md"
+  ],
+  "acceptance_commands": [
+    [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "acceptance",
+      "-v"
+    ],
+    [
+      "/usr/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "activity",
+      "tests",
+      "acceptance"
+    ]
+  ],
+  "review_focus": "Assess only the stated API migration: wrapper forwarding, canonical imports/exports, documentation and preservation of behavior. Use the source-bound diff and protected acceptance results as primary evidence. Additional inspection or probes should resolve a concrete uncovered requirement; do not add input hardening or redesign. Existing checks may be reused when their hashes match."
+}

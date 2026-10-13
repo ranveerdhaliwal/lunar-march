@@ -1,0 +1,769 @@
+{
+  "date_received": "2026-10-10",
+  "status": "quality_passed_cost_lower_time_slower_early_stop",
+  "decision": "Keep installed LunarMarch disabled; no promotion, commit or push. Stops after first pair under predeclared time-and-cost rule.",
+  "manifest": {
+    "format": "lunarmarch-workflow-pilot-v3",
+    "prepared_at": "2026-10-11T01:54:38.901943+00:00",
+    "case": "/home/ranveer/app/LunarMarch/evals/api-migration",
+    "owned_paths": [
+      "activity/report.py",
+      "activity/cli.py",
+      "activity/service.py",
+      "activity/__init__.py",
+      "README.md"
+    ],
+    "acceptance_commands": [
+      [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "acceptance",
+        "-v"
+      ],
+      [
+        "/usr/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "activity",
+        "tests",
+        "acceptance"
+      ]
+    ],
+    "review_focus": "Assess only the stated API migration: wrapper forwarding, canonical imports/exports, documentation and preservation of behavior. Use the source-bound diff and protected acceptance results as primary evidence. Additional inspection or probes should resolve a concrete uncovered requirement; do not add input hardening or redesign. Existing checks may be reused when their hashes match.",
+    "profile": "lean",
+    "parent_model": "gpt-6-astra",
+    "worker_model": "gpt-6-luna",
+    "effort": "high",
+    "metric": "weighted_cost",
+    "pricing": {
+      "source": "https://learn.chatgpt.com/docs/pricing",
+      "retrieved": "2026-10-10",
+      "unit": "Standard credits per million tokens",
+      "rates": {
+        "gpt-6-astra": {
+          "uncached_input_tokens": 250,
+          "cached_input_tokens": 25,
+          "output_tokens": 1250
+        },
+        "gpt-6.1-sol": {
+          "uncached_input_tokens": 50,
+          "cached_input_tokens": 2.5,
+          "output_tokens": 250
+        },
+        "gpt-5.6-luna": {
+          "uncached_input_tokens": 5,
+          "cached_input_tokens": 0.5,
+          "output_tokens": 30
+        },
+        "gpt-6-luna": {
+          "uncached_input_tokens": 2.5,
+          "cached_input_tokens": 0.25,
+          "output_tokens": 12.5
+        }
+      },
+      "limitation": "Normalized credit-cost proxy, not included subscription quota or an invoice; requested Standard tier is not independent proof of served tier."
+    },
+    "service_tier_requested": "default",
+    "local_overrides": [
+      "MCP_DOCKER disabled for these CPU-only fixture calls"
+    ],
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "source_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "dirty_suite_override": true,
+    "publication_scope": "exploratory pilot, not a general performance claim",
+    "fixture_hashes": {
+      "README.md": "d42a941beff82c02f9aabfd3206d4a15a67f8f4ade297cdd9e80a14ffd46d946",
+      "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+      "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+      "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+      "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+      "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+      "activity/service.py": "ff9e9170b41c5e600e87eaa0d9cbb7fdd3885b9b148b53e9aa0353345abc8f13",
+      "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+    },
+    "task_sha256": "8f342d83f24c39d9b2c0902c338ac024d4f8ceb14c010bf9f9c234bb0a6c4d15",
+    "grader_sha256": "c7557816bf07a1b34f933c4e4238ca46c4a41603965342510d311d00924cb4ee",
+    "runner_sha256": "413021621da088bc36406520e83b05d4b34e62b844e424763226cb42878ccbcc",
+    "skill_sha256": "56ce5fa02cb852ded1dcb6b9a1818671487f7bc04c756f5c1ae010807de8d965",
+    "python": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+    "root_timeout": 360,
+    "worker_timeout": 180,
+    "max_model_calls": 6,
+    "order": [
+      "direct",
+      "quick",
+      "quick",
+      "direct"
+    ],
+    "success_rule": "all quality/scope/acceptance checks pass; complete telemetry; two counterbalanced pairs; Quick mean time and weighted Standard-credit cost each <=90% of Direct",
+    "stop_rule": "stop after first pair on quality/infrastructure failure or if Quick fails any efficiency threshold; no replacement trials",
+    "dispatch_policy": "launcher starts worker, then fresh parent review; no nested CLI",
+    "cost_limits": "weighted credit proxy only, no subscription-meter or invoice inference; root and worker included, benchmark setup/controller and external approval review excluded"
+  },
+  "trials": [
+    {
+      "sequence": 1,
+      "arm": "direct",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-api-migration-20261010/trial-01-5feceb66/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-api-migration-20261010/trial-01-5feceb66/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-api-migration-20261010/trial-01-5feceb66/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 43.958,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 74819,
+          "cached_input_tokens": 53120,
+          "uncached_input_tokens": 21699,
+          "output_tokens": 1296,
+          "reasoning_tokens": 197,
+          "total_tokens": 76115,
+          "uncached_input_plus_output": 22995
+        },
+        "prompt_sha256": "757f11c915c420bc750e2a4555e22ff8e3313201098c9f8bc77500c7b3362397",
+        "semantic_acceptance": true,
+        "semantic_reason": "Changed all five paths: activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md. Inspected the final Git diff; compatibility forwarding and existing behavior are preserved, and protected files remain unchanged. All 4 legacy tests, 8 acceptance tests, compileall, additional error-handling checks, and git diff --check passed. No unmet requirements."
+      },
+      "worker": null,
+      "seconds": 43.959,
+      "weighted_cost": 8.37275,
+      "combined_usage": {
+        "input_tokens": 74819,
+        "cached_input_tokens": 53120,
+        "uncached_input_tokens": 21699,
+        "output_tokens": 1296,
+        "reasoning_tokens": 197,
+        "total_tokens": 76115,
+        "uncached_input_plus_output": 22995
+      },
+      "changed_paths": [
+        "README.md",
+        "activity/__init__.py",
+        "activity/cli.py",
+        "activity/report.py",
+        "activity/service.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ok\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.058s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests",
+            "acceptance"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_compatibility_propagates_exception (test_hidden_windows.MigrationProbes.test_compatibility_propagates_exception) ... ok\ntest_mixed_values_and_no_mutation (test_hidden_windows.MigrationProbes.test_mixed_values_and_no_mutation) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n"
+        }
+      ],
+      "reused_source_bound_checks": false,
+      "root_skipped_reason": null,
+      "quality_pass": true,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "README.md": "988c659ca6ec0cfae7268c28170996bd17a379441f8e0613a641f2688cc8db7b",
+        "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+        "activity/__init__.py": "c8f8569d7c6435406e4d789253d0e990f55c0976d9647f8ad6404e6f23ccf733",
+        "activity/cli.py": "4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5",
+        "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+        "activity/report.py": "35adac173815639d5e3ec1b217d8da55e2721ee880fb599856f05e29de812dea",
+        "activity/service.py": "a174f34d9524294cab8a6cd6d9cbccc14d87987b403cf567510557ebc8697ea5",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+      }
+    },
+    {
+      "sequence": 2,
+      "arm": "quick",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 23.582,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 55588,
+          "cached_input_tokens": 35072,
+          "uncached_input_tokens": 20516,
+          "output_tokens": 386,
+          "reasoning_tokens": 31,
+          "total_tokens": 55974,
+          "uncached_input_plus_output": 20902
+        },
+        "prompt_sha256": "9bed64edaa55f84dcc010ee5689dac76a7999f008d35feba8adaf448d1edadf1",
+        "semantic_acceptance": true,
+        "semantic_reason": "All five required paths changed: activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md. The diff confirms dynamic wrapper forwarding, canonical imports/exports, updated documentation, and unchanged reporting behavior. All source hashes match the evidence. Reused passing checks: 4 legacy tests, 8 protected acceptance tests, and compileall. Protected files remain unchanged. No unmet requirements."
+      },
+      "worker": {
+        "model_requested": "gpt-6-luna",
+        "effort": "high",
+        "service_tier_requested": "default",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6-luna",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "-c",
+          "service_tier=\"default\"",
+          "-c",
+          "mcp_servers.MCP_DOCKER.enabled=false",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/worker/report.md",
+          "-"
+        ],
+        "seconds": 24.519,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 69857,
+          "cached_input_tokens": 59392,
+          "uncached_input_tokens": 10465,
+          "output_tokens": 1575,
+          "reasoning_tokens": 503,
+          "total_tokens": 71432,
+          "uncached_input_plus_output": 12040
+        },
+        "prompt_sha256": "47b83ad69dd0812a5876c3dd29abf96f1b531357e3ace064ebb13e642be2b75d"
+      },
+      "seconds": 48.298,
+      "weighted_cost": 6.548998,
+      "combined_usage": {
+        "input_tokens": 125445,
+        "cached_input_tokens": 94464,
+        "uncached_input_tokens": 30981,
+        "output_tokens": 1961,
+        "reasoning_tokens": 534,
+        "total_tokens": 127406,
+        "uncached_input_plus_output": 32942
+      },
+      "changed_paths": [
+        "README.md",
+        "activity/__init__.py",
+        "activity/cli.py",
+        "activity/report.py",
+        "activity/service.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "acceptance",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ok\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.063s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests",
+            "acceptance"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_compatibility_propagates_exception (test_hidden_windows.MigrationProbes.test_compatibility_propagates_exception) ... ok\ntest_mixed_values_and_no_mutation (test_hidden_windows.MigrationProbes.test_mixed_values_and_no_mutation) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+        }
+      ],
+      "reused_source_bound_checks": true,
+      "root_skipped_reason": null,
+      "quality_pass": true,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "README.md": "8a1b7a4e91b576543179bab4e734b533b8b4b0c1d204161a646373a38132bfad",
+        "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+        "activity/__init__.py": "bb25184fc4c9f6ebb6d1a36137ea749db323ba8a8de32273adcbd6d0b19b174c",
+        "activity/cli.py": "4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5",
+        "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+        "activity/report.py": "35adac173815639d5e3ec1b217d8da55e2721ee880fb599856f05e29de812dea",
+        "activity/service.py": "a174f34d9524294cab8a6cd6d9cbccc14d87987b403cf567510557ebc8697ea5",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+      }
+    }
+  ],
+  "summary": {
+    "metric": "weighted_cost",
+    "trials": 2,
+    "planned_trials": 4,
+    "metrics": {
+      "direct": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 43.959,
+        "total_tokens": 76115.0,
+        "uncached_input_plus_output": 22995.0,
+        "weighted_cost": 8.37275
+      },
+      "quick": {
+        "trials": 1,
+        "all_quality_pass": true,
+        "seconds": 48.298,
+        "total_tokens": 127406.0,
+        "uncached_input_plus_output": 32942.0,
+        "weighted_cost": 6.548998
+      }
+    },
+    "complete": false,
+    "thresholds_met": false,
+    "successful": false,
+    "early_stop": true
+  },
+  "cost_reduction_percent": 21.781995162879575,
+  "elapsed_increase_percent": 9.870561204758976,
+  "quick_role_weighted_cost": {
+    "worker": 0.060698,
+    "root": 6.4883
+  },
+  "calibration": {
+    "checks": [
+      {
+        "name": "unmigrated_negative_control",
+        "source_hashes": {
+          "README.md": "d42a941beff82c02f9aabfd3206d4a15a67f8f4ade297cdd9e80a14ffd46d946",
+          "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+          "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+          "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+          "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+          "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+          "activity/service.py": "ff9e9170b41c5e600e87eaa0d9cbb7fdd3885b9b148b53e9aa0353345abc8f13",
+          "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ERROR\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ERROR\ntest_empty (test_contract.MigrationContract.test_empty) ... ERROR\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ERROR\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ERROR\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ERROR\n\n======================================================================\nERROR: test_canonical_export (test_contract.MigrationContract.test_canonical_export)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 17, in test_canonical_export\n    self.assertIs(package.summarize_events, report.summarize_events)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: module 'activity' has no attribute 'summarize_events'\n\n======================================================================\nERROR: test_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 56, in test_cli_uses_canonical\n    with patch.object(cli,'load_events',return_value=rows), patch.object(cli,'summarize_events',return_value=sentinel) as canonical, contextlib.redirect_stdout(io.StringIO()) as output:\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1458, in __enter__\n    original, local = self.get_original()\n                      ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1431, in get_original\n    raise AttributeError(\nAttributeError: <module 'activity.cli' from '/tmp/lunarmarch-api-migration-calibration/activity/cli.py'> does not have the attribute 'summarize_events'\n\n======================================================================\nERROR: test_empty (test_contract.MigrationContract.test_empty)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 40, in test_empty\n    from activity.report import summarize_events\nImportError: cannot import name 'summarize_events' from 'activity.report' (/tmp/lunarmarch-api-migration-calibration/activity/report.py)\n\n======================================================================\nERROR: test_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 31, in test_exact_decimal_sorted_categories\n    from activity.report import summarize_events\nImportError: cannot import name 'summarize_events' from 'activity.report' (/tmp/lunarmarch-api-migration-calibration/activity/report.py)\n\n======================================================================\nERROR: test_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 25, in test_old_module_and_package_api_forward\n    for legacy in (report.summarize, package.summarize):\n                                     ^^^^^^^^^^^^^^^^^\nAttributeError: module 'activity' has no attribute 'summarize'\n\n======================================================================\nERROR: test_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 47, in test_service_uses_canonical\n    with patch.object(service,'load_events',return_value=rows), patch.object(service,'summarize_events',return_value=sentinel) as canonical:\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1458, in __enter__\n    original, local = self.get_original()\n                      ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1431, in get_original\n    raise AttributeError(\nAttributeError: <module 'activity.service' from '/tmp/lunarmarch-api-migration-calibration/activity/service.py'> does not have the attribute 'summarize_events'\n\n----------------------------------------------------------------------\nRan 8 tests in 0.110s\n\nFAILED (errors=6)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "activity",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "unittest",
+              "posthoc"
+            ],
+            "returncode": 1,
+            "stderr": "test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception) ... ERROR\ntest_mixed_values_and_no_mutation (posthoc.MigrationProbes.test_mixed_values_and_no_mutation) ... ERROR\n\n======================================================================\nERROR: test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/posthoc.py\", line 18, in test_compatibility_propagates_exception\n    for fn in (report.summarize,activity.summarize):\n                                ^^^^^^^^^^^^^^^^^^\nAttributeError: module 'activity' has no attribute 'summarize'\n\n======================================================================\nERROR: test_mixed_values_and_no_mutation (posthoc.MigrationProbes.test_mixed_values_and_no_mutation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/posthoc.py\", line 13, in test_mixed_values_and_no_mutation\n    for fn in (report.summarize_events,report.summarize,activity.summarize_events,activity.summarize):\n               ^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: module 'activity.report' has no attribute 'summarize_events'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.003s\n\nFAILED (errors=2)\n"
+          }
+        ]
+      },
+      {
+        "name": "known_good_migration",
+        "source_hashes": {
+          "README.md": "6e36b8b54ffd7970f9b4d7687883caa8f2ab4b32b2289ffeebbf495a6e846ae2",
+          "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+          "activity/__init__.py": "9b56910459652497884c3e52f077d17ce7019a83a76c1f9380cb6b9d62c1f518",
+          "activity/cli.py": "4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5",
+          "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+          "activity/report.py": "1f48b035f2dd810301b75c1a55d0f7d3b740f48ab7d8483221b4743efc7c1a26",
+          "activity/service.py": "a174f34d9524294cab8a6cd6d9cbccc14d87987b403cf567510557ebc8697ea5",
+          "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ok\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.103s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "activity",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "unittest",
+              "posthoc"
+            ],
+            "returncode": 0,
+            "stderr": "test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception) ... ok\ntest_mixed_values_and_no_mutation (posthoc.MigrationProbes.test_mixed_values_and_no_mutation) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+          }
+        ]
+      },
+      {
+        "name": "broken_static_alias",
+        "source_hashes": {
+          "README.md": "6e36b8b54ffd7970f9b4d7687883caa8f2ab4b32b2289ffeebbf495a6e846ae2",
+          "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+          "activity/__init__.py": "9b56910459652497884c3e52f077d17ce7019a83a76c1f9380cb6b9d62c1f518",
+          "activity/cli.py": "4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5",
+          "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+          "activity/report.py": "04db737c0e663ea394a11b0fd8d8e6cf3af9c23f4059b24f6cee1c871bc33442",
+          "activity/service.py": "a174f34d9524294cab8a6cd6d9cbccc14d87987b403cf567510557ebc8697ea5",
+          "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... FAIL\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ok\n\n======================================================================\nFAIL: test_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 27, in test_old_module_and_package_api_forward\n    self.assertIs(legacy(rows), sentinel)\nAssertionError: {'count': 1, 'totals': {'x': '1'}} is not {'count': 99, 'totals': {}}\n\n----------------------------------------------------------------------\nRan 8 tests in 0.105s\n\nFAILED (failures=1)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "activity",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "unittest",
+              "posthoc"
+            ],
+            "returncode": 1,
+            "stderr": "test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception) ... FAIL\ntest_mixed_values_and_no_mutation (posthoc.MigrationProbes.test_mixed_values_and_no_mutation) ... ok\n\n======================================================================\nFAIL: test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/posthoc.py\", line 20, in test_compatibility_propagates_exception\n    with self.assertRaisesRegex(ValueError,'sentinel'):fn([])\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nFAILED (failures=1)\n"
+          }
+        ]
+      },
+      {
+        "name": "unmigrated_service",
+        "source_hashes": {
+          "README.md": "6e36b8b54ffd7970f9b4d7687883caa8f2ab4b32b2289ffeebbf495a6e846ae2",
+          "acceptance/test_contract.py": "beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7",
+          "activity/__init__.py": "9b56910459652497884c3e52f077d17ce7019a83a76c1f9380cb6b9d62c1f518",
+          "activity/cli.py": "4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5",
+          "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+          "activity/report.py": "1f48b035f2dd810301b75c1a55d0f7d3b740f48ab7d8483221b4743efc7c1a26",
+          "activity/service.py": "ff9e9170b41c5e600e87eaa0d9cbb7fdd3885b9b148b53e9aa0353345abc8f13",
+          "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+        },
+        "checks": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.006s\n\nOK\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "acceptance",
+              "-v"
+            ],
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ok\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ERROR\n\n======================================================================\nERROR: test_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-api-migration-calibration/acceptance/test_contract.py\", line 47, in test_service_uses_canonical\n    with patch.object(service,'load_events',return_value=rows), patch.object(service,'summarize_events',return_value=sentinel) as canonical:\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1458, in __enter__\n    original, local = self.get_original()\n                      ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/mock.py\", line 1431, in get_original\n    raise AttributeError(\nAttributeError: <module 'activity.service' from '/tmp/lunarmarch-api-migration-calibration/activity/service.py'> does not have the attribute 'summarize_events'\n\n----------------------------------------------------------------------\nRan 8 tests in 0.100s\n\nFAILED (errors=1)\n"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "compileall",
+              "-q",
+              "activity",
+              "tests",
+              "acceptance"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "unittest",
+              "posthoc"
+            ],
+            "returncode": 0,
+            "stderr": "test_compatibility_propagates_exception (posthoc.MigrationProbes.test_compatibility_propagates_exception) ... ok\ntest_mixed_values_and_no_mutation (posthoc.MigrationProbes.test_mixed_values_and_no_mutation) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+          }
+        ]
+      }
+    ],
+    "note": "Corrected and mutant implementations are calibration-only and never supplied to trial models."
+  },
+  "offline_tests_passed": 55,
+  "skill_disablement": {
+    "action": "removed installed skill symlink",
+    "path": "/home/ranveer/.agents/skills/lunar-march",
+    "target": "/home/ranveer/app/LunarMarch",
+    "date": "2026-10-10",
+    "reason": "User requested disablement until measured improvement.",
+    "restore_command": "ln -s /home/ranveer/app/LunarMarch /home/ranveer/.agents/skills/lunar-march",
+    "rule_search": "No LunarMarch auto-trigger instructions found in checked user/home AGENTS.md or Codex rule files. Config matches were project trust records, retained."
+  },
+  "artifacts": {
+    "trial-01-5feceb66/root/prompt.md": "Migrate the public reporting API from `summarize` to `summarize_events`, across five files. This is a compatibility migration, not a behavior change.\n\nRequirements:\n- In activity/report.py move the existing implementation to summarize_events(events). Keep summarize(events) as a thin compatibility wrapper that calls the current module-level summarize_events, returning its result unchanged. No duplicated implementation or warnings.\n- In activity/cli.py and activity/service.py import and call summarize_events by that name. Preserve their current signatures, JSON, exit/error behavior and CSV handling.\n- Export both summarize_events and the compatibility summarize from activity/__init__.py.\n- Update README.md to show the canonical import from activity, explain the legacy wrapper, and retain the service and CLI usage.\n- Preserve exact Decimal arithmetic, count, sorted category keys, empty-input behavior and input immutability. Accepted inputs remain lists of existing Event objects. No timestamp feature, new validation, dependencies or unrelated hardening.\n\nProtected executable acceptance checks are already supplied in acceptance/test_contract.py. Read them alongside the implementation before editing. They settle the concrete compatibility and caller contracts and must not be edited. tests/test_legacy.py and activity/parse.py are also protected. No new files are required.\n\nOwned paths (all five require changes): activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md.\nAcceptance commands:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q activity tests acceptance\n\nCPU only. Do not use network/GPU operations, install dependencies, commit, add workflow artifacts or delegate. Finish when the stated migration and checks pass. Return changed paths, checks and any unmet requirement concisely.\n\nComplete this task yourself in this main agent. Do not delegate, launch other model calls, or use orchestration skills. Implement, check and inspect your final diff.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nCPU only. Work inside this project. Do not inspect the evaluator source, other projects, or files outside the named worker report and evidence artifact. Do not touch GPU processes or install dependencies.\n\nReturn the required JSON acceptance decision. Set accepted=false for any unresolved material defect; mechanical tests alone do not establish acceptance.\n",
+    "trial-01-5feceb66/root/report.md": "{\"accepted\":true,\"reason\":\"Changed all five paths: activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md. Inspected the final Git diff; compatibility forwarding and existing behavior are preserved, and protected files remain unchanged. All 4 legacy tests, 8 acceptance tests, compileall, additional error-handling checks, and git diff --check passed. No unmet requirements.\"}",
+    "trial-01-5feceb66/project/README.md": "# Activity reporting\n\nUse `from activity import summarize_events` and call `summarize_events(events)`\nwith a list of existing `Event` objects to calculate an activity report.\nThe legacy `summarize(events)`, available from both `activity` and\n`activity.report`, is a compatibility wrapper that calls the current\n`activity.report.summarize_events` and returns its result unchanged.\n\n`activity.service.build_report(path)` reads a CSV and returns that same report.\nRun the CLI with `python3 -m activity.cli events.csv`.\n",
+    "trial-01-5feceb66/project/activity/report.py": "from decimal import Decimal\nfrom .parse import Event\n\n\ndef summarize_events(events: list[Event]) -> dict:\n    totals: dict[str, Decimal] = {}\n    for event in events:\n        totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\n    return {'count': len(events),\n            'totals': {key: str(totals[key]) for key in sorted(totals)}}\n\n\ndef summarize(events: list[Event]) -> dict:\n    return summarize_events(events)\n",
+    "trial-01-5feceb66/project/activity/cli.py": "import argparse\nimport json\nimport sys\nfrom .parse import load_events\nfrom .report import summarize_events\n\n\ndef main(argv=None) -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument('input')\n    args = parser.parse_args(argv)\n    try:\n        result = summarize_events(load_events(args.input))\n    except (OSError, ValueError, KeyError) as error:\n        print(str(error), file=sys.stderr)\n        return 2\n    print(json.dumps(result, sort_keys=True))\n    return 0\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n",
+    "trial-01-5feceb66/project/activity/service.py": "from .parse import load_events\nfrom .report import summarize_events\n\n\ndef build_report(path):\n    return summarize_events(load_events(path))\n",
+    "trial-01-5feceb66/project/activity/__init__.py": "\"\"\"Small CSV activity reporting tool.\"\"\"\n\nfrom .report import summarize_events, summarize\n",
+    "trial-02-6b86b273/root/prompt.md": "Migrate the public reporting API from `summarize` to `summarize_events`, across five files. This is a compatibility migration, not a behavior change.\n\nRequirements:\n- In activity/report.py move the existing implementation to summarize_events(events). Keep summarize(events) as a thin compatibility wrapper that calls the current module-level summarize_events, returning its result unchanged. No duplicated implementation or warnings.\n- In activity/cli.py and activity/service.py import and call summarize_events by that name. Preserve their current signatures, JSON, exit/error behavior and CSV handling.\n- Export both summarize_events and the compatibility summarize from activity/__init__.py.\n- Update README.md to show the canonical import from activity, explain the legacy wrapper, and retain the service and CLI usage.\n- Preserve exact Decimal arithmetic, count, sorted category keys, empty-input behavior and input immutability. Accepted inputs remain lists of existing Event objects. No timestamp feature, new validation, dependencies or unrelated hardening.\n\nProtected executable acceptance checks are already supplied in acceptance/test_contract.py. Read them alongside the implementation before editing. They settle the concrete compatibility and caller contracts and must not be edited. tests/test_legacy.py and activity/parse.py are also protected. No new files are required.\n\nOwned paths (all five require changes): activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md.\nAcceptance commands:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q activity tests acceptance\n\nCPU only. Do not use network/GPU operations, install dependencies, commit, add workflow artifacts or delegate. Finish when the stated migration and checks pass. Return changed paths, checks and any unmet requirement concisely.\n\nA single implementation worker has already completed this assignment. You are the independent acceptance reviewer. Do not implement, repair, select a workflow, load coordinator skills, or launch any agents.\nRead /tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/worker/evidence.json and /tmp/lunarmarch-api-migration-20261010/trial-02-6b86b273/worker/report.md. The launcher generated the diff, source hashes and fresh public-check results after the worker exited. Inspect the diff and coverage against the task, independently probing any uncovered or doubtful behavior. Reuse recorded passing checks on unchanged files; do not rerun them merely to repeat the worker. Read additional source only to resolve a concrete review question. Reject any unmet requirement and return the required JSON acceptance decision. Do not read hidden graders or other trials.\n\nReview focus: Assess only the stated API migration: wrapper forwarding, canonical imports/exports, documentation and preservation of behavior. Use the source-bound diff and protected acceptance results as primary evidence. Additional inspection or probes should resolve a concrete uncovered requirement; do not add input hardening or redesign. Existing checks may be reused when their hashes match.\n\nCPU only. Work inside this project. Do not inspect the evaluator source, other projects, or files outside the named worker report and evidence artifact. Do not touch GPU processes or install dependencies.\n\nReturn the required JSON acceptance decision. Set accepted=false for any unresolved material defect; mechanical tests alone do not establish acceptance.\n",
+    "trial-02-6b86b273/root/report.md": "{\"accepted\":true,\"reason\":\"All five required paths changed: activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md. The diff confirms dynamic wrapper forwarding, canonical imports/exports, updated documentation, and unchanged reporting behavior. All source hashes match the evidence. Reused passing checks: 4 legacy tests, 8 protected acceptance tests, and compileall. Protected files remain unchanged. No unmet requirements.\"}",
+    "trial-02-6b86b273/worker/prompt.md": "Migrate the public reporting API from `summarize` to `summarize_events`, across five files. This is a compatibility migration, not a behavior change.\n\nRequirements:\n- In activity/report.py move the existing implementation to summarize_events(events). Keep summarize(events) as a thin compatibility wrapper that calls the current module-level summarize_events, returning its result unchanged. No duplicated implementation or warnings.\n- In activity/cli.py and activity/service.py import and call summarize_events by that name. Preserve their current signatures, JSON, exit/error behavior and CSV handling.\n- Export both summarize_events and the compatibility summarize from activity/__init__.py.\n- Update README.md to show the canonical import from activity, explain the legacy wrapper, and retain the service and CLI usage.\n- Preserve exact Decimal arithmetic, count, sorted category keys, empty-input behavior and input immutability. Accepted inputs remain lists of existing Event objects. No timestamp feature, new validation, dependencies or unrelated hardening.\n\nProtected executable acceptance checks are already supplied in acceptance/test_contract.py. Read them alongside the implementation before editing. They settle the concrete compatibility and caller contracts and must not be edited. tests/test_legacy.py and activity/parse.py are also protected. No new files are required.\n\nOwned paths (all five require changes): activity/report.py, activity/cli.py, activity/service.py, activity/__init__.py, README.md.\nAcceptance commands:\npython3 -m unittest discover -s tests -v\npython3 -m unittest discover -s acceptance -v\npython3 -m compileall -q activity tests acceptance\n\nCPU only. Do not use network/GPU operations, install dependencies, commit, add workflow artifacts or delegate. Finish when the stated migration and checks pass. Return changed paths, checks and any unmet requirement concisely.\n\nThe assignment is complete: inspect the named inputs together, implement, and verify. Use the existing Git baseline to inspect your diff. Check coverage of each requested behavior, including error handling; report any unmet requirement. Batch independent reads/checks where practical. Re-run only after relevant changes or a new finding. Do not load orchestration skills or add workflow artifacts to this project.\n\nYou are an already assigned implementation worker. Do not load coordinator skills, select a workflow, or delegate. Return <=150 words with changed paths, check results and unmet requirements.\n",
+    "trial-02-6b86b273/worker/report.md": "Migrated the reporting API across all five requested files: `activity/report.py`, `activity/cli.py`, `activity/service.py`, `activity/__init__.py`, and `README.md`. The legacy wrapper forwards to `summarize_events`; Decimal arithmetic, sorting, empty-input behavior, CSV handling, and error behavior are preserved.\n\nAll requested checks passed:\n\n- `python3 -m unittest discover -s tests -v`\n- `python3 -m unittest discover -s acceptance -v`\n- `python3 -m compileall -q activity tests acceptance`\n\nNo unmet requirements. The untracked `__pycache__` directories were already present before the changes.",
+    "trial-02-6b86b273/worker/evidence.json": "{\n  \"source_hashes\": {\n    \"README.md\": \"8a1b7a4e91b576543179bab4e734b533b8b4b0c1d204161a646373a38132bfad\",\n    \"acceptance/test_contract.py\": \"beab520259f294a996890006a94e45d8f28f55e1c79095643d056d509609b7f7\",\n    \"activity/__init__.py\": \"bb25184fc4c9f6ebb6d1a36137ea749db323ba8a8de32273adcbd6d0b19b174c\",\n    \"activity/cli.py\": \"4665869ca8d32348faa2fcd13272be6518c05691cb2b0fc1e3fa7cd994c887a5\",\n    \"activity/parse.py\": \"38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092\",\n    \"activity/report.py\": \"35adac173815639d5e3ec1b217d8da55e2721ee880fb599856f05e29de812dea\",\n    \"activity/service.py\": \"a174f34d9524294cab8a6cd6d9cbccc14d87987b403cf567510557ebc8697ea5\",\n    \"tests/test_legacy.py\": \"0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216\"\n  },\n  \"stable_during_checks\": true,\n  \"changed_paths\": [\n    \"README.md\",\n    \"activity/__init__.py\",\n    \"activity/cli.py\",\n    \"activity/report.py\",\n    \"activity/service.py\"\n  ],\n  \"scope_pass\": true,\n  \"checks\": [\n    {\n      \"command\": [\n        \"/usr/bin/python3\",\n        \"-m\",\n        \"unittest\",\n        \"discover\",\n        \"-s\",\n        \"tests\",\n        \"-v\"\n      ],\n      \"returncode\": 0,\n      \"stdout\": \"\",\n      \"stderr\": \"test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\\n\\n----------------------------------------------------------------------\\nRan 4 tests in 0.002s\\n\\nOK\\n\"\n    },\n    {\n      \"command\": [\n        \"/usr/bin/python3\",\n        \"-m\",\n        \"unittest\",\n        \"discover\",\n        \"-s\",\n        \"acceptance\",\n        \"-v\"\n      ],\n      \"returncode\": 0,\n      \"stdout\": \"\",\n      \"stderr\": \"test_canonical_export (test_contract.MigrationContract.test_canonical_export) ... ok\\ntest_cli_uses_canonical (test_contract.MigrationContract.test_cli_uses_canonical) ... ok\\ntest_empty (test_contract.MigrationContract.test_empty) ... ok\\ntest_exact_decimal_sorted_categories (test_contract.MigrationContract.test_exact_decimal_sorted_categories) ... ok\\ntest_existing_missing_file_behavior (test_contract.MigrationContract.test_existing_missing_file_behavior) ... ok\\ntest_old_module_and_package_api_forward (test_contract.MigrationContract.test_old_module_and_package_api_forward) ... ok\\ntest_real_cli (test_contract.MigrationContract.test_real_cli) ... ok\\ntest_service_uses_canonical (test_contract.MigrationContract.test_service_uses_canonical) ... ok\\n\\n----------------------------------------------------------------------\\nRan 8 tests in 0.063s\\n\\nOK\\n\"\n    },\n    {\n      \"command\": [\n        \"/usr/bin/python3\",\n        \"-m\",\n        \"compileall\",\n        \"-q\",\n        \"activity\",\n        \"tests\",\n        \"acceptance\"\n      ],\n      \"returncode\": 0,\n      \"stdout\": \"\",\n      \"stderr\": \"\"\n    }\n  ],\n  \"tracked_diff\": \"diff --git a/README.md b/README.md\\nindex 369f6c9..e0bf26e 100644\\n--- a/README.md\\n+++ b/README.md\\n@@ -1,5 +1,9 @@\\n # Activity reporting\\n \\n-Use `from activity.report import summarize` to calculate an activity report.\\n-`activity.service.build_report(path)` reads a CSV and returns that same report.\\n-Run the CLI with `python3 -m activity.cli events.csv`.\\n+Use the canonical API, `from activity import summarize_events`, to calculate an\\n+activity report from a list of `Event` objects. The legacy `summarize` function\\n+remains available from `activity` and `activity.report`; it forwards to\\n+`summarize_events`.\\n+\\n+`activity.service.build_report(path)` reads a CSV and returns the report. Run the\\n+CLI with `python3 -m activity.cli events.csv`.\\ndiff --git a/activity/__init__.py b/activity/__init__.py\\nindex be20c56..80da591 100644\\n--- a/activity/__init__.py\\n+++ b/activity/__init__.py\\n@@ -1 +1,4 @@\\n \\\"\\\"\\\"Small CSV activity reporting tool.\\\"\\\"\\\"\\n+from .report import summarize, summarize_events\\n+\\n+__all__ = ['summarize_events', 'summarize']\\ndiff --git a/activity/cli.py b/activity/cli.py\\nindex 5971cc9..410cbf3 100644\\n--- a/activity/cli.py\\n+++ b/activity/cli.py\\n@@ -2,7 +2,7 @@ import argparse\\n import json\\n import sys\\n from .parse import load_events\\n-from .report import summarize\\n+from .report import summarize_events\\n \\n \\n def main(argv=None) -> int:\\n@@ -10,7 +10,7 @@ def main(argv=None) -> int:\\n     parser.add_argument('input')\\n     args = parser.parse_args(argv)\\n     try:\\n-        result = summarize(load_events(args.input))\\n+        result = summarize_events(load_events(args.input))\\n     except (OSError, ValueError, KeyError) as error:\\n         print(str(error), file=sys.stderr)\\n         return 2\\ndiff --git a/activity/report.py b/activity/report.py\\nindex d1b648b..e7d7cb2 100644\\n--- a/activity/report.py\\n+++ b/activity/report.py\\n@@ -2,9 +2,13 @@ from decimal import Decimal\\n from .parse import Event\\n \\n \\n-def summarize(events: list[Event]) -> dict:\\n+def summarize_events(events: list[Event]) -> dict:\\n     totals: dict[str, Decimal] = {}\\n     for event in events:\\n         totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\\n     return {'count': len(events),\\n             'totals': {key: str(totals[key]) for key in sorted(totals)}}\\n+\\n+\\n+def summarize(events: list[Event]) -> dict:\\n+    return summarize_events(events)\\ndiff --git a/activity/service.py b/activity/service.py\\nindex 52fa4c7..fb3cf24 100644\\n--- a/activity/service.py\\n+++ b/activity/service.py\\n@@ -1,6 +1,6 @@\\n from .parse import load_events\\n-from .report import summarize\\n+from .report import summarize_events\\n \\n \\n def build_report(path):\\n-    return summarize(load_events(path))\\n+    return summarize_events(load_events(path))\\n\",\n  \"untracked_files\": {}\n}\n",
+    "trial-02-6b86b273/project/README.md": "# Activity reporting\n\nUse the canonical API, `from activity import summarize_events`, to calculate an\nactivity report from a list of `Event` objects. The legacy `summarize` function\nremains available from `activity` and `activity.report`; it forwards to\n`summarize_events`.\n\n`activity.service.build_report(path)` reads a CSV and returns the report. Run the\nCLI with `python3 -m activity.cli events.csv`.\n",
+    "trial-02-6b86b273/project/activity/report.py": "from decimal import Decimal\nfrom .parse import Event\n\n\ndef summarize_events(events: list[Event]) -> dict:\n    totals: dict[str, Decimal] = {}\n    for event in events:\n        totals[event.category] = totals.get(event.category, Decimal('0')) + event.amount\n    return {'count': len(events),\n            'totals': {key: str(totals[key]) for key in sorted(totals)}}\n\n\ndef summarize(events: list[Event]) -> dict:\n    return summarize_events(events)\n",
+    "trial-02-6b86b273/project/activity/cli.py": "import argparse\nimport json\nimport sys\nfrom .parse import load_events\nfrom .report import summarize_events\n\n\ndef main(argv=None) -> int:\n    parser = argparse.ArgumentParser()\n    parser.add_argument('input')\n    args = parser.parse_args(argv)\n    try:\n        result = summarize_events(load_events(args.input))\n    except (OSError, ValueError, KeyError) as error:\n        print(str(error), file=sys.stderr)\n        return 2\n    print(json.dumps(result, sort_keys=True))\n    return 0\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n",
+    "trial-02-6b86b273/project/activity/service.py": "from .parse import load_events\nfrom .report import summarize_events\n\n\ndef build_report(path):\n    return summarize_events(load_events(path))\n",
+    "trial-02-6b86b273/project/activity/__init__.py": "\"\"\"Small CSV activity reporting tool.\"\"\"\nfrom .report import summarize, summarize_events\n\n__all__ = ['summarize_events', 'summarize']\n"
+  },
+  "raw_evidence_path": "/tmp/lunarmarch-api-migration-20261010",
+  "limitations": [
+    "One pair, no balanced follow-up or general performance claim.",
+    "Different task family and review focus from timestamp pilots; cannot isolate cause of quality improvement.",
+    "Acceptance-test authoring and setup/controller usage/time excluded and not measured; estimates implementation with checks already available, not full one-off task savings.",
+    "Fresh CLI sessions proxy direct main-agent work; requested model/tier are not attested served identities.",
+    "Weighted Standard credit proxy is not included subscription usage or an invoice.",
+    "External approval-review and post-run grading excluded.",
+    "No automatic skill restoration follows this result."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-10",
+  "baseline_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+  "working_tree": "modified; hashes identify tested sources",
+  "python": "3.12.3",
+  "checks": {
+    "offline_suite": "46 tests passed",
+    "python_compilation": "passed",
+    "skill_validator": "passed",
+    "diff_whitespace": "passed"
+  },
+  "live_benchmark": "not run",
+  "source_sha256": {
+    "SKILL.md": "404822c3b9201634882f21a873f0a7a3a3b1613801f41bd2a95bb3dded66ea08",
+    "agents/openai.yaml": "ddd120a6fa2221dccbfca65a9bad67b147ffa87238ee9caf754f44d436e25e28",
+    "scripts/lm_core.py": "7e7b368baa71ac5a2fe0e9105999e459269fc506905921ac372941f76ccb218e",
+    "scripts/lunarmarch.py": "b1282f1158d40a90c35d24ff8d218cd09ab46835207b474443cfae0b38d630e7",
+    "scripts/usage.py": "2fab2fdd92f2e5e02c388410a1fa752a04fe1b1a227af32ff4f2bf4a1df49205",
+    "schemas/task-contract.schema.json": "c735e66d4664db5e4dd7db53d834e5d9fb92bb73224a83d6d70b558c271f15ad",
+    "tests/test_lunarmarch.py": "142aeb0231b1118bc9cf18f78e9e7596113de983ba1fd61bfb3f07c4dc62e312",
+    "tests/test_context_eval.py": "2d0735ac697f7720725e479d06b8c9c7dc87dcbe9fb5baba1a30018664b34cb8",
+    "references/modes.md": "19be939d6fde00ba57a0e74d65b8db4ae761235071688a2c096685d3a934f851",
+    "references/contracts.md": "8dac1a69c9a157c921c02606dbecc7ea25080860b51fe08faeb975624d901b8f"
+  }
+}

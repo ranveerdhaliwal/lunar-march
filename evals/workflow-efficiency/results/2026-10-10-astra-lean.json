@@ -1,0 +1,376 @@
+{
+  "date_received": "2026-10-10",
+  "status": "tested_incomplete_comparison",
+  "decision": "No efficiency claim, no retries, no commit or push. Adopt removal of conflicting routing and offline-validated deterministic dispatch; live efficiency remains unverified.",
+  "raw_evidence_path": "/tmp/lunarmarch-astra-lean-20261010",
+  "manifest": {
+    "format": "lunarmarch-workflow-pilot-v1",
+    "date": "2026-10-10",
+    "profile": "lean",
+    "parent_model": "gpt-6-astra",
+    "worker_model": "gpt-5.6-luna",
+    "effort": "high",
+    "cli_version": "codex-cli 0.162.0-alpha.17.2",
+    "source_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+    "dirty_suite_override": true,
+    "publication_scope": "exploratory pilot, not a general performance claim",
+    "fixture_hashes": {
+      "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+      "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+      "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+      "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+      "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+    },
+    "task_sha256": "52d8dbfd2b340c1b114d8c37adc469d12f822fb693bdb64d48199b26012bc7d3",
+    "grader_sha256": "3b5a8aa59b889e206064cd88214464bee11949f4706304187628df5b659f9821",
+    "runner_sha256": "b998783ff07b09c624b0e48b09bb2ebaac80566d5cdf3b2eecd350f23e309753",
+    "skill_sha256": "69e8c9b6217483fabba5389b1bf4bb1c6483f78f811fcf374d070d318d830074",
+    "python": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+    "root_timeout": 360,
+    "worker_timeout": 180,
+    "max_model_calls": 6,
+    "order": [
+      "direct",
+      "quick",
+      "quick",
+      "direct"
+    ],
+    "success_rule": "all public/hidden checks and scope pass; complete telemetry; Quick mean time, total tokens and uncached input plus output each <=90% of Direct",
+    "stop_rule": "stop after first pair on quality/infrastructure failure or if Quick fails any efficiency threshold; no replacement trials",
+    "cost_limits": "no pricing/account-meter inference; root and worker usage included, setup and external approval-review usage excluded"
+  },
+  "original_trials": [
+    {
+      "sequence": 1,
+      "arm": "direct",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 69.736,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 105669,
+          "cached_input_tokens": 78464,
+          "uncached_input_tokens": 27205,
+          "output_tokens": 4697,
+          "reasoning_tokens": 582,
+          "total_tokens": 110366,
+          "uncached_input_plus_output": 31902
+        },
+        "prompt_sha256": "53e77122c97d7d5df566def9ffc6536578f018eca839a339c704cbf35ecf948a",
+        "semantic_acceptance": true,
+        "semantic_reason": "Implemented UTC window filtering in activity/parse.py, activity/report.py, and activity/cli.py; added tests/test_windows.py. All 18 tests, compileall, and diff checks passed. Reviewed boundary semantics, validation/error handling, and legacy compatibility. tests/test_legacy.py and package __init__.py remain unchanged. No unmet requirements or material uncertainty identified."
+      },
+      "worker": null,
+      "seconds": 69.736,
+      "combined_usage": {
+        "input_tokens": 105669,
+        "cached_input_tokens": 78464,
+        "uncached_input_tokens": 27205,
+        "output_tokens": 4697,
+        "reasoning_tokens": 582,
+        "total_tokens": 110366,
+        "uncached_input_plus_output": 31902
+      },
+      "changed_paths": [
+        "activity/cli.py",
+        "activity/parse.py",
+        "activity/report.py",
+        "tests/test_windows.py"
+      ],
+      "scope_pass": true,
+      "topology_pass": true,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\ntest_module_invocation (test_windows.CliWindowTests.test_module_invocation) ... ok\ntest_success_has_only_existing_json_shape (test_windows.CliWindowTests.test_success_has_only_existing_json_shape) ... ok\ntest_validation_and_data_errors_have_no_json (test_windows.CliWindowTests.test_validation_and_data_errors_have_no_json) ... ok\ntest_invalid_timestamps (test_windows.TimestampTests.test_invalid_timestamps) ... ok\ntest_loader_preserves_raw_invalid_timestamp (test_windows.TimestampTests.test_loader_preserves_raw_invalid_timestamp) ... ok\ntest_offsets_normalize_to_utc (test_windows.TimestampTests.test_offsets_normalize_to_utc) ... ok\ntest_bounds_with_offsets (test_windows.WindowTests.test_bounds_with_offsets) ... ok\ntest_each_bound_can_be_omitted (test_windows.WindowTests.test_each_bound_can_be_omitted) ... ok\ntest_empty_and_fully_excluded_input (test_windows.WindowTests.test_empty_and_fully_excluded_input) ... ok\ntest_equal_and_reversed_bounds_rejected (test_windows.WindowTests.test_equal_and_reversed_bounds_rejected) ... ok\ntest_half_open_window_exact_totals_and_sorted_categories (test_windows.WindowTests.test_half_open_window_exact_totals_and_sorted_categories) ... ok\ntest_invalid_event_checked_even_after_excluded_event (test_windows.WindowTests.test_invalid_event_checked_even_after_excluded_event) ... ok\ntest_naive_bounds_rejected_even_with_empty_input (test_windows.WindowTests.test_naive_bounds_rejected_even_with_empty_input) ... ok\ntest_without_window_ignores_timestamp_validity (test_windows.WindowTests.test_without_window_ignores_timestamp_validity) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.066s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "test_all_event_timestamps_checked_with_window (test_hidden_windows.WindowTests.test_all_event_timestamps_checked_with_window) ... ok\ntest_bad_bounds_even_on_empty_data (test_hidden_windows.WindowTests.test_bad_bounds_even_on_empty_data) ... ok\ntest_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json) ... ERROR\ntest_cli_filtering (test_hidden_windows.WindowTests.test_cli_filtering) ... ok\ntest_cli_missing_timestamp_in_window (test_hidden_windows.WindowTests.test_cli_missing_timestamp_in_window) ... ok\ntest_cli_short_csv_row_is_data_error (test_hidden_windows.WindowTests.test_cli_short_csv_row_is_data_error) ... ok\ntest_half_open_window_exact_totals (test_hidden_windows.WindowTests.test_half_open_window_exact_totals) ... ok\ntest_no_window_preserves_legacy (test_hidden_windows.WindowTests.test_no_window_preserves_legacy) ... ok\ntest_one_sided_windows (test_hidden_windows.WindowTests.test_one_sided_windows) ... ok\ntest_parser_normalizes_offsets (test_hidden_windows.WindowTests.test_parser_normalizes_offsets) ... ok\ntest_parser_rejects_invalid (test_hidden_windows.WindowTests.test_parser_rejects_invalid) ... ok\n\n======================================================================\nERROR: test_cli_errors_no_partial_json (test_hidden_windows.WindowTests.test_cli_errors_no_partial_json)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project/activity/parse.py\", line 19, in parse_timestamp\n    timestamp = datetime.fromisoformat(text)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Invalid isoformat string: 'bad'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/argparse.py\", line 2577, in _get_value\n    result = type_func(arg_string)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project/activity/parse.py\", line 24, in parse_timestamp\n    raise ValueError(f'Invalid timestamp {text!r}: expected an ISO timestamp with a timezone') from error\nValueError: Invalid timestamp 'bad': expected an ISO timestamp with a timezone\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/argparse.py\", line 1941, in parse_known_args\n    namespace, args = self._parse_known_args(args, namespace)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 2162, in _parse_known_args\n    start_index = consume_optional(start_index)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 2102, in consume_optional\n    take_action(action, args, option_string)\n  File \"/usr/lib/python3.12/argparse.py\", line 2001, in take_action\n    argument_values = self._get_values(action, argument_strings)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 2544, in _get_values\n    value = self._get_value(action, arg_string)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 2589, in _get_value\n    raise ArgumentError(action, msg % args)\nargparse.ArgumentError: argument --since: invalid parse_timestamp value: 'bad'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project/test_hidden_windows.py\", line 70, in test_cli_errors_no_partial_json\n    code,stdout,stderr=self.invoke(csv,args)\n                       ^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project/test_hidden_windows.py\", line 60, in invoke\n    with contextlib.redirect_stdout(stdout),contextlib.redirect_stderr(stderr):code=main([str(path)]+args)\n                                                                                    ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-01-5feceb66/project/activity/cli.py\", line 15, in main\n    args = parser.parse_args(argv)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 1908, in parse_args\n    args, argv = self.parse_known_args(args, namespace)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/argparse.py\", line 1943, in parse_known_args\n    self.error(str(err))\n  File \"/usr/lib/python3.12/argparse.py\", line 2677, in error\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\n  File \"/usr/lib/python3.12/argparse.py\", line 2664, in exit\n    _sys.exit(status)\nSystemExit: 2\n\n----------------------------------------------------------------------\nRan 11 tests in 0.008s\n\nFAILED (errors=1)\n"
+        }
+      ],
+      "reused_source_bound_checks": false,
+      "quality_pass": false,
+      "usage_complete": true,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "3891d4f9e5e1448e88dd9318224fd582943dab33ea4e2f8aa582f011f671947e",
+        "activity/parse.py": "6b9a052dfead5dec588a0a43809022301637b3c7389d897ae80a46670684f9f3",
+        "activity/report.py": "a7741f7af32302a62d865db093b79941cd315cd13c396dfa7f84683b55129e88",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216",
+        "tests/test_windows.py": "6b97f336d92b5b20591ec272fb7105e6ab31ca9c3c99e5b4ac3a89080a7bffe7"
+      }
+    },
+    {
+      "sequence": 2,
+      "arm": "quick",
+      "root": {
+        "model_requested": "gpt-6-astra",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-6-astra",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/root/report.md",
+          "--output-schema",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/root/acceptance-schema.json",
+          "-"
+        ],
+        "seconds": 30.489,
+        "exit_code": 0,
+        "usage": {
+          "input_tokens": 70026,
+          "cached_input_tokens": 63488,
+          "uncached_input_tokens": 6538,
+          "output_tokens": 598,
+          "reasoning_tokens": 156,
+          "total_tokens": 70624,
+          "uncached_input_plus_output": 7136
+        },
+        "prompt_sha256": "7727d5e6245149e9c5e2e0a255474b4fbbffc94dd148d2670b65f2014113d586",
+        "semantic_acceptance": false,
+        "semantic_reason": "Worker exited with code 1; no files changed and report.md is missing. Independent probes confirmed parse_timestamp, summarize window parameters, and tests/test_windows.py are absent. Recorded legacy tests and compileall passed, but the feature remains unimplemented. Worker failure cause is unknown; no retries or repairs performed."
+      },
+      "worker": {
+        "model_requested": "gpt-5.6-luna",
+        "effort": "high",
+        "command": [
+          "/mnt/c/Users/ranve/.codex/bin/wsl/d04c9d9044dd4815/codex",
+          "exec",
+          "--ephemeral",
+          "-C",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/project",
+          "-m",
+          "gpt-5.6-luna",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-c",
+          "agents.max_depth=0",
+          "--approve-for-me",
+          "--json",
+          "--output-last-message",
+          "/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/worker/report.md",
+          "-"
+        ],
+        "seconds": 0.2,
+        "exit_code": 1,
+        "usage": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "uncached_input_tokens": null,
+          "output_tokens": null,
+          "reasoning_tokens": null,
+          "total_tokens": null,
+          "uncached_input_plus_output": null
+        },
+        "prompt_sha256": "55007d187743aef0cb0cd6a2b5a74b28358ff2b989fdc0f84ae37acc2b6940b1"
+      },
+      "seconds": 30.489,
+      "combined_usage": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "uncached_input_tokens": null,
+        "output_tokens": null,
+        "reasoning_tokens": null,
+        "total_tokens": null,
+        "uncached_input_plus_output": null
+      },
+      "changed_paths": [],
+      "scope_pass": false,
+      "topology_pass": false,
+      "checks": [
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": "test_csv_without_timestamps_and_cli (test_legacy.LegacyTests.test_csv_without_timestamps_and_cli) ... ok\ntest_empty (test_legacy.LegacyTests.test_empty) ... ok\ntest_exact_decimal_summary (test_legacy.LegacyTests.test_exact_decimal_summary) ... ok\ntest_missing_file_no_json (test_legacy.LegacyTests.test_missing_file_no_json) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "compileall",
+            "-q",
+            "activity",
+            "tests"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "/usr/bin/python3",
+            "-m",
+            "unittest",
+            "test_hidden_windows",
+            "-v"
+          ],
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "test_hidden_windows (unittest.loader._FailedTest.test_hidden_windows) ... ERROR\n\n======================================================================\nERROR: test_hidden_windows (unittest.loader._FailedTest.test_hidden_windows)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_hidden_windows\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 137, in loadTestsFromName\n    module = __import__(module_name)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/project/test_hidden_windows.py\", line 10, in <module>\n    from activity.parse import Event,parse_timestamp,load_events\nImportError: cannot import name 'parse_timestamp' from 'activity.parse' (/tmp/lunarmarch-astra-lean-20261010/trial-02-6b86b273/project/activity/parse.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n"
+        }
+      ],
+      "reused_source_bound_checks": true,
+      "quality_pass": false,
+      "usage_complete": false,
+      "final_source_hashes": {
+        "activity/__init__.py": "f44481a8676c3b961e1de536f691be020425174a46a3f5dd72742711bcb31a35",
+        "activity/cli.py": "36be14e4ca8888e2b7a059290db21a30c574424e2dcdf0ae79c41e92b0461a6f",
+        "activity/parse.py": "38a844a22899fdcbbed798fcbc8b451b47326c35dc0ea824fc95f21661874092",
+        "activity/report.py": "28bbe397a508410f46a300a899c7e28b12fa2ef312fba79b711780312249eb30",
+        "tests/test_legacy.py": "0b2e74a8120ab3ea1c69b558de09a203ce0b7f61d32e49980de12c16c8477216"
+      }
+    }
+  ],
+  "original_summary": {
+    "trials": 2,
+    "planned_trials": 4,
+    "metrics": {
+      "direct": {
+        "trials": 1,
+        "all_quality_pass": false,
+        "seconds": 69.736,
+        "total_tokens": 110366.0,
+        "uncached_input_plus_output": 31902.0
+      },
+      "quick": {
+        "trials": 1,
+        "all_quality_pass": false,
+        "seconds": 30.489,
+        "total_tokens": null,
+        "uncached_input_plus_output": null
+      }
+    },
+    "complete": false,
+    "thresholds_met": false,
+    "successful": false,
+    "early_stop": true
+  },
+  "adjudication": {
+    "direct": "18 public tests passed; original hidden grader 10/11 with a false negative for normal argparse SystemExit(2). Actual CLI behavior and corrected post-hoc grader pass 11/11.",
+    "quick": "Nested worker CLI failed to initialize its app-server with read-only filesystem/database errors. No worker report or changed sources. Parent correctly rejected. Missing worker usage remains null; elapsed time is a failure duration, not a speedup.",
+    "completed_root_model_calls": 2,
+    "worker_launch_attempts": 1,
+    "completed_worker_calls": 0,
+    "quality_amendment": "Post-hoc actual-CLI grading. Frozen original trial records and protocol unchanged. No successful predeclared comparison.",
+    "posthoc_cli_validation": {
+      "astra_direct": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.268s\n\nOK\n"
+      },
+      "old_rejected_quick": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": ".....F.....\n======================================================================\nFAIL: test_cli_short_csv_row_is_data_error (<run_path>.WindowTests.test_cli_short_csv_row_is_data_error)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ranveer/app/LunarMarch/evals/workflow-efficiency/grade.py\", line 78, in test_cli_short_csv_row_is_data_error\n    self.assertEqual(code,2);self.assertEqual(stdout,'');self.assertTrue(stderr)\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 2\n\n----------------------------------------------------------------------\nRan 11 tests in 0.343s\n\nFAILED (failures=1)\n"
+      }
+    }
+  },
+  "tested_hashes": {
+    "runner.py": "b998783ff07b09c624b0e48b09bb2ebaac80566d5cdf3b2eecd350f23e309753",
+    "grade.py": "3b5a8aa59b889e206064cd88214464bee11949f4706304187628df5b659f9821",
+    "task.md": "52d8dbfd2b340c1b114d8c37adc469d12f822fb693bdb64d48199b26012bc7d3"
+  },
+  "current_hashes": {
+    "scripts/workflow_eval.py": "2fc1e9b2f1baed1d6df1f3778b7de69748f442a0e82a23e7fcf9bd4f8663c7b3",
+    "evals/workflow-efficiency/grade.py": "36e348fc5eefe55e1a47c3b3663a5dc43ba00cc6f1db1765e88ab8e420af65b6",
+    "tests/test_workflow_eval.py": "8c23022ae6492542f25b5a953d0df7eeeff7194b109f6a7313b59c3c1e9a2668",
+    "SKILL.md": "56ce5fa02cb852ded1dcb6b9a1818671487f7bc04c756f5c1ae010807de8d965",
+    "references/routing.md": "6ada0f2f183003a8c19f13186dceb3546b04bfbe5378c448c68af2f56ef779da",
+    "references/modes.md": "f22f5d73ce4c4df2ed5752384458bf8a699a79170047e4ddc0ea5ea1c0c6d9d7"
+  },
+  "changes_after_live_trial": [
+    "Launcher dispatches worker outside the model sandbox; successful worker is followed by independent parent review.",
+    "Failed worker startup skips review model call.",
+    "CLI grading runs the real module rather than requiring main() to return instead of raise SystemExit.",
+    "Only source snapshot files enter disposable baseline commits.",
+    "Reviewer source mutations invalidate acceptance."
+  ],
+  "offline_validation": {
+    "tests": 52,
+    "result": "passed",
+    "seconds": 4.366,
+    "python": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+    "compileall": "passed",
+    "skill_validator": "passed",
+    "diff_check": "passed"
+  },
+  "limitations": [
+    "Only one familiar development fixture; not held-out.",
+    "Root changed from Sol to Astra versus the earlier historical pilot; no causal attribution to instructions across runs.",
+    "Final deterministic-dispatch profile has offline validation only; no live efficiency comparison.",
+    "Reported tokens do not infer account meter or monetary cost; controlling chat, benchmark setup, external approval review excluded."
+  ]
+}

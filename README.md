@@ -1,6 +1,10 @@
 # LunarMarch
 
-LunarMarch is a Luna-first, provider-aware orchestration skill for research, focused coding tasks, independent review, and resumable multi-phase projects.
+LunarMarch supports bounded Luna/OpenCode delegation and optional durable evidence for risky or resumable work. Ordinary tasks stay in the parent or use one worker with parent review. Durable Builder/Reviewer loops and phase Auditors are reserved for work that needs them.
+
+The [efficiency audit](references/efficiency-audit-2026-10-10.md) explains earlier overhead. **Direct remains the default: no completed comparison has demonstrated accepted results with both lower elapsed time and weighted cost.** GPT-6 Luna sometimes reduced cost, but quality failures or review time prevented a win on both measures. The installed skill was disabled locally on 2026-10-10 and remains disabled; this repository retains its implementation for explicit experiments.
+
+See [current benchmark findings and reproduction](references/workflow-benchmarks.md). Durable runs now enforce attempt caps; experimental launchers reuse source-bound checks, stop immediately on failed quality or missing usage, and offer isolated per-call state for concurrent tests. These controls are offline-tested; they are not a claim of measured performance gains.
 
 ```text
 parent authority
@@ -28,9 +32,20 @@ See [references/influences.md](references/influences.md) for the projects studie
 
 ## Current status
 
-Version `0.2.0` includes the skill, contract schema, Codex and OpenCode worker transports, durable run state, scope snapshots, integrity gates, checkpointed evaluations, recovery-safe status, examples, and offline tests. The first model-backed Task evaluation completed successfully on 2026-08-22; a one-call Luna smoke also succeeded on 2026-08-23. A real two-phase Studio Core run accepted nine tasks, exposed review-heavy marginal usage, and drove the latest transport and contract improvements. See [the Studio Core results](references/live-test-results-2026-08-23-studio-core.md) and [improvement plan](references/studio-core-retrospective-2026-08-23.md). The complete verification record, including all 38 automated tests, live trials, invalidated diagnostics, evaluator hardening, limitations, and reproduction commands, is in [references/testing-and-evaluation.md](references/testing-and-evaluation.md).
+Version `0.2.0` includes the skill, contract schema, Codex and OpenCode worker transports, durable run state, scope snapshots, integrity gates, checkpointed evaluations, recovery-safe status, examples, and offline tests. The first model-backed Task evaluation completed successfully on 2026-08-22; a one-call Luna smoke also succeeded on 2026-08-23. A real two-phase Studio Core run accepted nine tasks, exposed review-heavy marginal usage, and drove the latest transport and contract improvements. See [the Studio Core results](references/live-test-results-2026-08-23-studio-core.md) and [improvement plan](references/studio-core-retrospective-2026-08-23.md). Historical verification is in [references/testing-and-evaluation.md](references/testing-and-evaluation.md); the latest workflow experiments and checks are summarized in [the benchmark guide](references/workflow-benchmarks.md).
 
-## Quick start
+## Choose a workflow
+
+| Work shape | Starting path |
+|---|---|
+| Small or tightly dependent edits, even across several files | Direct in the main agent |
+| Independent work that can overlap, substantial context to compress, or a required specialist boundary | Quick: one worker and parent review |
+| Required immutable evidence or recovery | Durable Task |
+| Meaningful phase boundaries and cross-task risk | March |
+
+The [tiny smoke](references/live-test-results-2026-10-10-simple-smoke.md) verified operation and attempt limits but excluded parent usage. The [multi-file pilot](evals/workflow-efficiency/results/2026-10-10-direct-v-quick.md) included parent coordination: Direct took 91.615 seconds and 22,265 uncached input plus output; Quick took 102.273 seconds and 46,496. It stopped after one pair under its predeclared rule. This is fixture-specific evidence, not a general model ranking or an account-meter conversion. Do not delegate merely because a change touches several files.
+
+## Durable quick start
 
 ```bash
 python3 scripts/lunarmarch.py init \
@@ -88,17 +103,33 @@ Native workers default to no inherited conversation plus a compact resolved cont
 
 ### Verification performed
 
-- 26 orchestration and transport tests cover immutable contracts, attempt lifecycle, write boundaries, acceptance evidence, protected invariants, review budgets, independent review, phase freezing, Codex/OpenCode launch policies, environment isolation, bounded timeouts, recovery safety, and installation behavior.
+- 34 orchestration and transport tests cover immutable contracts, attempt lifecycle, write boundaries, acceptance evidence, protected invariants, review budgets, independent review, phase freezing, Codex/OpenCode launch policies, environment isolation, bounded timeouts, recovery safety, and installation behavior.
 - 12 evaluator tests cover opaque trial identities, balanced ordering, packet equivalence, terminal usage parsing, malformed grader handling, missing-trial and missing-telemetry rejection, sealed checkpoint/resume, tamper rejection, end-to-end scoring, and source-repository isolation.
+- 22 workflow/runtime tests cover weighted multi-model accounting, immediate failure stops, source-bound checks, semantic acceptance, overlapping workers, scoped merges, reviewer mutation rejection, private credentials and cleanup. Together with the 46 tests above, all 68 passed on 2026-10-12.
+- A CPU-only multi-file pilot compared Direct against Quick with parent usage included and stopped without meeting the savings criterion.
 - One live Task evaluation exercised Builder, Reviewer, objective gates, retry recording, and parent acceptance.
 - One blinded context evaluation ran 12 Luna workers in six matched pairs from a clean commit.
 - An independent Luna audit found eight evaluator defects and one order-balance defect; all were corrected and covered by regression tests before the published run.
 
-For the exact test inventory and what each check proves, read [references/testing-and-evaluation.md](references/testing-and-evaluation.md).
+For historical test coverage, read [references/testing-and-evaluation.md](references/testing-and-evaluation.md). The [2026-10-12 validation record](docs/research/efficiency-validation-2026-10-12.json) identifies the latest checked source hashes.
 
 ### Expanding to 3-5 additional fixtures
 
 A credible next set should cover research synthesis, multi-file implementation, diagnosis from incomplete evidence, resumable multi-phase work, and reviewer/fixer recovery. It no longer needs to happen in one expensive session: create the full immutable manifest once, run one or two trials with `--max-new-trials`, then continue later with `--resume`. A useful cadence is one fixture design session followed by six two-trial checkpoints. Partial checkpoints are preserved but cannot support a quality claim until the balanced roster is complete. See [references/testing-and-evaluation.md](references/testing-and-evaluation.md#bite-sized-execution-plan).
+
+### CPU-only workflow pilot
+
+The launchers freeze fixtures, briefs, graders and source hashes, include worker and review costs, and stop after any quality or telemetry failure. The first pair must meet the time and cost thresholds before a reverse-order pair is permitted. Two complete pairs are required for the experiment's success gate. Raw logs stay outside the repository; compact evidence is retained here.
+
+For an explicit two-worker test while other chats are active, use per-call isolation:
+
+```bash
+python3 scripts/parallel_eval.py prepare --output /tmp/lunarmarch-parallel-new --isolated-runtime --parallel-first --pairs 1
+python3 scripts/parallel_eval.py run-one --output /tmp/lunarmarch-parallel-new
+python3 scripts/parallel_eval.py summarize --output /tmp/lunarmarch-parallel-new
+```
+
+Preparation and summarization make no model calls. Each `run-one` consumes usage; after a failed trial it returns the stop decision without launching more models. A one-pair diagnostic cannot meet the two-pair success gate. Isolation changes only child runtime state, leaving shared configuration and daemons alone; model usage still counts against the same account. See [the protocol and limitations](references/workflow-benchmarks.md) before spending on another comparison.
 
 The concrete fixture contracts, graders, success evidence, and stop conditions are written out in [references/fixture-roadmap.md](references/fixture-roadmap.md).
 
@@ -107,6 +138,8 @@ The concrete fixture contracts, graders, success evidence, and stop conditions a
 After a Sol, Luna, DeepSeek, or other worker run, record the result in [the metrics report template](references/metrics-report-template.md). Use `references/live-test-results-YYYY-MM-DD.md` for one bounded run, or `evals/<series>/results/` for repeated comparisons. Include model, transport, effort or variant, attempts, gate or quality result, and token fields. Use `not reported` when the provider does not expose usage.
 
 ## Installation as a skill
+
+The local installation used for these experiments remains disabled pending a convincing workflow result. The following commands are for deliberate installation, not a step required to run offline tests.
 
 For every local Codex or OpenCode chat:
 
@@ -121,6 +154,12 @@ python3 scripts/install_skill.py --scope repo --repo-root /absolute/project
 ```
 
 See [references/installation.md](references/installation.md) for discovery behavior, safe replacement, explicit invocation, and future plugin distribution.
+
+### Avoid repeated orchestration
+
+A fully specified assignment does not need a coordinator model to reread its inputs and launch a fixed command. Use native dispatch in the current chat; for scripted fixed work, let the launcher dispatch and collect the diff/check evidence, then ask the parent to review uncovered behavior. Already assigned workers execute their packet without loading coordinator references. Reuse unchanged checks instead of repeating the implementation pass.
+
+The [Astra follow-up](evals/workflow-efficiency/results/2026-10-10-astra-lean.md) identified a nested-CLI startup failure and an overly restrictive grader. It did not establish savings. The follow-up stopped without retries or publishing, and led to the deterministic dispatch and CLI-grading fixes above. Coupled tasks still default to Direct; the external Astra/Luna example is not installed, and the Luna model/effort defaults remain unchanged.
 
 ## Safety model
 

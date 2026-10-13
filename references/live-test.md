@@ -58,3 +58,7 @@ python3 <skill>/scripts/lunarmarch.py accept \
 ```
 
 Record wall time, changed paths, test results, findings, retries, and parent inspection cost. Keep the disposable directory until the results are captured.
+
+## Testing efficiency rather than only operation
+
+The clamp-count smoke verifies completion and gates. Comparing one worker against Builder/Reviewer while excluding the parent cannot establish that delegation beats doing the task directly. For that question, use the bounded CPU-only workflow pilot in `scripts/workflow_eval.py`; see [the first multi-file result](../evals/workflow-efficiency/results/2026-10-10-direct-v-quick.md) for controls, parent/worker accounting, grading limits, early stopping and the failed savings result.

@@ -17,7 +17,13 @@ Required semantics:
 - `depends_on`: task IDs that must be semantically accepted first.
 - `protected_invariants` (optional): known security, compatibility, or behavioral properties that must survive the task.
 - `invariant_commands` (optional): focused deterministic probes for protected invariants. LunarMarch records their baseline result when reserving an attempt and reruns them as launcher checks.
-- `max_reviewer_attempts` (optional): a task-local Reviewer attempt cap from one through eight. A normal change task should usually use two: initial review and post-Fixer review.
+- `max_attempts` (optional): total task reservation cap from one through 64, default four, across all roles and including failed launches.
+- `max_auditor_attempts` (optional): Auditor cap from one through eight, default two. Role changes never reset the total cap.
+- `max_reviewer_attempts` (optional, default two): a task-local Reviewer attempt cap from one through eight. A normal change task should usually use two: initial review and post-Fixer review.
+
+Run initialization also accepts `--max-attempts`, default 24, to cap reservations across tasks. Existing runs and contracts without explicit ceilings use these defaults. A rejected reservation spends no worker call and creates no attempt directory. These are attempt limits, not hard token or time limits. Choose higher limits before registration when justified; do not edit immutable contracts or run state to bypass them.
+
+`status` reports accepted/total tasks and March phases, attempt counts by role, remaining task/run reservations, and reported token sums with per-field missing-telemetry counts. Running/unknown and incomplete reservations count as missing telemetry and consumed attempt budget. An exclusive `.reservation-lock` serializes dispatch; after a killed process, establish that no reservation/writer can continue before removing only that stale lock. `status` reports the lock without changing it. Launcher totals exclude parent work and native workers outside its run.
 
 An attempt contains:
 

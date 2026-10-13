@@ -36,6 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--project-root", required=True, type=Path)
     init.add_argument("--run-root", required=True, type=Path)
     init.add_argument("--goal", required=True)
+    init.add_argument("--max-attempts", type=int, default=24, help="run-wide reservation ceiling (default: 24)")
     init.add_argument("--mode", choices=["quick", "research", "task", "march"], default="task")
 
     add = commands.add_parser("add-task", help="register an immutable task contract")
@@ -98,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         if args.command == "init":
-            emit(init_run(args.project_root, args.run_root, args.goal, args.mode))
+            emit(init_run(args.project_root, args.run_root, args.goal, args.mode, args.max_attempts))
         elif args.command == "add-task":
             emit(add_task(args.run_root, args.spec))
         elif args.command == "reserve":

@@ -1,0 +1,9 @@
+{
+  "action": "removed installed skill symlink",
+  "path": "/home/ranveer/.agents/skills/lunar-march",
+  "target": "/home/ranveer/app/LunarMarch",
+  "date": "2026-10-10",
+  "reason": "User requested disablement until measured improvement.",
+  "restore_command": "ln -s /home/ranveer/app/LunarMarch /home/ranveer/.agents/skills/lunar-march",
+  "rule_search": "No LunarMarch auto-trigger instructions found in checked user/home AGENTS.md or Codex rule files. Config matches were project trust records, retained."
+}

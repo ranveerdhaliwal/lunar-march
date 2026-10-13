@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-12",
+  "status": "tested",
+  "base_commit": "4faebecba9152aa0af12acb4b6ccbb2acfa654da",
+  "offline_tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "passed": 68,
+    "log_sha256": "fba945cc481105d0bfca9811857feafa10ab09bc7ff9aa60e9754416d7f23ac6"
+  },
+  "checks": {
+    "compileall": "passed",
+    "cli_help": "lunarmarch, workflow_eval and parallel_eval passed",
+    "skill_validator": "passed",
+    "diff_whitespace": "passed",
+    "calibration": "8 CSV checks pass historical Direct; 1 expected failure in rejected parallel source; disposable copies only"
+  },
+  "source_sha256": {
+    "scripts/lm_core.py": "7e7b368baa71ac5a2fe0e9105999e459269fc506905921ac372941f76ccb218e",
+    "scripts/lunarmarch.py": "b1282f1158d40a90c35d24ff8d218cd09ab46835207b474443cfae0b38d630e7",
+    "scripts/workflow_eval.py": "babffcaa42b838d7047e58e6fb661744efc64098e28d6bb7ea80f921ea3783aa",
+    "scripts/parallel_eval.py": "bb5b5135e988bc7bfa70c984b3d57c7b307132f2064f7ba73c2a53519c3f663c",
+    "scripts/isolated_codex.py": "fea2372ada8deacb565eeb2b44208f411495e86054530eef9f98c976e433ad6d",
+    "tests/test_lunarmarch.py": "142aeb0231b1118bc9cf18f78e9e7596113de983ba1fd61bfb3f07c4dc62e312",
+    "tests/test_workflow_eval.py": "97129e80cc083dd6aac2410507fe42710c0be1e8ca6e0689e6421559b7ef1ec4",
+    "tests/test_parallel_eval.py": "cd52d5863f8e4fe8a85062f488f90af8550800d7d869d0f3e9ae95fe34809253",
+    "tests/test_isolated_codex.py": "78683588db67e614c5f93beb5039648e7b04a9aaa8ebad5d4c538a877a73b825",
+    "evals/parallel-exporters/task.md": "aba1e6265657aa0daa697d6e27f0ae34fe391b7aec0095664da9354c8abc3915",
+    "evals/parallel-exporters/fixture/acceptance/test_csv_contract.py": "f3fd674961c40a0cb659b265ea2cc39e510d7b7e390e8f0e71ca4aaaa81071d7"
+  },
+  "new_model_calls": 0,
+  "gpu_work": false,
+  "skill_reenabled": false,
+  "performance_claim": "No new live time/cost result; safeguards and regression checks only."
+}

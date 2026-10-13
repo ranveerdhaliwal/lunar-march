@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-12",
+  "status": "tested",
+  "scope": "Post-hoc offline calibration on disposable copies; original scores and artifacts unchanged. No model calls.",
+  "test_sha256": "f3fd674961c40a0cb659b265ea2cc39e510d7b7e390e8f0e71ca4aaaa81071d7",
+  "results": [
+    {
+      "artifact": "historical-direct",
+      "original_path": "/tmp/lunarmarch-parallel-exporters-20261010/trial-01/project",
+      "csv_sha256": "ad3d88259240affd83d6a48dda2e433ff1d17abf9620d9d549efa39d4d21c42c",
+      "returncode": 0,
+      "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... ok\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_json_numeric_limit_has_row_context (test_csv_contract.CsvContract.test_json_numeric_limit_has_row_context) ... ok\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "artifact": "rejected-parallel",
+      "original_path": "/tmp/lunarmarch-parallel-isolated-pair-20261010/trial-01/project",
+      "csv_sha256": "7ec9ecd8008df90db5d2c751d2851ad77f3420f8086aa9b5f81d47d28a27adc8",
+      "returncode": 1,
+      "stderr": "test_atomic_error_before_header (test_csv_contract.CsvContract.test_atomic_error_before_header) ... ok\ntest_bad_rows (test_csv_contract.CsvContract.test_bad_rows) ... ok\ntest_crlf (test_csv_contract.CsvContract.test_crlf) ... ok\ntest_empty_header (test_csv_contract.CsvContract.test_empty_header) ... ok\ntest_json_numeric_limit_has_row_context (test_csv_contract.CsvContract.test_json_numeric_limit_has_row_context) ... FAIL\ntest_quoted_error_context (test_csv_contract.CsvContract.test_quoted_error_context) ... ok\ntest_reject_headers (test_csv_contract.CsvContract.test_reject_headers) ... ok\ntest_roundtrip_and_scale (test_csv_contract.CsvContract.test_roundtrip_and_scale) ... ok\n\n======================================================================\nFAIL: test_json_numeric_limit_has_row_context (test_csv_contract.CsvContract.test_json_numeric_limit_has_row_context)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lm-regression-gywyg_lf/project/acceptance/test_csv_contract.py\", line 41, in test_json_numeric_limit_has_row_context\n    self.assertRegex(str(error.exception).lower(), r'(line|row)\\s*:?\\s*2\\b')\nAssertionError: Regex didn't match: '(line|row)\\\\s*:?\\\\s*2\\\\b' not found in 'exceeds the limit (4300 digits) for integer string conversion: value has 5000 digits; use sys.set_int_max_str_digits() to increase the limit'\n\n----------------------------------------------------------------------\nRan 8 tests in 0.001s\n\nFAILED (failures=1)\n"
+    }
+  ]
+}

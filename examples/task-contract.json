@@ -20,7 +20,9 @@
     "Existing authorization behavior remains unchanged."
   ],
   "invariant_commands": [],
+  "max_attempts": 4,
   "max_reviewer_attempts": 2,
+  "max_auditor_attempts": 2,
   "inputs": [],
   "non_goals": [
     "Do not change the database schema.",

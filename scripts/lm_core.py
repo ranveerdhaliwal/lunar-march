@@ -40,6 +40,9 @@ WRITE_ROLES = {"builder", "fixer"}
 READ_ONLY_ROLES = ROLES - WRITE_ROLES
 RISKS = {"trivial", "routine", "medium", "high"}
 MODES = {"quick", "research", "task", "march"}
+DEFAULT_MAX_ATTEMPTS = 4
+DEFAULT_MAX_RUN_ATTEMPTS = 24
+DEFAULT_MAX_REVIEW_ATTEMPTS = 2
 
 ROLE_GUIDANCE = {
     "scout": "Investigate the bounded question read-only. Cite exact evidence and separate fact, inference, and unknown.",
@@ -144,7 +147,7 @@ def validate_contract(contract: dict[str, Any]) -> None:
         "depends_on",
     }
     missing = sorted(required - contract.keys())
-    optional = {"protected_invariants", "invariant_commands", "max_reviewer_attempts"}
+    optional = {"protected_invariants", "invariant_commands", "max_reviewer_attempts", "max_auditor_attempts", "max_attempts"}
     extra = sorted(contract.keys() - required - optional)
     if missing:
         raise LunarMarchError(f"contract missing fields: {', '.join(missing)}")
@@ -184,17 +187,20 @@ def validate_contract(contract: dict[str, Any]) -> None:
     for dependency in contract["depends_on"]:
         if not TASK_ID_RE.fullmatch(dependency):
             raise LunarMarchError(f"invalid depends_on task id: {dependency!r}")
-    if "max_reviewer_attempts" in contract:
-        budget = contract["max_reviewer_attempts"]
-        if not isinstance(budget, int) or isinstance(budget, bool) or not 1 <= budget <= 8:
-            raise LunarMarchError("max_reviewer_attempts must be an integer from 1 through 8")
+    for field, maximum in (("max_reviewer_attempts", 8), ("max_auditor_attempts", 8), ("max_attempts", 64)):
+        if field in contract:
+            budget = contract[field]
+            if not isinstance(budget, int) or isinstance(budget, bool) or not 1 <= budget <= maximum:
+                raise LunarMarchError(f"{field} must be an integer from 1 through {maximum}")
 
 
-def init_run(project_root: Path, run_root: Path, goal: str, mode: str) -> dict[str, Any]:
+def init_run(project_root: Path, run_root: Path, goal: str, mode: str, max_attempts: int = DEFAULT_MAX_RUN_ATTEMPTS) -> dict[str, Any]:
     project_root = resolve_existing_directory(project_root)
     run_root = Path(run_root).expanduser().resolve()
     if mode not in MODES:
         raise LunarMarchError(f"mode must be one of: {', '.join(sorted(MODES))}")
+    if not isinstance(max_attempts, int) or isinstance(max_attempts, bool) or max_attempts < 1:
+        raise LunarMarchError("run max_attempts must be a positive integer")
     if not goal.strip():
         raise LunarMarchError("goal must not be empty")
     if run_root.exists() and any(run_root.iterdir()):
@@ -211,6 +217,7 @@ def init_run(project_root: Path, run_root: Path, goal: str, mode: str) -> dict[s
         "run_root": str(run_root),
         "goal": goal.strip(),
         "mode": mode,
+        "max_attempts": max_attempts,
         "status": "active",
         "created_at": created,
         "updated_at": created,
@@ -241,6 +248,9 @@ def add_task(run_root: Path, spec_path: Path) -> dict[str, Any]:
     run_root = resolve_existing_directory(run_root)
     state = load_state(run_root)
     contract = read_json(Path(spec_path).expanduser().resolve())
+    contract.setdefault("max_attempts", DEFAULT_MAX_ATTEMPTS)
+    contract.setdefault("max_reviewer_attempts", DEFAULT_MAX_REVIEW_ATTEMPTS)
+    contract.setdefault("max_auditor_attempts", DEFAULT_MAX_REVIEW_ATTEMPTS)
     validate_contract(contract)
     task_id = contract["task_id"]
     if task_id in state["tasks"]:
@@ -268,6 +278,7 @@ def add_task(run_root: Path, spec_path: Path) -> dict[str, Any]:
         {"status": "active", "task_ids": [], "freeze": None, "audit_attempt": None},
     )
     phase["task_ids"].append(task_id)
+    state["status"] = "active"
     state["next_action"] = f"dispatch or reserve task {task_id}"
     save_state(run_root, state)
     return binding
@@ -333,7 +344,9 @@ def capture_snapshot(project_root: Path, run_root: Path | None = None) -> dict[s
     excluded = _excluded_prefix(project_root, run_root)
     files: dict[str, dict[str, Any]] = {}
     for relative in sorted(set(paths)):
-        normalized = relative.replace("\\", "/").lstrip("./")
+        normalized = relative.replace("\\", "/")
+        while normalized.startswith("./"):
+            normalized = normalized[2:]
         components = normalized.split("/")
         if not normalized or normalized == ".git" or normalized.startswith(".git/"):
             continue
@@ -379,6 +392,8 @@ Verification boundary:
 - If the parent launches with --run-checks, launcher-run acceptance and invariant commands are authoritative.
 - Do not call a check unverified solely because a read-only sandbox cannot create caches or temporary files. State the local limitation and inspect the recorded launcher result.
 - Run local checks only when they are safe in the assigned sandbox and add evidence beyond the launcher result.
+- Review the changed behavior and explicit invariants; do not restart repository-wide exploration or repeat unchanged checks.
+- Report only concrete defects that affect the assigned acceptance criteria. Separate optional improvements from blockers.
 """
     return f"""# LunarMarch worker packet
 
@@ -402,7 +417,7 @@ Task contract:
 {json.dumps(contract, indent=2, sort_keys=True, ensure_ascii=False)}
 ```
 
-Lead with a concise conclusion. Then state work or findings, verification actually performed, decisive evidence, changed paths, defects or uncertainty, and the smallest next action. Natural language is evidence, not a magic wire format.
+Keep the final report within 300 words unless concrete findings require more. Lead with a concise conclusion. Then state work or findings, verification actually performed, decisive evidence, changed paths, defects or uncertainty, and the smallest next action. Usage comes from terminal telemetry; do not estimate or reconstruct it in prose. Natural language is evidence, not a magic wire format.
 """
 
 
@@ -477,6 +492,40 @@ def reserve_attempt(
     check_timeout: int = 1200,
 ) -> Path:
     run_root = resolve_existing_directory(run_root)
+    lock = run_root / ".reservation-lock"
+    try:
+        descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    except FileExistsError as exc:
+        raise LunarMarchError("reservation lock exists; another dispatch or interrupted reservation requires parent recovery") from exc
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            handle.write(f"pid={os.getpid()}\ncreated_at={utc_now()}\n")
+        return _reserve_attempt_locked(run_root, task_id, role, model, effort, transport, variant, check_timeout)
+    finally:
+        lock.unlink()
+
+
+def _task_attempt_paths(run_root: Path, task_id: str, task: dict[str, Any]) -> list[Path]:
+    """Include incomplete setup directories even before state binding succeeded."""
+    paths = {resolve_within(run_root, raw) for raw in task["attempts"]}
+    directory = run_root / "attempts" / task_id
+    if directory.is_dir():
+        pattern = re.compile(r"(" + "|".join(sorted(ROLES)) + r")-[0-9]+$")
+        paths.update(child for child in directory.iterdir() if child.is_dir() and pattern.fullmatch(child.name))
+    return sorted(paths)
+
+
+def _reserve_attempt_locked(
+    run_root: Path,
+    task_id: str,
+    role: str,
+    model: str = "gpt-5.6-luna",
+    effort: str | None = None,
+    transport: str = "codex",
+    variant: str | None = None,
+    check_timeout: int = 1200,
+) -> Path:
+    run_root = resolve_existing_directory(run_root)
     state = load_state(run_root)
     task, contract_path, contract = contract_for_task(run_root, state, task_id)
     if role not in ROLES:
@@ -487,22 +536,30 @@ def reserve_attempt(
         if state["tasks"][dependency]["status"] != "accepted":
             raise LunarMarchError(f"dependency is not accepted: {dependency}")
     active = []
-    for attempt_raw in task["attempts"]:
-        candidate = resolve_within(run_root, attempt_raw)
+    task_attempts = _task_attempt_paths(run_root, task_id, task)
+    for candidate in task_attempts:
         if not (candidate / "terminal.json").is_file():
             active.append(candidate.name)
     if active:
         raise LunarMarchError(f"task has running_or_unknown attempt(s): {', '.join(active)}")
-    if role == "reviewer" and "max_reviewer_attempts" in contract:
-        review_attempts = 0
-        for attempt_raw in task["attempts"]:
-            attempt_reservation = read_json(resolve_within(run_root, attempt_raw) / "reservation.json")
-            if attempt_reservation.get("role") == "reviewer":
-                review_attempts += 1
-        if review_attempts >= contract["max_reviewer_attempts"]:
-            raise LunarMarchError(
-                f"reviewer attempt budget exhausted ({contract['max_reviewer_attempts']}); parent escalation is required"
-            )
+    # Count every reservation, including failed infrastructure attempts. Switching
+    # roles or registering replacement tasks must not reset the spending envelope.
+    run_attempts = sum(len(_task_attempt_paths(run_root, key, value)) for key, value in state["tasks"].items())
+    run_limit = state.get("max_attempts", DEFAULT_MAX_RUN_ATTEMPTS)
+    task_limit = contract.get("max_attempts", DEFAULT_MAX_ATTEMPTS)
+    if run_attempts >= run_limit:
+        raise LunarMarchError(f"run attempt budget exhausted ({run_limit}); parent adjudication is required")
+    if len(task_attempts) >= task_limit:
+        raise LunarMarchError(f"task attempt budget exhausted ({task_limit}); parent adjudication is required")
+    if role in {"reviewer", "auditor"}:
+        field = "max_reviewer_attempts" if role == "reviewer" else "max_auditor_attempts"
+        role_limit = contract.get(field, DEFAULT_MAX_REVIEW_ATTEMPTS)
+        role_attempts = sum(
+            read_json(path / "reservation.json").get("role") == role
+            for path in task_attempts
+        )
+        if role_attempts >= role_limit:
+            raise LunarMarchError(f"{role} attempt budget exhausted ({role_limit}); parent escalation is required")
     if effort is None and transport == "codex":
         effort = "medium" if role in {"scout", "sentinel", "clerk", "recovery"} else "high"
     if effort is not None and effort not in {"low", "medium", "high", "xhigh", "max"}:
@@ -551,6 +608,7 @@ def reserve_attempt(
     atomic_write_json(attempt_dir / "reservation.json", reservation)
     task["attempts"].append(str(attempt_dir.relative_to(run_root)))
     task["status"] = "active"
+    state["status"] = "active"
     state["next_action"] = f"wait for or launch {task_id}/{attempt_dir.name}"
     save_state(run_root, state)
     return attempt_dir
@@ -756,9 +814,8 @@ def gate_attempt(run_root: Path, attempt_dir: Path) -> dict[str, Any]:
         if observed != expected_commands:
             errors.append("acceptance command results or invariant results are missing, reordered, or mismatched")
         for item in checks:
-            if isinstance(item, dict) and item.get("returncode") != 0:
-                label = "protected invariant" if item.get("kind") == "invariant" else "acceptance command"
-                errors.append(f"{label} failed ({item.get('returncode')}): {item.get('command')}")
+            if isinstance(item, dict) and item.get("returncode") != 0 and item.get("kind") != "invariant":
+                errors.append(f"acceptance command failed ({item.get('returncode')}): {item.get('command')}")
     baseline_invariants: list[Any] = []
     if contract.get("invariant_commands", []):
         raw_baseline = reservation.get("baseline_invariants")
@@ -1049,22 +1106,58 @@ def status_summary(run_root: Path) -> dict[str, Any]:
     run_root = resolve_existing_directory(run_root)
     state = load_state(run_root)
     tasks: list[dict[str, Any]] = []
+    usage_fields = ("input_tokens", "cached_input_tokens", "uncached_input_tokens", "output_tokens", "reasoning_tokens", "total_tokens", "uncached_input_plus_output")
+    usage = {field: {"reported_sum": None, "reported_attempts": 0, "missing_attempts": 0} for field in usage_fields}
+    attempts_by_role: dict[str, int] = {}
     for task_id, task in state["tasks"].items():
         attempts = []
-        for raw in task["attempts"]:
-            attempt_dir = resolve_within(run_root, raw)
-            reservation = read_json(attempt_dir / "reservation.json")
+        for attempt_dir in _task_attempt_paths(run_root, task_id, task):
+            reservation_path = attempt_dir / "reservation.json"
+            reservation = read_json(reservation_path) if reservation_path.is_file() else {}
+            role = reservation.get("role", attempt_dir.name.rsplit("-", 1)[0])
+            attempts_by_role[role] = attempts_by_role.get(role, 0) + 1
             if (attempt_dir / "terminal.json").is_file():
+                terminal_usage = read_json(attempt_dir / "terminal.json").get("usage", {})
+                for field in usage_fields:
+                    value = terminal_usage.get(field)
+                    if isinstance(value, int) and not isinstance(value, bool):
+                        usage[field]["reported_sum"] = (usage[field]["reported_sum"] or 0) + value
+                        usage[field]["reported_attempts"] += 1
+                    else:
+                        usage[field]["missing_attempts"] += 1
                 lifecycle = "gated" if (attempt_dir / "gate.json").is_file() else "terminal"
             else:
-                lifecycle = "running_or_unknown"
-            attempts.append({"name": attempt_dir.name, "role": reservation["role"], "lifecycle": lifecycle})
-        tasks.append({"task_id": task_id, "phase": task["phase"], "status": task["status"], "attempts": attempts})
+                lifecycle = "running_or_unknown" if reservation else "incomplete_reservation"
+                for field in usage_fields:
+                    usage[field]["missing_attempts"] += 1
+            attempts.append({"name": attempt_dir.name, "role": role, "lifecycle": lifecycle})
+        _, _, contract = contract_for_task(run_root, state, task_id)
+        task_limit = contract.get("max_attempts", DEFAULT_MAX_ATTEMPTS)
+        tasks.append({"task_id": task_id, "phase": task["phase"], "status": task["status"], "attempts": attempts,
+                      "attempt_budget": {"limit": task_limit, "used": len(attempts), "remaining": max(0, task_limit - len(attempts))}})
+    used = sum(attempts_by_role.values())
+    run_limit = state.get("max_attempts", DEFAULT_MAX_RUN_ATTEMPTS)
+    task_progress = {"accepted": sum(task["status"] == "accepted" for task in tasks), "total": len(tasks)}
+    phases = state.get("phases", {})
+    phase_progress = {"accepted": sum(phase["status"] == "accepted" for phase in phases.values()), "total": len(phases)}
+    complete = bool(tasks) and task_progress["accepted"] == task_progress["total"]
+    if state["mode"] == "march":
+        complete = complete and phase_progress["accepted"] == phase_progress["total"]
+    # Repair the displayed truth of legacy runs without rewriting their artifacts.
+    status = state["status"]
+    if status == "complete" and not complete:
+        status = "active"
     return {
         "run_id": state["run_id"],
         "goal": state["goal"],
         "mode": state["mode"],
-        "status": state["status"],
+        "status": status,
+        "progress": {"tasks": task_progress, "phases": phase_progress if state["mode"] == "march" else None},
+        "attempt_budget": {"limit": run_limit, "used": used, "remaining": max(0, run_limit - used)},
+        "attempts_by_role": attempts_by_role,
+        "usage": usage,
+        "reservation_locked": (run_root / ".reservation-lock").exists(),
+        "running_or_unknown_attempts": sum(attempt["lifecycle"] in {"running_or_unknown", "incomplete_reservation"} for task in tasks for attempt in task["attempts"]),
         "next_action": state["next_action"],
         "phases": state.get("phases", {}),
         "tasks": tasks,

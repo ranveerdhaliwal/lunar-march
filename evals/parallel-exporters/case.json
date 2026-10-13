@@ -1,0 +1,117 @@
+{
+  "owned_paths": [
+    "ledgerfmt/formats/jsonl.py",
+    "tests/test_jsonl.py",
+    "docs/jsonl.md",
+    "ledgerfmt/formats/csv.py",
+    "tests/test_csv.py",
+    "docs/csv.md"
+  ],
+  "commands": [
+    [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "acceptance",
+      "-v"
+    ],
+    [
+      "/usr/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "ledgerfmt",
+      "tests",
+      "acceptance"
+    ]
+  ],
+  "lanes": [
+    {
+      "id": "jsonl",
+      "owned_paths": [
+        "ledgerfmt/formats/jsonl.py",
+        "tests/test_jsonl.py",
+        "docs/jsonl.md"
+      ],
+      "commands": [
+        [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "acceptance",
+          "-p",
+          "test_jsonl_contract.py",
+          "-v"
+        ],
+        [
+          "/usr/bin/python3",
+          "-m",
+          "compileall",
+          "-q",
+          "ledgerfmt",
+          "tests"
+        ]
+      ]
+    },
+    {
+      "id": "csv",
+      "owned_paths": [
+        "ledgerfmt/formats/csv.py",
+        "tests/test_csv.py",
+        "docs/csv.md"
+      ],
+      "commands": [
+        [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "acceptance",
+          "-p",
+          "test_csv_contract.py",
+          "-v"
+        ],
+        [
+          "/usr/bin/python3",
+          "-m",
+          "compileall",
+          "-q",
+          "ledgerfmt",
+          "tests"
+        ]
+      ]
+    }
+  ]
+}
